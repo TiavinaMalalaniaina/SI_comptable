@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<?php echo site_url('assets/img/favicon.png') ?>" rel="icon">
+  <link href="<?php echo site_url('assets/img/apple-touch-icon.png') ?>" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -40,76 +40,90 @@
 <body>
  
 
-  <main id="main" class="main">
+  
+<main>
+    <div class="container">
 
-    <div class="pagetitle">
-      <h1>A propos de la société</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Forms</li>
-          <li class="breadcrumb-item active">Layouts</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    <section class="section">
-      <div class="row">
-        <div class="offset-2 col-lg-8">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 d-flex flex-column align-items-center justify-content-center">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Formulaire pour la société</h5>
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">NiceAdmin</span>
+                </a>
+              </div><!-- End Logo -->
 
-              <!-- Multi Columns Form -->
-              <form class="row g-3">
-                <div class="col mb-12">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Logo</label>
-                  <div class="col-sm-12">
-                    <input class="form-control" type="file" id="formFile">
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create a Society</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
                   </div>
-                </div>
+
+                   <!-- Multi Columns Form -->
+              <form class="row g-3">
                 <div class="col-md-12">
-                  <label for="company" class="form-label">Nom de l'entreprise</label>
+                  <label for="company" class="form-label">Numero d'identification fiscale</label>
                   <input type="text" class="form-control" id="company">
                 </div>
-                <div class="col-md-6">
-                  <label for="leader" class="form-label">Nom du dirigeant</label>
+                <div class="col-md-12">
+                  <label for="leader" class="form-label">Numero de registre de commerce</label>
                   <input type="text" class="form-control" id="leader">
                 </div>
-                <div class="col-md-6">
-                  <label for="contact" class="form-label">Contact</label>
+                <div class="col-md-12">
+                  <label for="contact" class="form-label">Numéro statistique</label>
                   <input type="text" class="form-control" id="contact">
                 </div>
-                <div class="col-12">
-                  <label for="address_social" class="form-label">Addresse social</label>
-                  <input type="text" class="form-control" id="address_social" placeholder="1234 Main St">
+                <div class="col-md-4">
+                  <label for="" class="form-label">Devise</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Ariary</option>
+                    <option value="2">Euro</option>
+                    <option value="3">Dollars</option>
+                  </select>
                 </div>
-                <div class="col-12">
-                  <label for="address_exploitation" class="form-label">Addresse d'exploitation</label>
-                  <input type="text" class="form-control" id="address_exploitation" placeholder="1234 Main St">
+                <div class="col-md-4">
+                  <label for="" class="form-label">Début de l'exercice</label>
+                  <input class="form-control" type="date" id="formFile">
                 </div>
-                <div class="col-12">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Objet</label>
-                  <div class="col-sm-12">
-                    <textarea class="form-control" style="height: 100px"></textarea>
-                  </div>
+                <div class="col-md-4">
+                  <label for="" class="form-label">Fin de l'exercice</label>
+                  <input class="form-control" type="date" id="formFile">
                 </div>
+                
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Valider</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- End Multi Columns Form -->
 
+
+                </div>
+              </div>
+
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+
             </div>
           </div>
-
         </div>
 
-        </div>
-      </div>
-    </section>
+      </section>
 
+    </div>
   </main><!-- End #main -->
+
 
  
 
@@ -126,7 +140,7 @@
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
-  <script src="<?php echo site_url('assets/js/main.js') ?>"></script>
+  <script src="assets/js/main.js"></script>
 
 </body>
 
