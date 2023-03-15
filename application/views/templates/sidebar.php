@@ -44,6 +44,12 @@
       <span>About</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="<?php bu('csv') ?>">
+      <i class="bi bi-grid"></i>
+      <span>CSV</span>
+    </a>
+  </li>
 </ul>
 
 </aside><!-- End Sidebar-->

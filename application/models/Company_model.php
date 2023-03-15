@@ -3,7 +3,7 @@
 
     class Company_model extends CI_Model{
         public function insert($name, $leader, $address_social, $address_exploitation, $tel, $telecopie, $objet, $logo){
-            $sql = sprintf("INSERT INTO company(id, name, leader, address_social, address_exploitation, tel, telecopie, objet, logo) values(null,'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", $name, $leader, $address_social, $address_exploitation, $tel, $telecopie, $objet, $logo);
+            $sql = sprintf("INSERT INTO company(id, name, leader, address_social, address_exploitation, tel, telecopie, objet, logo) values(null,%s, %s, %s, %s, %s, %s, %s, %s)", $this->db->escape($name), $this->db->escape($leader), $this->db->escape($address_social), $this->db->escape($address_exploitation), $this->db->escape($tel), $this->db->escape($telecopie), $this->db->escape($objet), $this->db->escape($logo));
             $query = $this->db->query($sql);
         }
 

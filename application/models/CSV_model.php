@@ -26,13 +26,13 @@ class CSV_model extends CI_Model
         $result = [];
         $i = 0;
         foreach($rs->result_array() as $row){
-            $result[$i] = $row['Tables_in_testcsv'];
+            $result[$i] = $row['Tables_in_si_comptable'];
             $i++;   
         }
         return $result;
     }
     public function columns($table){
-        $req = $this->db->query("select column_name from information_schema.columns where table_schema='testcsv' and table_name='".$table."'");
+        $req = $this->db->query("select column_name from information_schema.columns where table_schema='si_comptable' and table_name='".$table."'");
         $result = [];
         $i=0;
         foreach($req->result_array() as $row){
@@ -65,7 +65,7 @@ class CSV_model extends CI_Model
     public function datatyper($table,$cols){
         $result = [];
         for ($i=0; $i < count($cols); $i++) { 
-            $req = $this->db->query("select data_type from information_schema.columns where table_schema='testcsv' and table_name='".$table."' and  column_name='".$cols[$i]."'");
+            $req = $this->db->query("select data_type from information_schema.columns where table_schema='si_comptable' and table_name='".$table."' and  column_name='".$cols[$i]."'");
             $rs = $req->row_array();
             $rs = $rs['data_type'];
             if($rs!='int' && $rs!='double'){

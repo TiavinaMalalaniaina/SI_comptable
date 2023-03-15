@@ -63,6 +63,7 @@
                   <option value="<?php echo $t['id'] ?>"><?php echo $t['name'] ?></option>
                 <?php } ?>
               </select>
+              
             </div>
             <?php } ?>
                               
@@ -114,11 +115,10 @@
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title">Vertically Centered</h5>
+                              <h5 class="modal-title">Ajout de nouveau compte</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <h5 class="card-title">Ajouter un nouveau compte</h5>
                             <!-- No Labels Form -->
                             <form class="row g-3" action="<?php echo site_url($update) ?>" method="post">
                               <input type="hidden" class="form-control" placeholder="id" value="<?php echo $c['code'] ?>" name="id">

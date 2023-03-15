@@ -66,35 +66,35 @@
                   </div>
 
                    <!-- Multi Columns Form -->
-              <form class="row g-3">
+              <form class="row g-3" action="<?php echo site_url('company/save_detail') ?>" method="post">
                 <div class="col-md-12">
-                  <label for="company" class="form-label">Numero d'identification fiscale</label>
-                  <input type="text" class="form-control" id="company">
+                  <label for="nif" class="form-label">Numero d'identification fiscale</label>
+                  <input type="text" class="form-control" id="nif" name="nif">
                 </div>
                 <div class="col-md-12">
-                  <label for="leader" class="form-label">Numero de registre de commerce</label>
-                  <input type="text" class="form-control" id="leader">
+                  <label for="rcs" class="form-label">Numero de registre de commerce</label>
+                  <input type="text" class="form-control" id="rcs" name="rcs">
                 </div>
                 <div class="col-md-12">
-                  <label for="contact" class="form-label">Numéro statistique</label>
-                  <input type="text" class="form-control" id="contact">
+                  <label for="ns" class="form-label">Numéro statistique</label>
+                  <input type="text" class="form-control" id="ns" name="ns"> 
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Devise</label>
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select example" name="devise">
                     <option selected>Open this select menu</option>
-                    <option value="1">Ariary</option>
-                    <option value="2">Euro</option>
-                    <option value="3">Dollars</option>
+                    <?php foreach ($devise as $d) { ?>
+                      <option value="<?php echo $d['code'] ?>"><?php echo $d['name'] ?></option>
+                      <?php } ?>
                   </select>
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Début de l'exercice</label>
-                  <input class="form-control" type="date" id="formFile">
+                  <input class="form-control" type="date" id="formFile" name="debut">
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Fin de l'exercice</label>
-                  <input class="form-control" type="date" id="formFile">
+                  <input class="form-control" type="date" id="formFile" name="fin">
                 </div>
                 
                 <div class="text-center">
