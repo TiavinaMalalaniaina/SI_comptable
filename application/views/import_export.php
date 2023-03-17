@@ -58,7 +58,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Importation de fichier CSV</h5>
+              <h5 class="card-title">Importation de fichier CSV<h6 style="color: red;"><?php echo $error?></h6></h5>
 
               <!-- Multi Columns Form -->
               <form class="row g-3" action="<?php bu('CSV/import')?>" method="post" enctype="multipart/form-data">
@@ -67,6 +67,13 @@
                   <div class="col-sm-12">
                     <input class="form-control" type="file" id="formFile" name="csv">
                   </div>
+                </div>
+                <div class="col-mb-12">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">Separator</label>
+                    <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="separator">
+                        <option value=",">virgule</option>
+                        <option value=";">point-virgule</option>
+                    </select>
                 </div>
 
                 <div class="col-mb-12">
@@ -107,8 +114,8 @@
                 <div class="col-mb-12">
                     <label for="inputNumber" class="col-sm-2 col-form-label">Separator</label>
                     <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="separator">
-                        <option value="">,</option>
-                        <option value="">;</option>
+                        <option value=",">virgule</option>
+                        <option value=";">point-virgule</option>
                     </select>
                 </div>
                 <div class="col-mb-12">

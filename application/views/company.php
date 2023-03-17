@@ -61,7 +61,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="<?php echo bu('assets/img/'.$company['logo']) ?>" alt="Profile" class="rounded-circle">
+              <img src="<?php bu('assets/img/'.$company['logo']) ?>" alt="Profile" class="rounded-circle">
               <h2><?php echo $company['name'] ?></h2>
               <h3><?php echo $company['leader'] ?></h3>
               <!-- <div class="social-links mt-2">

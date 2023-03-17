@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CSV_model extends CI_Model
 {
-    public function import(){
 
-    }
     public function export($table,$separator){
         $date = date('Y-m-d');
         $filename = $table."_".$date.".csv";
@@ -67,6 +65,9 @@ class CSV_model extends CI_Model
         for ($i=0; $i < count($cols); $i++) { 
             $req = $this->db->query("select data_type from information_schema.columns where table_schema='si_comptable' and table_name='".$table."' and  column_name='".$cols[$i]."'");
             $rs = $req->row_array();
+            if ($rs==null){
+                throw new Exception("");
+            }
             $rs = $rs['data_type'];
             if($rs!='int' && $rs!='double'){
                 $result[$i] = "'";
@@ -76,6 +77,9 @@ class CSV_model extends CI_Model
             }
         }
         return $result;
+    }
+    public function formatter($word){
+        return str_replace("'","\'",$word);
     }
 }
 ?>
