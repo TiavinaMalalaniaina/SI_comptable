@@ -58,27 +58,23 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Importation de fichier CSV</h5>
+              <h5 class="card-title">Convertir Ar en d'autre devise</h5>
 
               <!-- Multi Columns Form -->
-              <form class="row g-3" action="<?php bu('CSV/import')?>" method="post" enctype="multipart/form-data">
+              <form class="row g-3" action="<?php echo bu('convertion/convertion_compte_devise') ?>" method="post">
                 <div class="col mb-12">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">FILE</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Argent</label>
                   <div class="col-sm-12">
-                    <input class="form-control" type="file" id="formFile" name="csv">
+                    <input class="form-control" type="number" id="formFile" name="argent">
                   </div>
                 </div>
 
                 <div class="col-mb-12">
-                <label for="inputNumber" class="col-sm-2 col-form-label">Table</label>
-                <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="table">
-                <?php
-                  for ($i=0; $i < count($tables); $i++) { 
-                    ?>
-                      <option value="<?php echo $tables[$i]?>"><?php echo $tables[$i]?></option>
-                    <?php
-                  }
-                ?>
+                <label for="inputNumber" class="col-sm-5 col-form-label">Devise d'equivalence</label>
+                <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="devise">
+                <?php foreach ($devise as $d) { ?>
+                  <option value="<?php echo $d['code'] ?>"><?php echo $d['name'] ?>(<?php echo $d['code'] ?>)</option>
+                <?php } ?> 
                 </select>
               
               </div>
@@ -100,33 +96,34 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Exportation de fichier CSV</h5>
+            <h5 class="card-title">Convertir d'autre devise en Ar</h5>
 
             <!-- Multi Columns Form -->
-            <form class="row g-3" action="<?php bu('CSV/export')?>" method="post" enctype="multipart/form-data">
+            <form class="row g-3" action="<?php echo bu('convertion/convertion_devise_compte') ?>" method="post">
+                <div class="col mb-12">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Argent</label>
+                  <div class="col-sm-12">
+                    <input class="form-control" type="number" id="formFile" name="argent">
+                  </div>
+                </div>
+
                 <div class="col-mb-12">
-                    <label for="inputNumber" class="col-sm-2 col-form-label">Separator</label>
-                    <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="separator">
-                        <option value=",">,</option>
-                        <option value=";">;</option>
-                    </select>
-                </div>
-                <div class="col-mb-12">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Table</label>
-                  <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="table">
-                  <?php
-                    for ($i=0; $i < count($tables); $i++) { 
-                      ?>
-                        <option value="<?php echo $tables[$i]?>"><?php echo $tables[$i]?></option>
-                      <?php
-                    }
-                  ?>
-                  </select>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Valider</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
+                <label for="inputNumber" class="col-sm-5 col-form-label">Devise d'equivalence</label>
+
+                <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="devise">
+                <?php foreach ($devise as $d) { ?>
+                  <option value="<?php echo $d['code'] ?>"><?php echo $d['name'] ?>(<?php echo $d['code'] ?>)</option>
+                <?php } ?> 
+                </select>
+              
+              </div>
+                
+                
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+              </div>
             </form><!-- End Multi Columns Form -->
 
 
@@ -138,6 +135,23 @@
         </div>
       </div>
     </section>
+
+    <div class="offset-2 col-lg-8">
+      <?php if (isset($convert)) { ?>
+        <div class="card">
+          <div class="card-body">
+            <center>
+              <h5 class="card-title">Convertion</h5>
+              <p> <?php echo $convert['argent1']." ".$convert['devise1'] ?> <span> <i class="bi bi-arrow-right"></i> </span> <?php echo $convert['argent2']." ".$convert['devise2'] ?></p>
+            </center>
+          </div>
+        </div>
+      <?php } ?>
+
+        </div>
+
+        </div>
+      </div>
 
   </main><!-- End #main -->
 

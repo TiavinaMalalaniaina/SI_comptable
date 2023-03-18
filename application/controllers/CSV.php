@@ -16,7 +16,7 @@ class CSV extends CI_Controller
         $cols = "";
         $datatypes = null;
         $this->db->trans_begin();
-        while(($field = fgetcsv($file,null,","))!==false){
+        while(($field = fgetcsv($file,null,";"))!==false){
             if($head==null){
                 $head = $field;
                 $datatypes = $this->csv_model->datatyper($table,$head);
@@ -31,16 +31,16 @@ class CSV extends CI_Controller
                     redirect('CSV/index?error=1');
                     return;
                 }
-                $q = "insert into ".$table."(".$cols.") values(";
+                $q = "insert into ".$table." values(";
                 for ($i=0; $i < count($field)-1; $i++) { 
-                    $q .= $datatypes[$i].$field[$i].$datatypes[$i].",";
+                    $q .= $this->db->escape($field[$i]).",";
                 }
-                $q .= $datatypes[$i].$field[count($field)-1].$datatypes[$i].")";
+                $q .= $this->db->escape($field[count($field)-1]).")";
                 $this->db->query($q);
             }
         }
         $this->db->trans_commit();
-        redirect('CSV/error=0');
+        redirect('CSV/index?error=0');
     }
 
     public function export(){

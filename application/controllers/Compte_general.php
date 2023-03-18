@@ -30,6 +30,7 @@ class Compte_general extends CI_Controller {
 
     public function insert() {
         $code = $this->input->post('code');
+        $code = $this->compte_general->check($code);
         $intitule = $this->input->post('intitule');
         $this->compte_general->insert($code, $intitule);
         redirect(site_url('Compte_general'));

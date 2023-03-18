@@ -34,5 +34,12 @@
             $sql = sprintf("DELETE from plan_comptable where code='%s'", $code);
             $query = $this->db->query($sql);
         }
+
+        public function check($code) {
+            for ($i=count($code); $i < 5; $i++) { 
+                $code .= '0';
+            }
+            return $code;
+        }
     }
 ?>

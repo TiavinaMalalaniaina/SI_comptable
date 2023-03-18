@@ -7,7 +7,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('templates/header.php');
 		$this->load->view('templates/sidebar.php');
-		$this->load->view('import_export.php');
+		$this->load->view('convertion.php');
 		$this->load->view('templates/footer.php');
 	}
 
