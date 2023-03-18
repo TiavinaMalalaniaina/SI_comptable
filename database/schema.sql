@@ -1,9 +1,10 @@
+drop schema si_comptable;
 CREATE SCHEMA si_comptable;
 
 CREATE  TABLE si_comptable.code_journaux ( 
 	code                 VARCHAR(3)  NOT NULL     PRIMARY KEY,
 	intitule             VARCHAR(100)  NOT NULL     
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.company ( 
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
@@ -15,12 +16,12 @@ CREATE  TABLE si_comptable.company (
 	logo                 VARCHAR(100)       ,
 	address_exploitation VARCHAR(100)       ,
 	telecopie            VARCHAR(15)       
- ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.devise ( 
 	code                 VARCHAR(3)  NOT NULL     PRIMARY KEY,
 	name                 VARCHAR(100)       
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.devise_equivalence ( 
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
@@ -30,29 +31,29 @@ CREATE  TABLE si_comptable.devise_equivalence (
 	date_parite          DATE       ,
 	CONSTRAINT fk_devise_equivalence_devise FOREIGN KEY ( devise1 ) REFERENCES si_comptable.devise( code ) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT fk_devise_equivalence_devise_0 FOREIGN KEY ( devise2 ) REFERENCES si_comptable.devise( code ) ON DELETE NO ACTION ON UPDATE NO ACTION
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.document ( 
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
 	name                 VARCHAR(100)       ,
 	intitule             VARCHAR(100)       
- ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.exercice ( 
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
 	debut                DATE       ,
 	fin                  DATE       
- ) engine=InnoDB;
+ ) ;
 
 CREATE  TABLE si_comptable.plan_comptable ( 
 	code                 VARCHAR(5)  NOT NULL     PRIMARY KEY,
 	intitule             VARCHAR(100)  NOT NULL     
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.type_tiers ( 
 	id                   INT  NOT NULL     PRIMARY KEY,
 	name                 VARCHAR(100)       
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE  TABLE si_comptable.detail_company ( 
 	nif                  VARCHAR(25)       ,
@@ -62,7 +63,7 @@ CREATE  TABLE si_comptable.detail_company (
 	debut_exercise       DATE       ,
 	fin_exercice         DATE       ,
 	CONSTRAINT fk_detail_company_devise FOREIGN KEY ( devise ) REFERENCES si_comptable.devise( code ) ON DELETE NO ACTION ON UPDATE NO ACTION
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE INDEX fk_detail_company_devise ON si_comptable.detail_company ( devise );
 
@@ -71,7 +72,9 @@ CREATE  TABLE si_comptable.plan_tiers (
 	intitule             VARCHAR(100)  NOT NULL     ,
 	type_tiers           INT  NOT NULL     ,
 	CONSTRAINT fk_plan_tiers_type_tiers FOREIGN KEY ( type_tiers ) REFERENCES si_comptable.type_tiers( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
+
+CREATE INDEX fk_plan_tiers_type_tiers ON si_comptable.plan_tiers ( type_tiers );
 
 CREATE INDEX fk_plan_tiers_type_tiers ON si_comptable.plan_tiers ( type_tiers );
 
@@ -81,7 +84,7 @@ CREATE  TABLE si_comptable.journal (
 	credit               DOUBLE   DEFAULT '0'    ,
 	date_journal         DATE  NOT NULL     ,
 	code_journal         VARCHAR(3)       ,
-	numero_piece         INT  NOT NULL     ,
+	numero_piece         VARCHAR(100)  NOT NULL     ,
 	compte               VARCHAR(5)  NOT NULL     ,
 	libelle              VARCHAR(35)  NOT NULL     ,
 	reference_piece      VARCHAR(100)       ,
@@ -95,7 +98,7 @@ CREATE  TABLE si_comptable.journal (
 	CONSTRAINT fk_journal_plan_comptable FOREIGN KEY ( compte ) REFERENCES si_comptable.plan_comptable( code ) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT fk_journal_plan_tiers FOREIGN KEY ( compte_tierce ) REFERENCES si_comptable.plan_tiers( code ) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT fk_journal_exercice FOREIGN KEY ( idexercice ) REFERENCES si_comptable.exercice( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ );
 
 CREATE INDEX fk_journal_plan_tiers ON si_comptable.journal ( compte_tierce );
 
@@ -132,10 +135,8 @@ INSERT INTO si_comptable.devise_equivalence( devise1, devise2, parite, date_pari
 INSERT INTO si_comptable.devise_equivalence( devise1, devise2, parite, date_parite ) VALUES ( 'AR', 'AR', 1.0, null);
 INSERT INTO si_comptable.document( name, intitule ) VALUES ( 'selection1.pdf', 'selection');
 INSERT INTO si_comptable.document( name, intitule ) VALUES ( 'Madagascar-Loi-2003-36-societes-commerciales.pdf', 'Status');
-INSERT INTO si_comptable.plan_comptable( code, intitule ) VALUES ( '10000', 'CAPITAL');
-INSERT INTO si_comptable.plan_comptable( code, intitule ) VALUES ( '10200', 'CAPIT');
-INSERT INTO si_comptable.plan_comptable( code, intitule ) VALUES ( '20000', 'IMMOBILISATION');
 INSERT INTO si_comptable.type_tiers( id, name ) VALUES ( 1, 'Fournisseur');
 INSERT INTO si_comptable.type_tiers( id, name ) VALUES ( 2, 'Client');
 INSERT INTO si_comptable.detail_company( nif, ns, rcs, devise, debut_exercise, fin_exercice ) VALUES ( '1265055951', '88126059599', '845132815', 'AR', '2023-01-01', '2023-12-31');
 INSERT INTO si_comptable.plan_tiers( code, intitule, type_tiers ) VALUES ( '400000000', 'TIAVINA', 2);
+INSERT INTO exercice values(null,'2023-01-01','2023-12-31');
