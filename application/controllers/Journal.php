@@ -40,6 +40,8 @@ class Journal extends CI_Controller {
 		$this->load->view('templates/footer.php');
 	}
 
+
+
 	public function insertor(){
 
 		$code_journal = $this->input->get('cj');

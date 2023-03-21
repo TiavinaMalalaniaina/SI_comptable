@@ -301,6 +301,7 @@
   datatables.forEach(datatable => {
     new simpleDatatables.DataTable(datatable);
   })
+  
 
   /**
    * Autoresize echart charts
