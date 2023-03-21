@@ -102,7 +102,7 @@
                 <tbody>
                   <?php foreach ($compte as $c) { ?>
                     <tr>
-                      <th scope="row"><?php echo $c['code'] ?></th>
+                      <th><?php echo $c['code'] ?></th>
                       <td><?php echo $c['intitule'] ?></td>
                       <td>
 

@@ -140,3 +140,12 @@ INSERT INTO si_comptable.type_tiers( id, name ) VALUES ( 2, 'Client');
 INSERT INTO si_comptable.detail_company( nif, ns, rcs, devise, debut_exercise, fin_exercice ) VALUES ( '1265055951', '88126059599', '845132815', 'AR', '2023-01-01', '2023-12-31');
 INSERT INTO si_comptable.plan_tiers( code, intitule, type_tiers ) VALUES ( '400000000', 'TIAVINA', 2);
 INSERT INTO exercice values(null,'2023-01-01','2023-12-31');
+
+-- 
+create table reference_piece(
+	ref varchar(2),
+	name varchar(50)
+);
+insert into reference_piece values('FF','Facture');
+insert into reference_piece values('PC','Piece de caisse');
+insert into reference_piece values('CH','Cheque');

@@ -29,7 +29,7 @@ class Company extends CI_Controller {
     }
 
     public function sign() {
-        $this->load->view('register_company');
+        $this->load->view('register_company_journal');
     }
 
     public function detail() {

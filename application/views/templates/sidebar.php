@@ -8,11 +8,17 @@
       <i class="bi bi-layout-text-window-reverse"></i><span>Journal</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="tables-general.html">
-          <i class="bi bi-circle"></i><span>Affichage journal</span>
+      <?php
+      for ($i=0; $i < count($lst); $i++) { 
+        ?>
+        <li>
+        <a href="<?php echo site_url('journal?cj='.$lst[$i]['code']) ?>">
+          <i class="bi bi-circle"></i><span>Journal <?php echo $lst[$i]['intitule']?></span>
         </a>
       </li>
+        <?php
+      }
+      ?>
       <li>
         <a href="<?php echo site_url('code_journaux') ?>">
           <i class="bi bi-circle"></i><span>Code journal</span>

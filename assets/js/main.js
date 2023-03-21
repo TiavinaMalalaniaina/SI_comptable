@@ -297,14 +297,9 @@
   /**
    * Initiate Datatables
    */
-  const options = {
-    searching: {
-      threshold: 0
-    }
-  };
   const datatables = select('.datatable', true)
   datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable, options);
+    new simpleDatatables.DataTable(datatable);
   })
 
   /**
