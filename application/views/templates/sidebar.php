@@ -45,6 +45,18 @@
     </ul>
   </li>
   <li class="nav-item">
+    <a class="nav-link collapsed" href="<?php echo site_url('grand_livre') ?>">
+      <i class="bi bi-grid"></i>
+      <span>Grand livre</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="<?php bu('balance') ?>">
+      <i class="bi bi-grid"></i>
+      <span>Balance</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="<?php echo site_url('Company') ?>">
       <i class="bi bi-grid"></i>
       <span>About</span>
