@@ -15,11 +15,17 @@ class CSV extends CI_Controller
         $head = null;
         $cols = "";
         $datatypes = null;
+        $headto = "";
         $separator = $this->input->post('separator');
         $this->db->trans_begin();
         while(($field = fgetcsv($file,null,$separator))!==false){
             if($head==null){
                 $head = $field;
+                for ($i=0; $i < count($head)-1; $i++) { 
+                    $head[$i] = trim($head[$i]);
+                    $headto .= $head[$i].',';
+                }
+                $headto .= $head[count($head)-1];
                 try {
                     $datatypes = $this->csv_model->datatyper($table,$head);
                 } catch (Exception $e) {
@@ -35,14 +41,15 @@ class CSV extends CI_Controller
             else {
                 if(count($field)!=count($head)){
                     $this->db->trans_rollback();
-                    redirect('CSV/index?error=1');
+                    redirect('CSV/index?error=2');
                     return;
                 }
-                $q = "insert into ".$table." values(";
+                $q = "insert into ".$table."(".$headto.") values(";
                 for ($i=0; $i < count($field)-1; $i++) { 
                     $q .= $datatypes[$i].$this->csv_model->formatter($field[$i]).$datatypes[$i].",";
                 }
                 $q .= $datatypes[$i].$this->csv_model->formatter($field[count($field)-1]).$datatypes[$i].")";
+                // echo $q.';<br>';
                 $this->db->query($q);
             }
         }

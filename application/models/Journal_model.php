@@ -15,7 +15,8 @@ class Journal_model extends CI_Model
     }
     public function get_journal_detail($exo,$code,$month){
         $req = "select * from journal j join devise_equivalence d on j.devise=d.devise2  where j.idexercice=".$exo." and j.code_journal='".$code."' and month(j.date_journal)=".$month." order by j.date_journal,j.id asc";
-        $rs = $this->db->query($req);
+        // echo $req;
+		$rs = $this->db->query($req);
         $data = [];
 		$i=0;
 		foreach ($rs->result_array() as $row) {

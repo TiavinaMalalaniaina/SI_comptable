@@ -63,6 +63,8 @@ class CSV_model extends CI_Model
     public function datatyper($table,$cols){
         $result = [];
         for ($i=0; $i < count($cols); $i++) { 
+            // $r = "select data_type from information_schema.columns where table_schema='si_comptable' and table_name='".$table."' and  column_name='".trim($cols[$i])."'";
+            // echo $r.';<br>';
             $req = $this->db->query("select data_type from information_schema.columns where table_schema='si_comptable' and table_name='".$table."' and  column_name='".$cols[$i]."'");
             $rs = $req->row_array();
             if ($rs==null){
