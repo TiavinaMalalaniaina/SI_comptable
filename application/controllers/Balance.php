@@ -20,7 +20,6 @@ class Balance extends CI_Controller {
             if ($solde > 0) {
                 $balance[$i]['soldedebit'] = $solde;
                 $balance[$i]['soldecredit'] = "";
-                $total['debit'] = 
             } else {
                 $balance[$i]['soldedebit'] = "";
                 $balance[$i]['soldecredit'] = -$solde;
@@ -29,7 +28,7 @@ class Balance extends CI_Controller {
             if ($balance[$i]['debit'] == 0) $balance[$i]['debit']=""; 
             if ($balance[$i]['credit'] == 0) $balance[$i]['credit']=""; 
         }
-
+        $total = $this->balance_model->getTotal($balance);
         $data = array(
            'title' => "Balance",
            'balance' => $balance,
