@@ -66,7 +66,7 @@
                   </div>
 
                    <!-- Multi Columns Form -->
-              <form class="row g-3" action="<?php echo site_url('Company/insert') ?>" method="post" enctype="multipart/form-data">
+              <form class="row g-3" action="<?php echo site_url('Company/insert') ?>" method="post" enctype="multipart/form-data" id="form">
                 <div class="col mb-12">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Logo</label>
                   <div class="col-sm-12">
@@ -75,15 +75,15 @@
                 </div>
                 <div class="col-md-12">
                   <label for="company" class="form-label">Nom de l'entreprise</label>
-                  <input type="text" class="form-control" id="company" name="name">
+                  <input type="text" class="form-control" id="company" name="name" required>
                 </div>
                 <div class="col-md-4">
                   <label for="leader" class="form-label">Nom du dirigeant</label>
-                  <input type="text" class="form-control" id="leader" name="leader">
+                  <input type="text" class="form-control" id="leader" name="leader" required>
                 </div>
                 <div class="col-md-4">
                   <label for="contact" class="form-label">Contact</label>
-                  <input type="text" class="form-control" id="contact" name="contact">
+                  <input type="text" class="form-control" id="contact" name="contact" required>
                 </div>
                 <div class="col-md-4">
                   <label for="contact" class="form-label">Telecopie</label>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-12">
                   <label for="address_social" class="form-label">Addresse social</label>
-                  <input type="text" class="form-control" id="address_social" placeholder="1234 Main St" name="social">
+                  <input type="text" class="form-control" id="address_social" placeholder="1234 Main St" name="social" required>
                 </div>
                 <div class="col-12">
                   <label for="address_exploitation" class="form-label">Addresse d'exploitation</label>
@@ -100,7 +100,7 @@
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Objet</label>
                   <div class="col-sm-12">
-                    <textarea class="form-control" style="height: 100px" name="objet"></textarea>
+                    <textarea class="form-control" style="height: 100px" name="objet" required></textarea>
                   </div>
                 </div>
                 <div class="text-center">
@@ -114,10 +114,6 @@
               </div>
 
               <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
               </div>
 
@@ -146,7 +142,10 @@
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="<?php echo bu('assets/js/main.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/parsley.min.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/register_company.js') ?>"></script>
 
 </body>
 

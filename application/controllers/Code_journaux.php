@@ -23,7 +23,9 @@ class Code_journaux extends CI_Controller {
         );
 
         $this->load->view('templates/header.php');
-		$this->load->view('templates/sidebar.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
 		$this->load->view('consultation.php', $data);
 		$this->load->view('templates/footer.php');
     }

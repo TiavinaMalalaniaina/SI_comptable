@@ -28,8 +28,10 @@ class Convertion extends CI_Controller {
             'devise' => $devise,
             'convert' => $convert
         );
-        $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
+        $this->load->view('templates/header.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);;
         $this->load->view('convertion', $data);
         $this->load->view('templates/footer');
     }
@@ -43,8 +45,10 @@ class Convertion extends CI_Controller {
             'devise' => $devise,
             'convert' => $convert
         );
-        $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
+        $this->load->view('templates/header.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
         $this->load->view('convertion', $data);
         $this->load->view('templates/footer');
     }

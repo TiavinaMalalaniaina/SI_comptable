@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="<?php echo site_url('assets/css/style.css') ?>" rel="stylesheet">
+  <link href="<?php echo site_url('assets/css/lib/select2.min.css') ?>" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
@@ -59,7 +60,19 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Formulaire pour la société</h5>
-
+              <form class="row g-3" action="<?php bu('grand_livre/compte')?>" method="post">
+                <label for="address_exploitation" class="form-label">Compte</label>
+                <div class="col-md-4">
+                    <select class="form-select js-example-basic-single" aria-label="Default select example" aria-placeholder="type" name="compte">
+                        <?php foreach ($compte as $c) { ?>
+                            <option value="<?php echo $c['code']?>"><?php echo $c['code']?> (<?php echo $c['intitule']?>)</option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
               <table class="table table-bordered" style="font-size: 90%;">
                 <thead>
                   <tr>
@@ -75,16 +88,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($livre as $l) { ?>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>FF0001</td>
-                    <td>10000</td>
-                    <td>TIAVINA</td>
-                    <td>TIAVINA MALALNIANIA</td>
-                    <td>2002-02-02</td>
-                    <td>AR</td>
+                    <th scope="row"><?php echo $l['code_journal'] ?></th>
+                    <td><?php echo $l['date_journal'] ?></td>
+                    <td><?php echo $l['numero_piece'] ?></td>
+                    <td><?php echo $l['reference_piece'] ?></td>
+                    <td><?php echo $l['compte'] ?></td>
+                    <td><?php echo $l['libelle'] ?></td>
+                    <td><?php echo $l['debit'] ?></td>
+                    <td><?php echo $l['credit'] ?></td>
                   </tr>
+                <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -113,8 +128,10 @@
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+  <script src="<?php echo bu('assets/js/main.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/grand_livre.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/select2.min.js') ?>"></script>
 </body>
 
 </html>

@@ -107,3 +107,7 @@
     }
     
 var co = savecopy();
+
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});

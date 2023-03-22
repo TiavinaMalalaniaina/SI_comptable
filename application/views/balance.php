@@ -65,14 +65,12 @@
                   <tr>
                     <th scope="col" rowspan="2">N°compte</th>
                     <th scope="col" rowspan="2">Intitulé des comptes</th>
-                    <th scope="col" rowspan="2">N° pièce</th>
                     <th scope="col" colspan="2" rowspan="2">Mouvement</th>
                     <th scope="col" colspan="2" rowspan="2">Solde</th>
                   </tr>
                 </thead>
                 <thead>
                   <tr>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th>Débit</th>
@@ -83,15 +81,20 @@
 
                 </thead>
                 <tbody>
-
+                <?php foreach ($balance as $b) { ?>
                   <tr>
-                    <td>10200</td>
-                    <td>CAPITAL</td>
-                    <td>15000</td>
-                    <td>1500000</td>
-                    <td>0</td>
-                    <td>5161000</td>
-                    <td>0</td>
+                    <td><?php echo $b['code'] ?></td>
+                    <td><?php echo $b['intitule'] ?></td>
+                    <td><?php echo $b['debit'] ?></td>
+                    <td><?php echo $b['credit'] ?></td>
+                    <td><?php echo $b['soldedebit'] ?></td>
+                    <td><?php echo $b['soldecredit'] ?></td>
+                  </tr>
+                <?php } ?>
+                  <tr>
+                    <th colspan="2">TOTAL</th>
+                    <th colspan="2">TOTAL</th>
+                    <th colspan="2">TOTAL</th>
                   </tr>
                 </tbody>
               </table>

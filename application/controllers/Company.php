@@ -8,6 +8,7 @@ class Company extends CI_Controller {
         parent::__construct();
         $this->load->model('Company_model', 'company');
         $this->load->model('Detail_company_model', 'detail_company');
+		$this->load->model('code_journaux_model');
         $this->load->model('document_model');
     }
 
@@ -22,14 +23,18 @@ class Company extends CI_Controller {
             'detail' => $detail_company,
             'docs' => $docs
         );
+        
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+
         $this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar.php',$piwi);
 		$this->load->view('company', $data);
 		$this->load->view('templates/footer');
     }
 
     public function sign() {
-        $this->load->view('register_company_journal');
+        $this->load->view('register_company');
     }
 
     public function detail() {

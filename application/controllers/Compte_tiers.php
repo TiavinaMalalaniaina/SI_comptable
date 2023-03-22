@@ -24,9 +24,10 @@ class Compte_tiers extends CI_Controller {
            'delete' => "Compte_tiers/delete",
            'compte' => $compte
         );
-
         $this->load->view('templates/header.php');
-		$this->load->view('templates/sidebar.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
 		$this->load->view('consultation.php', $data);
 		$this->load->view('templates/footer.php');
     }

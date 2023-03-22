@@ -7,6 +7,7 @@ class Grand_livre extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('grand_livre_model');
+        $this->load->model('compte_general_model');
     }
 
 
@@ -16,11 +17,31 @@ class Grand_livre extends CI_Controller {
 
         $data = array(
            'title' => "Balance",
-           'balance' => $balance,
+           'livre' => array(),
+           'compte' => $this->compte_general_model->selectAll() 
         );
-
         $this->load->view('templates/header.php');
-		$this->load->view('templates/sidebar.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
+		$this->load->view('Grand_livre.php', $data);
+		$this->load->view('templates/footer.php');
+    }
+
+    public function compte() {
+
+        $compte = $this->input->post('compte');
+        $grand_livre = $this->grand_livre_model->selectByCompte($compte);
+
+        $data = array(
+           'title' => "Grand livre",
+           'livre' => $grand_livre,
+           'compte' => $this->compte_general_model->selectAll() 
+        );
+        $this->load->view('templates/header.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
 		$this->load->view('Grand_livre.php', $data);
 		$this->load->view('templates/footer.php');
     }

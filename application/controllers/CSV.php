@@ -68,8 +68,10 @@ class CSV extends CI_Controller
                 $data['error'] = "Importation success";
             }
         }
-        $this->load->view("/templates/header");
-        $this->load->view("/templates/sidebar");
+        $this->load->view('templates/header.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
         $this->load->view("import_export",$data);
         // $this->load->view("csv",$data);
         $this->load->view("/templates/footer");

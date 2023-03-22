@@ -28,13 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="<?php echo site_url('assets/css/style.css') ?>" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <link href="<?php echo site_url('assets/css/lib/select2.min.css') ?>" rel="stylesheet">
 </head>
 <style>
     .table-journal{
@@ -70,10 +64,10 @@
         width: 40px;
     }
     #line-compteg{
-        width: 50px;
+        width: 100px;
     }
     #compteg {
-        width: 50px;
+        width: 150px;
     }
     #line-comptet{
         width: 120px;
@@ -94,10 +88,10 @@
         width: 110px;
     }
     #line-devise {
-        width: 50px;
+        width: 100px;
     }
     #devise {
-        width: 50px;
+        width: 100px;
     }
     #line-parite {
         width: 80px;
@@ -130,7 +124,7 @@
         width: 200px;
     }
 
-    input ,select{
+    input ,select, .select2{
         background-color: transparent;
         border-left: 0px;
         border-right: 0px;
@@ -203,10 +197,10 @@
                                 </td>
                                 <td id="line-compteg">
                                 <span>
-                                        <select name="compteg[]" id="compteg">
+                                        <select name="compteg[]" id="compteg" class="js-example-basic-single select2">
                                             <?php for ($i=0; $i < count($compte_gen); $i++) { 
                                                 ?>
-                                                <option value="<?php echo $compte_gen[$i]['code']?>"><?php echo $compte_gen[$i]['code']?></option>
+                                                <option value="<?php echo $compte_gen[$i]['code']?>"><?php echo $compte_gen[$i]['code']?> <?php echo $compte_gen[$i]['intitule']?></option>
                                                 <?php
                                             }?>
                                         </select>
@@ -214,7 +208,8 @@
                                 </td>
                                 <td id="line-comptet">
                                 <span>
-                                        <select name="comptet[]" id="comptet">
+                                        <select name="comptet[]" id="comptet" class="js-example-basic-single">
+                                            <option value="" selected></option>
                                             <?php for ($i=0; $i < count($compte_tiers); $i++) { 
                                                 ?>
                                                 <option value="<?php echo $compte_tiers[$i]['code']?>"><?php echo $compte_tiers[$i]['code']?></option>
@@ -226,7 +221,7 @@
                                 <td id="line-libelle"><input type="text" name="libelle" id="libelle"></td>
                                 <td id="line-echeance"><input type="date" name="echeance" id="echeance"></td>
                                 <td id="line-devise">
-                                    <select name="devise" id="devise">
+                                    <select name="devise" id="devise" class="js-example-basic-single">
                                     <?php for ($i=0; $i < count($devise); $i++) { 
                                                 ?>
                                                 <option value="<?php echo $devise[$i]['code']?>"><?php echo $devise[$i]['name']?></option>
@@ -359,7 +354,9 @@
 
   <!-- Template Main JS File -->
   <script src="<?php echo bu('assets/js/main.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
   <script src="<?php echo bu('assets/js/journal.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/select2.min.js') ?>"></script>
 
 </body>
 

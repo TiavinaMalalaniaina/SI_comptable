@@ -66,7 +66,7 @@
                   </div>
 
                    <!-- Multi Columns Form -->
-              <form class="row g-3" action="<?php echo site_url('company/save_detail') ?>" method="post">
+              <form class="row g-3" action="<?php echo site_url('company/save_detail') ?>" method="post" id="form">
                 <div class="col-md-12">
                   <label for="nif" class="form-label">Numero d'identification fiscale</label>
                   <input type="text" class="form-control" id="nif" name="nif">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Devise</label>
-                  <select class="form-select" aria-label="Default select example" name="devise">
+                  <select class="form-select" aria-label="Default select example" name="devise" required>
                     <option selected>Open this select menu</option>
                     <?php foreach ($devise as $d) { ?>
                       <option value="<?php echo $d['code'] ?>"><?php echo $d['name'] ?></option>
@@ -140,7 +140,10 @@
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="<?php echo bu('assets/js/main.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/parsley.min.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/register_company.js') ?>"></script>
 
 </body>
 
