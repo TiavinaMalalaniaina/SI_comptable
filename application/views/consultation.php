@@ -68,10 +68,10 @@
             <?php } ?>
                               
           <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Code" name="code">
+            <input type="text" class="form-control" placeholder="Code" name="code" required>
           </div>
           <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Intitule" name="intitule">
+            <input type="text" class="form-control" placeholder="Intitule" name="intitule" required>
           </div>
           <div class="col-md-2">
             <button type="submit" class="btn btn-primary">Ajouter</button>

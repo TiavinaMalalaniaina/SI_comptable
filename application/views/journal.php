@@ -181,8 +181,8 @@
                         <tbody id="table-add-journal">
 
                             <tr class="writing-journal">
-                                <td id="line-jour"><input type="date" name="jour" id="jour"></td>
-                                <td id="line-npiece"><input type="text" name="npiece" id="npiece"></td>
+                                <td id="line-jour"><input type="date" name="jour" id="jour" required></td>
+                                <td id="line-npiece"><input type="text" name="npiece" id="npiece" required></td>
                                 <td id="line-rpiece">
                                     <span>
                                         <select name="rpiecetype" id="rpiecetype">
@@ -192,7 +192,7 @@
                                                 <?php
                                             }?>
                                         </select>
-                                        <input type="text" name="rpiece" id="rpiece">                    
+                                        <input type="text" name="rpiece" id="rpiece" required>                    
                                     </span>
                                 </td>
                                 <td id="line-compteg">
@@ -238,8 +238,8 @@
                         </tbody>
                     </table>
                 <div class="text-center">
-                      <button type="button" class="btn btn-primary" onclick="addLine(co)">Auter une ligne</button>
-                      <button type="submit" class="btn btn-primary" id="validate" hidden>Valider</button>
+                      <button type="button" class="btn btn-primary" onclick="addLine(co)">Ajouter une ligne</button>
+                      <button type="submit" class="btn btn-primary" id="validate" disabled>Valider</button>
                       <button type="reset" class="btn btn-secondary">Reset</button>
                   </div>
                 </form>
@@ -264,7 +264,7 @@
               <form class="row g-3" action="<?php bu('Journal/')?>" method="get">
               <input type="hidden" name="cj" value="<?php echo $journal['code']?>">
                 <label for="address_exploitation" class="form-label">Mois</label>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <select class="form-select" aria-label="Default select example" aria-placeholder="type" name="month">
                         <?php for ($i=0; $i < count($months); $i++) { 
                             ?><option value="<?php echo ($i+1)?>"><?php echo $months[$i]?></option><?php

@@ -12,5 +12,11 @@
             return $result;
         }
 
+        public function save($code, $name) {
+            $sql = "INSERT INTO devise (code, name) VALUES (%s, %s)";
+            $sql = sprintf($sql, $this->db->escape($code), $this->db->escape($name));
+            $this->db->query($sql);
+        } 
+
     }
 ?>

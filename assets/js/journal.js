@@ -59,10 +59,10 @@
     function unabilityToValide() {
         var button = document.getElementById('validate');
         if (getDifference() == 0) {
-            button.hidden = false;
+            button.disabled = false;
         }
         else {
-            button.hidden = true;
+            button.disabled = true;
         }
     }
 

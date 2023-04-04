@@ -32,12 +32,12 @@ class Journal extends CI_Controller {
 		$data['devise'] = $this->devise_model->selectAll();
 		$data['journal'] = $this->journal_model->get_journal($code);
 		$data['liste'] = $this->journal_model->get_journal_detail($this->journal_model->current_exercice(),$code,$month);
-		$this->load->view('templates/header.php');
+		$this->load->view('templates/header');
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
-		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('journal.php',$data);
-		$this->load->view('templates/footer.php');
+		$this->load->view('templates/sidebar',$piwi);
+		$this->load->view('journal',$data);
+		$this->load->view('templates/footer');
 	}
 
 
@@ -94,16 +94,16 @@ class Journal extends CI_Controller {
 		$exo = $this->journal_model->current_exercice();
 		$data = [];
 		$data['data'] = $this->journal_model->load_to_modify($this->input->get('cj'),$exo,$this->input->get('npiece'));
-		$this->load->view('templates/header.php');
+		$this->load->view('templates/header');
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$data['compte_tiers'] = $this->compte_tiers_model->selectAll();
 		$data['compte_gen'] = $this->compte_general_model->selectAll();
 		$data['devise'] = $this->devise_model->selectAll();
 		$data['month'] = $this->input->get('month');
-		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('update_journal.php',$data);
-		$this->load->view('templates/footer.php');
+		$this->load->view('templates/sidebar',$piwi);
+		$this->load->view('update_journal',$data);
+		$this->load->view('templates/footer');
 	}
 	public function update_modified(){
 		$code_journal = $this->input->get('cj');

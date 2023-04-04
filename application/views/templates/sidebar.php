@@ -68,6 +68,12 @@
       <span>CSV</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="<?php bu('convertion') ?>">
+      <i class="bi bi-grid"></i>
+      <span>Convertion de devise</span>
+    </a>
+  </li>
 </ul>
 
 </aside><!-- End Sidebar-->

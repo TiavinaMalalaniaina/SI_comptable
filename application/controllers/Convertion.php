@@ -6,6 +6,7 @@ class Convertion extends CI_Controller {
         parent::__construct();
         $this->load->model('devise_model');
         $this->load->model('devise_equivalence_model');
+        $this->load->model('detail_company_model');
     }
 
     public function index(){
@@ -13,10 +14,25 @@ class Convertion extends CI_Controller {
         $data = array(
             'devise' => $devise
         );
-        $this->load->view('templates/header');
+        $this->load->view('templates/header.php');
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
         $this->load->view('templates/sidebar');
         $this->load->view('convertion', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function add() {
+        $taux = $this->input->post('taux');
+        $code = $this->input->post('code');
+        $nom = $this->input->post('nom');
+        $company = $this->detail_company_model->select();
+
+        $this->devise_model->save($code, $nom);
+        $this->devise_equivalence_model->insert($company['devise'], $code, $taux, null);
+
+        redirect('/convertion');
     }
 
     public function convertion_compte_devise() {

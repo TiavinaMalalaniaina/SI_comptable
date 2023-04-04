@@ -42,6 +42,7 @@
 
   <main id="main" class="main">
 
+    
     <div class="pagetitle">
       <h1>A propos de la société</h1>
       <nav>
@@ -52,6 +53,26 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ajouter un nouveau compte</h5>
+        <!-- No Labels Form -->
+        <form class="row g-3" action="<?php echo site_url("/convertion/add") ?>" method="post">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Code" name="code" required>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Intitule" name="nom" required>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Taux" name="taux" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+          </div>
+        </form><!-- End No Labels Form -->
+      </div>
+    </div>
     <section class="section">
       <div class="row">
         <div class="col-lg-6">

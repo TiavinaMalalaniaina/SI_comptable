@@ -20,12 +20,12 @@ class Grand_livre extends CI_Controller {
            'livre' => array(),
            'compte' => $this->compte_general_model->selectAll() 
         );
-        $this->load->view('templates/header.php');
+        $this->load->view('templates/header');
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
-		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('Grand_livre.php', $data);
-		$this->load->view('templates/footer.php');
+		$this->load->view('templates/sidebar',$piwi);
+		$this->load->view('Grand_livre', $data);
+		$this->load->view('templates/footer');
     }
 
     public function compte() {
@@ -38,12 +38,12 @@ class Grand_livre extends CI_Controller {
            'livre' => $grand_livre,
            'compte' => $this->compte_general_model->selectAll() 
         );
-        $this->load->view('templates/header.php');
+        $this->load->view('templates/header');
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
-		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('Grand_livre.php', $data);
-		$this->load->view('templates/footer.php');
+		$this->load->view('templates/sidebar',$piwi);
+		$this->load->view('Grand_livre', $data);
+		$this->load->view('templates/footer');
     }
 
 }
