@@ -20,7 +20,8 @@ class Grand_livre extends CI_Controller {
            'livre' => array(),
            'compte' => $this->compte_general_model->selectAll() 
         );
-        $this->load->view('templates/header');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar',$piwi);
@@ -38,7 +39,8 @@ class Grand_livre extends CI_Controller {
            'livre' => $grand_livre,
            'compte' => $this->compte_general_model->selectAll() 
         );
-        $this->load->view('templates/header');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar',$piwi);

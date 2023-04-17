@@ -5,10 +5,13 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('templates/header.php');
-		$this->load->view('templates/sidebar.php');
-		$this->load->view('convertion.php');
-		$this->load->view('templates/footer.php');
+		$head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar',$piwi);
+		$this->load->view('resultat');
+		$this->load->view('templates/footer');
 	}
 
 }

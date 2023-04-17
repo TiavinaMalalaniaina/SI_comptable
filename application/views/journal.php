@@ -276,7 +276,7 @@
                 </div>
             </form>
             <div class="table-journal">
-              <table class="table table-bordered" style="font-size: 90%;">  
+              <table class="table datatable" style="font-size: 90%;">  
               <thead>
                   <tr>
                     <th scope="col">Jour</th>
@@ -310,8 +310,8 @@
                     <td><?php echo $liste[$i]['parite']?></td>
                     <td><?php echo $liste[$i]['quantite']?></td>
                     <td><?php echo $liste[$i]['devise']?></td>
-                    <td><?php echo $liste[$i]['debit']?></td>
-                    <td><?php echo $liste[$i]['credit']?></td>
+                    <td><?php echo format_to_money($liste[$i]['debit']) ?></td>
+                    <td><?php echo format_to_money($liste[$i]['credit'])?></td>
                     <td>
                         <!-- Modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ExtralargeModal">

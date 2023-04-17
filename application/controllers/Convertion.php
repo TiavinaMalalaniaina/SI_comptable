@@ -14,7 +14,8 @@ class Convertion extends CI_Controller {
         $data = array(
             'devise' => $devise
         );
-        $this->load->view('templates/header.php');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
@@ -44,7 +45,8 @@ class Convertion extends CI_Controller {
             'devise' => $devise,
             'convert' => $convert
         );
-        $this->load->view('templates/header.php');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);;
@@ -61,7 +63,8 @@ class Convertion extends CI_Controller {
             'devise' => $devise,
             'convert' => $convert
         );
-        $this->load->view('templates/header.php');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);

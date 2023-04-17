@@ -24,6 +24,7 @@
                 $total['credit'] += $b['credit'];
             }
             $solde = $total['debit'] - $total['credit'];
+            $total['solde'] = $solde;
             if ($solde > 0) {
                 $total['soldedebit'] = $solde;
                 $total['soldecredit'] = 0;
@@ -32,6 +33,20 @@
                 $total['soldecredit'] = -$solde;
             }
             return $total;
+        }
+
+        public function setBalance($balance) {
+            for ($i=0; $i < count($balance); $i++) { 
+                $solde = $balance[$i]['debit']-$balance[$i]['credit'];
+                if ($solde > 0) {
+                    $balance[$i]['soldedebit'] = $solde;
+                    $balance[$i]['soldecredit'] = 0;
+                } else {
+                    $balance[$i]['soldedebit'] = 0;
+                    $balance[$i]['soldecredit'] = -$solde;
+                }
+            }
+            return $balance;
         }
     }
 ?>

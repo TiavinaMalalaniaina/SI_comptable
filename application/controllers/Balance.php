@@ -14,27 +14,15 @@ class Balance extends CI_Controller {
     public function index() {
 
         $balance = $this->balance_model->selectAll();
-
-        for ($i=0; $i < count($balance); $i++) { 
-            $solde = $balance[$i]['debit']-$balance[$i]['credit'];
-            if ($solde > 0) {
-                $balance[$i]['soldedebit'] = $solde;
-                $balance[$i]['soldecredit'] = "";
-            } else {
-                $balance[$i]['soldedebit'] = "";
-                $balance[$i]['soldecredit'] = -$solde;
-            }
-
-            if ($balance[$i]['debit'] == 0) $balance[$i]['debit']=""; 
-            if ($balance[$i]['credit'] == 0) $balance[$i]['credit']=""; 
-        }
+        $balance = $this->balance_model->setBalance($balance);
         $total = $this->balance_model->getTotal($balance);
         $data = array(
            'title' => "Balance",
            'balance' => $balance,
            'total' => $total,
         );
-        $this->load->view('templates/header.php');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);

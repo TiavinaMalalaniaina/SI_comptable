@@ -96,8 +96,8 @@
                     <td><?php echo $l['reference_piece'] ?></td>
                     <td><?php echo $l['compte'] ?></td>
                     <td><?php echo $l['libelle'] ?></td>
-                    <td><?php echo $l['debit'] ?></td>
-                    <td><?php echo $l['credit'] ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($l['debit']) ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($l['credit']) ?></td>
                   </tr>
                 <?php } ?>
                 </tbody>

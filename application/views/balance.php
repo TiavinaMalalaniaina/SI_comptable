@@ -60,7 +60,7 @@
             <div class="card-body">
               <h5 class="card-title">Formulaire pour la société</h5>
 
-              <table class="table table-bordered" style="font-size: 90%;">
+              <table class="table table-striped table-bordered datatable" style="font-size: 90%;">
                 <thead>
                   <tr>
                     <th scope="col" rowspan="2">N°compte</th>
@@ -85,16 +85,17 @@
                   <tr>
                     <td><?php echo $b['code'] ?></td>
                     <td><?php echo $b['intitule'] ?></td>
-                    <td><?php echo $b['debit'] ?></td>
-                    <td><?php echo $b['credit'] ?></td>
-                    <td><?php echo $b['soldedebit'] ?></td>
-                    <td><?php echo $b['soldecredit'] ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($b['debit']) ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($b['credit']) ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($b['soldedebit']) ?></td>
+                    <td style="text-align: right;"><?php echo format_to_money($b['soldecredit']) ?></td>
                   </tr>
                 <?php } ?>
                   <tr>
                     <th colspan="2">TOTAL</th>
-                    <th colspan="2">TOTAL</th>
-                    <th colspan="2">TOTAL</th>
+                    <th colspan=""><?php echo format_to_money($total['debit']) ?></th>
+                    <th colspan=""><?php echo format_to_money($total['credit']) ?></th>
+                    <th colspan="2"><?php echo format_to_money($total['solde']) ?></th>
                   </tr>
                 </tbody>
               </table>

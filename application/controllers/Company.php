@@ -27,7 +27,8 @@ class Company extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 
-        $this->load->view('templates/header');
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
 		$this->load->view('templates/sidebar.php',$piwi);
 		$this->load->view('company', $data);
 		$this->load->view('templates/footer');

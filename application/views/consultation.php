@@ -114,7 +114,7 @@
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title">Ajout de nouveau compte</h5>
+                              <h5 class="modal-title">Modification du compte</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -131,17 +131,17 @@
                               </div>
                               <?php } ?>
                               <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Code" value="<?php echo $c['code'] ?>" name="code">
+                                <input type="number" class="form-control" placeholder="Code" value="<?php echo $c['code'] ?>" name="code" min="0" required>
                               </div>
                               <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Intitule" value="<?php echo $c['intitule'] ?>" name="intitule">
+                                <input type="text" class="form-control" placeholder="Intitule" value="<?php echo $c['intitule'] ?>" name="intitule" aria-required="true">
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               <button type="submit" class="btn btn-primary">Save changes</button>
-                            </form><!-- End No Labels Form -->
                             </div>
+                          </form><!-- End No Labels Form -->
                           </div>
                         </div>
                       </div><!-- End Vertically centered Modal-->
@@ -182,6 +182,9 @@
 
   <!-- Template Main JS File -->
   <script src="<?php echo bu('assets/js/main.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/parsley.min.js') ?>"></script>
+  <script src="<?php echo bu('assets/js/lib/i18n/fr.js') ?>"></script>
 
 </body>
 
