@@ -74,6 +74,28 @@
       <span>Convertion de devise</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-menu-button-wide"></i><span>Etats financiers</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="<?php bu('Etat_financier') ?>">
+          <i class="bi bi-circle"></i><span>Actif</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Etat_financier/passif') ?>">
+          <i class="bi bi-circle"></i><span>Passif</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Etat_financier/resultat') ?>">
+          <i class="bi bi-circle"></i><span>Resultat</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 </aside><!-- End Sidebar-->

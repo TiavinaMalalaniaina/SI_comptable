@@ -46,7 +46,7 @@ CREATE  TABLE si_comptable.exercice (
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
 	debut                DATE       ,
 	fin                  DATE       
- ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+ ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE  TABLE si_comptable.plan_comptable ( 
 	code                 VARCHAR(5)  NOT NULL     PRIMARY KEY,
@@ -339,3 +339,6 @@ INSERT INTO si_comptable.journal( debit, credit, date_journal, code_journal, num
 INSERT INTO si_comptable.journal( debit, credit, date_journal, code_journal, numero_piece, compte, libelle, reference_piece, compte_tierce, echeance, devise, quantite, idexercice ) VALUES ( 300300.0, 0.0, '2023-01-01', 'AN', null, '51200', 'A NOUVEAU 2023', 'AN2023', '', null, 'AR', 0.0, 1);
 INSERT INTO si_comptable.journal( debit, credit, date_journal, code_journal, numero_piece, compte, libelle, reference_piece, compte_tierce, echeance, devise, quantite, idexercice ) VALUES ( 0.0, 119560.0, '2023-01-01', 'AN', null, '51202', 'A NOUVEAU 2023', 'AN2023', '', null, 'AR', 0.0, 1);
 INSERT INTO si_comptable.journal( debit, credit, date_journal, code_journal, numero_piece, compte, libelle, reference_piece, compte_tierce, echeance, devise, quantite, idexercice ) VALUES ( 18320.0, 0.0, '2023-01-01', 'AN', null, '53100', 'A NOUVEAU 2023', 'AN2023', '', null, 'AR', 0.0, 1);
+
+
+ update exercice set fin='2023-12-31' where id=1;

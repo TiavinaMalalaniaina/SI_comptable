@@ -55,16 +55,16 @@
             <div class="card-body">
             <div class="row">
                 <div class="col-lg-2">
-                    SOCIETE:
+                    SOCIETE: 
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['company']['name'] ?>
                 </div>
                 <div class="col-lg-2">
                     ADRESSE:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                    <?php echo $con['company']['address_social'] ?>
                 </div>
                 <div class="col-lg-2">
                     CAPITAL:
@@ -82,7 +82,7 @@
                     STAT:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['detail']['ns'] ?>
                 </div>
             </div>
             
@@ -103,7 +103,7 @@
                         BILAN
                     </div>
                     <div class="card-body">
-                        EXERCICE CLOS AU: ...
+                        EXERCICE CLOS AU: <?php echo $exo['fin']?>
                         <br>
                         Unité monétaire: Ariary
                     </div>
@@ -142,108 +142,92 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Capital émis</td>
-                        <td>101</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Réserve légal</td>
-                        <td>105</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Résultat en instance d'affectation</td>
-                        <td>128</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Résultat net</td>
-                        <td>120</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Résultat en capitaux propre</td>
-                        <td>11</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php for ($i=0; $i < count($cp[0]); $i++) { 
+                      ?>
+                      <tr>
+                        <td style="padding-left: 40px;text-transform:uppercase"><?php echo $cp[0][$i]['nom']?></td>
+                        <td><?php echo $cp[0][$i]['con']?></td>
+                        <td><?php echo $cp[0][$i]['brut']?></td>
+                      </tr>
+                      <?php
+                      for ($j=0; $j < count($cp[0][$i]['subs']); $j++) { 
+                        ?>
+                        <tr>
+                        <td style="padding-left: 40px;text-transform:capitalize"><?php echo $cp[0][$i]['subs'][$j]['nom']?></td>
+                        <td><?php echo $cp[0][$i]['subs'][$j]['con']?></td>
+                        <td><?php echo $cp[0][$i]['subs'][$j]['brut']?></td>
+                        </tr>
+                        <?php
+                      }
+                    }?>
 
                     <tr style="text-align: right;">
                         <th>TOTAL DES CAPITAUX PROPRES</th>
-                        <td colspan="2"> 0.00</td>
+                        <td colspan="2"> <?php echo $cp[1][2]?></td>
                     </tr>
 
                     <tr>
                         <th>PASSIF NON COURANT</th>
                         <td colspan="5"></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Emprunt différés</td>
-                        <td>13</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Emprunts/Dettes à LMT part+1an</td>
-                        <td>161</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php for ($i=0; $i < count($pnc[0]); $i++) { 
+                      ?>
+                      <tr>
+                        <td style="padding-left: 40px;text-transform:uppercase"><?php echo $pnc[0][$i]['nom']?></td>
+                        <td><?php echo $pnc[0][$i]['con']?></td>
+                        <td><?php echo $pnc[0][$i]['brut']?></td>
+                      </tr>
+                      <?php
+                      for ($j=0; $j < count($pnc[0][$i]['subs']); $j++) { 
+                        ?>
+                        <tr>
+                        <td style="padding-left: 40px;text-transform:capitalize"><?php echo $pnc[0][$i]['subs'][$j]['nom']?></td>
+                        <td><?php echo $pnc[0][$i]['subs'][$j]['con']?></td>
+                        <td><?php echo $pnc[0][$i]['subs'][$j]['brut']?></td>
+                        </tr>
+                        <?php
+                      }
+                    }?>
                     
 
                     <tr style="text-align: right;">
                         <th>TOTAL PASSIF NON COURANT</th>
-                        <td colspan="2"> 0.00</td>
+                        <td colspan="2"> <?php echo $pnc[1][2]?></td>
                     </tr>
 
                     <tr>
                         <th>PASSIF COURANT</th>
                         <td colspan="4"></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Dettes court termes</td>
-                        <td>165</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Fournisseur et comptes rattachés</td>
-                        <td>40</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Avances reçues des clients</td>
-                        <td>41</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Autre dettes</td>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Compte de trésorerie</td>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php for ($i=0; $i < count($pc[0]); $i++) { 
+                      ?>
+                      <tr>
+                        <td style="padding-left: 40px;text-transform:uppercase"><?php echo $pc[0][$i]['nom']?></td>
+                        <td><?php echo $pc[0][$i]['con']?></td>
+                        <td><?php echo $pc[0][$i]['brut']?></td>
+                      </tr>
+                      <?php
+                      for ($j=0; $j < count($pc[0][$i]['subs']); $j++) { 
+                        ?>
+                        <tr>
+                        <td style="padding-left: 40px;text-transform:capitalize"><?php echo $pc[0][$i]['subs'][$j]['nom']?></td>
+                        <td><?php echo $pc[0][$i]['subs'][$j]['con']?></td>
+                        <td><?php echo $pc[0][$i]['subs'][$j]['brut']?></td>
+                        </tr>
+                        <?php
+                      }
+                    }?>
                     
 
                     <tr style="text-align: right;">
-                        <th>TOTAL PASSIF COURANT</th>
-                        <td colspan="2"> 0.00</td>
+                        <th>TOTAL PASSIF NON COURANT</th>
+                        <td colspan="2"> <?php echo $pc[1][2]?></td>
                     </tr>
                     <tr style="text-align: right;">
-                        <th>TOTAL ACTIF</th>
-                        <td colspan="2"> 0.00</td>
+                        <th>TOTAL PASSIF</th>
+                        <td colspan="2"> <?php 
+                        $tot = $cp[1][2]+$pnc[1][2]+$pc[1][2];
+                        echo $tot?></td>
                     </tr>
                 </tbody>
               </table>

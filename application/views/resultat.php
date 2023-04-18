@@ -55,16 +55,16 @@
             <div class="card-body">
             <div class="row">
                 <div class="col-lg-2">
-                    SOCIETE:
+                    SOCIETE: 
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['company']['name'] ?>
                 </div>
                 <div class="col-lg-2">
                     ADRESSE:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                    <?php echo $con['company']['address_social'] ?>
                 </div>
                 <div class="col-lg-2">
                     CAPITAL:
@@ -82,7 +82,7 @@
                     STAT:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['detail']['ns'] ?>
                 </div>
             </div>
             
@@ -103,7 +103,7 @@
                         BILAN
                     </div>
                     <div class="card-body">
-                        EXERCICE CLOS AU: ...
+                        EXERCICE CLOS AU: <?php echo $exo['fin']?>
                         <br>
                         Unité monétaire: Ariary
                     </div>
@@ -136,165 +136,145 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Chiffre d'affaire</td>
-                        <td>70</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Production stockée</td>
-                        <td>71</td>
-                        <td></td>
-                    </tr>
 
+                <?php
+                for ($i=0; $i < count($lst[0][0]); $i++) { 
+                    ?>
+                    <tr>
+                        <td><?php echo $lst[0][0][$i]['nom']?></td>
+                        <td><?php echo $lst[0][0][$i]['con']?></td>
+                        <td><?php echo $lst[0][0][$i]['somme']?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
 
                     <tr>
                         <th>I.PRODUCTION DE L'EXERCICE</th>
-                        <td colspan="5"></td>
+                        <td colspan="5"><?php echo $lst[0][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[1][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Achat consommée</td>
-                        <td>60</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[1][0][$i]['nom']?></td>
+                        <td><?php echo $lst[1][0][$i]['con']?></td>
+                        <td><?php echo $lst[1][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Services extérieurs et autres consommations</td>
-                        <td>61/62</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    
-
+                    <?php
+                }
+                ?>
                     <tr>
                         <th>II.CONSOMMATION DE L'EXERCICE</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[1][1]?></td>
                     </tr>
 
                     <tr>
                         <th>III.VALEUR AJOUTEE D'EXPLOITATION(I-II)</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[0][1]-$lst[1][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[2][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Charge personnel</td>
-                        <td>64</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[2][0][$i]['nom']?></td>
+                        <td><?php echo $lst[2][0][$i]['con']?></td>
+                        <td><?php echo $lst[2][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Impôts, taxes et versements assimilés</td>
-                        <td>63</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php
+                }
+                ?>
 
                     <tr>
                         <th>IV.EXCEDENT BRUT D'EXPLOITATION</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[2][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[3][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Autres produits opérationnels</td>
-                        <td>75</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[3][0][$i]['nom']?></td>
+                        <td><?php echo $lst[3][0][$i]['con']?></td>
+                        <td><?php echo $lst[3][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Autres charges opérationnelles</td>
-                        <td>65</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Dotations aux Ammortissements, aux provisions et pertes de valeurs</td>
-                        <td>68</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Reprise sur privisions et pertes de valeurs</td>
-                        <td>78</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php
+                }
+                ?>
 
                     <tr>
                         <th>V.RESULTAT OPERATIONNEL</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[3][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[4][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Produits financiers</td>
-                        <td>76</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[4][0][$i]['nom']?></td>
+                        <td><?php echo $lst[4][0][$i]['con']?></td>
+                        <td><?php echo $lst[4][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Charges financières</td>
-                        <td>66</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php
+                }
+                ?>
 
                     <tr>
                         <th>VI.RESULTAT FINANCIERS</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[4][1]?></td>
                     </tr>
 
                     <tr>
                         <th>VII.RESULTAT AVANT IMPOTS (V+VI)</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[3][1]+$lst[4][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[5][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Impôts exigibles sur résultats</td>
-                        <td>695</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[5][0][$i]['nom']?></td>
+                        <td><?php echo $lst[5][0][$i]['con']?></td>
+                        <td><?php echo $lst[5][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Impôts différés (Variations)</td>
-                        <td>692</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php
+                }
+                ?>
+                    
                     <tr>
                         <th style="padding-left: 40px;">TOTAL DES PRODUITS DES ACTIVITES ORDINAIRES</th>
-                        <td></td>
+                        <td><?php echo $totpo?></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td style="padding-left: 40px;">TOTAL DES CHARGES DES ACTIVITES ORDINAIRES</td>
-                        <td></td>
+                        <td><?php echo $totco?></td>
                         <td></td>
                         <td></td>
                     </tr>
-                    
-                    
                     
                     <tr>
                         <th>VIII.RESULTAT NET DES ACTIVITES ORDINAIRES</th>
-                        <td colspan="4"></td>
+                        <td colspan="4"><?php echo $lst[5][1]?></td>
                     </tr>
+                    <?php
+                for ($i=0; $i < count($lst[6][0]); $i++) { 
+                    ?>
                     <tr>
-                        <td style="padding-left: 40px;">Elements extraordinaires (produits)</td>
-                        <td>77</td>
-                        <td></td>
-                        <td></td>
+                        <td style="padding-left: 40px;"><?php echo $lst[6][0][$i]['nom']?></td>
+                        <td><?php echo $lst[6][0][$i]['con']?></td>
+                        <td><?php echo $lst[6][0][$i]['somme']?></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">Elements extraordinaires (charges)</td>
-                        <td>67</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <?php
+                }
+                ?>
                     <tr>
                         <th>IX.RESULTAT EXTRAORDINAIRES</th>
                         <td></td>
-                        <td>0.00</td>
+                        <td><?php echo $lst[6][1]?></td>
                     </tr>
                     <tr>
                         <th>X.RESULTAT NET DE L'EXERCICE</th>
                         <td></td>
-                        <td>0.00</td>
+                        <td><?php echo $lst[6][1] + ($totpo-$totco)?></td>
                     </tr>
 
                 </tbody>

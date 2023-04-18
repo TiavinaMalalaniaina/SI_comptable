@@ -55,16 +55,16 @@
             <div class="card-body">
             <div class="row">
                 <div class="col-lg-2">
-                    SOCIETE:
+                    SOCIETE: 
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['company']['name'] ?>
                 </div>
                 <div class="col-lg-2">
                     ADRESSE:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                    <?php echo $con['company']['address_social'] ?>
                 </div>
                 <div class="col-lg-2">
                     CAPITAL:
@@ -82,7 +82,7 @@
                     STAT:
                 </div>
                 <div class="col-lg-10">
-                    ...
+                  <?php echo $con['detail']['ns'] ?>
                 </div>
             </div>
             
@@ -103,7 +103,7 @@
                         BILAN
                     </div>
                     <div class="card-body">
-                        EXERCICE CLOS AU: ...
+                        EXERCICE CLOS AU: <?php echo $exo['fin']?>
                         <br>
                         Unité monétaire: Ariary
                     </div>
@@ -144,128 +144,75 @@
                     <tr>
                         <th>ACTIF NON COURANT</th>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">ECART D'ACQUISITION</td>
+                    
+                    <?php for ($i=0; $i < count($anc[0]); $i++) { 
+                      ?>
+                      <tr>
+                        <td style="padding-left: 40px;text-transform:uppercase"><?php echo $anc[0][$i]['nom']?></td>
+                        <td><?php echo $anc[0][$i]['con']?></td>
+                        <td><?php echo $anc[0][$i]['brut']?></td>
+                        <td><?php echo $anc[0][$i]['ap']?></td>
+                        <td><?php echo $anc[0][$i]['net']?></td>
                         <td></td>
+                      </tr>
+                      <?php
+                      for ($j=0; $j < count($anc[0][$i]['subs']); $j++) { 
+                        ?>
+                        <tr>
+                        <td style="padding-left: 40px;text-transform:capitalize"><?php echo $anc[0][$i]['subs'][$j]['nom']?></td>
+                        <td><?php echo $anc[0][$i]['subs'][$j]['con']?></td>
+                        <td><?php echo $anc[0][$i]['subs'][$j]['brut']?></td>
+                        <td><?php echo $anc[0][$i]['subs'][$j]['ap']?></td>
+                        <td><?php echo $anc[0][$i]['subs'][$j]['net']?></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMMOBILISATION CORPORELLE</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMMOBILISATION INCORPORELLE</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMMOBILISATION EN COURS</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMMOBILISATION FINANCIERES</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMPOTS D'INTERET</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        </tr>
+                        <?php
+                      }
+                    }?>
 
                     <tr style="text-align: right;">
                         <th>TOTAL ACTIF NON COURANT</th>
-                        <td colspan="4"> 0.00</td>
+                        <td colspan="4"> <?php echo $anc[1][2]?></td>
                     </tr>
 
                     <tr>
                         <th>ACTIF COURANT</th>
                         <td colspan="4"></td>
                     </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">STOCKS ET EN COURS</td>
+                    <?php for ($i=0; $i < count($ac[0]); $i++) { 
+                      ?>
+                      <tr>
+                        <td style="padding-left: 40px;text-transform:uppercase"><?php echo $ac[0][$i]['nom']?></td>
+                        <td><?php echo $ac[0][$i]['con']?></td>
+                        <td><?php echo $ac[0][$i]['brut']?></td>
+                        <td><?php echo $ac[0][$i]['ap']?></td>
+                        <td><?php echo $ac[0][$i]['net']?></td>
                         <td></td>
+                      </tr>
+                      <?php
+                      for ($j=0; $j < count($ac[0][$i]['subs']); $j++) { 
+                        ?>
+                        <tr>
+                        <td style="padding-left: 60px;text-transform:capitalize"><?php echo $ac[0][$i]['subs'][$j]['nom']?></td>
+                        <td><?php echo $ac[0][$i]['subs'][$j]['con']?></td>
+                        <td><?php echo $ac[0][$i]['subs'][$j]['brut']?></td>
+                        <td><?php echo $ac[0][$i]['subs'][$j]['ap']?></td>
+                        <td><?php echo $ac[0][$i]['subs'][$j]['net']?></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">CREANCE ET EMPLOIS ASSIMILEE</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 60px;">Client et autre débiteurs</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 60px;">Impots/Accompte ou IReporte</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 60px;">Autre créance et actifs assimilés</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">TERSORERIE ET EQUIVALENT DE TERSORERIE</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 40px;">IMPOTS D'INTERET</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        </tr>
+                        <?php
+                      }
+                    }?>
 
                     <tr style="text-align: right;">
-                        <th>TOTAL ACTIF COURANT</th>
-                        <td colspan="4"> 0.00</td>
+                        <th>TOTAL  NON COURANT</th>
+                        <td colspan="4"> <?php echo $ac[1][2]?></td>
                     </tr>
                     <tr style="text-align: right;">
                         <th>TOTAL ACTIF</th>
-                        <td colspan="4"> 0.00</td>
+                        <td colspan="4"> <?php 
+                        $tot = $anc[1][2]+$ac[1][2];
+                        echo $tot?></td>
                     </tr>
                 </tbody>
               </table>
