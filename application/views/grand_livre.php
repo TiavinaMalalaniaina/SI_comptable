@@ -72,6 +72,9 @@
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
+                <div class="col-md-2">
+                  <p>Solde <?php echo $livre[1]?> : <?php echo $livre[0]?></p>
+                </div>
             </form>
               <table class="table table-bordered" style="font-size: 90%;">
                 <thead>
@@ -88,7 +91,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($livre as $l) { ?>
+                  <?php foreach ($livre[2] as $l) { ?>
                   <tr>
                     <th scope="row"><?php echo $l['code_journal'] ?></th>
                     <td><?php echo $l['date_journal'] ?></td>

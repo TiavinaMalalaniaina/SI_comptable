@@ -18,6 +18,11 @@ class Etat_financier extends CI_Controller {
 
     public function index() {
 
+        $dt = date('Y-m-d');
+        if($this->input->get('date')!==null){
+            $dt = $this->input->get('date');
+        }
+
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
 		$piwi = [];
@@ -34,8 +39,8 @@ class Etat_financier extends CI_Controller {
         );
         $exo = $this->Etat_financier_model->current_exercice();
 
-        $test = $this->Etat_financier_model->get_it([1,2,3,4,5,6],[[],[],[],[],[],[]]);
-        $test2 = $this->Etat_financier_model->get_it([7,8,12],[[],[9,10,11],[]]);
+        $test = $this->Etat_financier_model->get_it([1,2,3,4,5,6],[[],[],[],[],[],[]],$dt);
+        $test2 = $this->Etat_financier_model->get_it([7,8,12],[[],[9,10,11],[]],$dt);
         
         $data = array(
             'con' => $datacompany,
@@ -52,6 +57,11 @@ class Etat_financier extends CI_Controller {
 
     public function passif() {
 
+        $dt = date('Y-m-d');
+        if($this->input->get('date')!==null){
+            $dt = $this->input->get('date');
+        }
+
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
 		$piwi = [];
@@ -67,9 +77,9 @@ class Etat_financier extends CI_Controller {
             'docs' => $docs
         );
         $exo = $this->Etat_financier_model->current_exercice();
-        $test = $this->Etat_financier_model->get_it([13,14,15,16,17],[[],[],[],[],[]]);
-        $test2 = $this->Etat_financier_model->get_it([18,19],[[],[]]);
-        $test3 = $this->Etat_financier_model->get_it([20,21,22,23,24,25],[[],[],[],[],[],[]]);
+        $test = $this->Etat_financier_model->get_it2([13,14,15,16,17],[[],[],[],[],[]],$dt);
+        $test2 = $this->Etat_financier_model->get_it2([18,19],[[],[]],$dt);
+        $test3 = $this->Etat_financier_model->get_it2([20,21,22,23,24,25],[[],[],[],[],[],[]],$dt);
         
         $data = array(
             'con' => $datacompany,
@@ -84,6 +94,11 @@ class Etat_financier extends CI_Controller {
     }
 
     public function resultat() {
+
+        $dt = date('Y-m-d');
+        if($this->input->get('date')!==null){
+            $dt = $this->input->get('date');
+        }
 
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
@@ -103,13 +118,17 @@ class Etat_financier extends CI_Controller {
 
         
         $lst = [];
-        $lst[0] = $this->Etat_financier_model->do_do(['70','71']);
-        $lst[1] = $this->Etat_financier_model->do_do(['60','61/62']);
-        $lst[2] = $this->Etat_financier_model->do_do(['64','63']);
-        $lst[3] = $this->Etat_financier_model->do_do(['75','65','68','78']);
-        $lst[4] = $this->Etat_financier_model->do_do(['76','66']);
-        $lst[5] = $this->Etat_financier_model->do_do(['695','692']);
-        $lst[6] = $this->Etat_financier_model->do_do(['77','67']);
+        $lst[0] = $this->Etat_financier_model->do_do(['70','71'],$dt);
+        $lst[1] = $this->Etat_financier_model->do_do(['60','61/62'],$dt);
+        $lst[2] = $this->Etat_financier_model->do_do(['64','63'],$dt);
+        $lst[3] = $this->Etat_financier_model->do_do(['75','65','68','78'],$dt);
+        $lst[4] = $this->Etat_financier_model->do_do(['76','66'],$dt);
+        $lst[5] = $this->Etat_financier_model->do_do(['695','692'],$dt);
+        $lst[6] = $this->Etat_financier_model->do_do(['77','67'],$dt);
+
+
+        $rsam = 0;
+        $sd = -1;
 
         $totco = 0;
         $totpo = 0;
@@ -120,10 +139,26 @@ class Etat_financier extends CI_Controller {
                 }
                 else {
                     $totpo += $lst[$i][0][$j]['somme'];
+                    if($sd==-1){
+                        $sd = $lst[$i][0][$j]['somme'];
+                    }
                 }
+            }
+            if($i==4){
+                $rsam = $totpo - $totco;
+                $rsam = (20*$rsam)/100;
+        $sd = (5*$sd)/1000 + 320000;
+
+        $max = $rsam;
+        if($max<$sd){
+            $max = $sd;
+        }
+
+        $lst[5][0][1]['somme'] = $max;
             }
         }
 
+        
 
         $data = array(
             'con' => $datacompany,

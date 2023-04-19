@@ -1,3 +1,6 @@
+DROP SCHEMA si_comptable;
+
+
 CREATE SCHEMA si_comptable;
 
 CREATE  TABLE si_comptable.code_journaux ( 
@@ -342,3 +345,4 @@ INSERT INTO si_comptable.journal( debit, credit, date_journal, code_journal, num
 
 
  update exercice set fin='2023-12-31' where id=1;
+

@@ -114,6 +114,27 @@
         </div>
     </section>
 
+    <section class="section" style="text-align: center;">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-title">
+                        Date
+                    </div>
+                    <div class="card-body">
+                        <form action="<?php bu('Etat_financier/passif')?>" method="get">
+                        <input type="date" name="date" id="">
+                        <button type="submit">OK</button>  
+                      </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
