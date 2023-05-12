@@ -40,12 +40,6 @@
   .number {
     text-align: right;
   }
-
-  .input-pourcentage {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-  }
 </style>
 <body>
  
@@ -65,34 +59,95 @@
 
 <section class="section">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">General Form Elements</h5>
+          <h5 class="card-title">Seuil de rentabilité</h5>
 
           <!-- General Form Elements -->
-          <form action="<?php bu('Produit/insertion')?>">
-            <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label" >Nom du produit</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="nom">
-              </div>
-              <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
-              <div class="col-sm-10">
-                <input type="date" class="form-control" name="date">
-              </div>
-            
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <td>p1</td>
+                  <td>p2</td>
+                  <td>p3</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="number">
+                    <?php echo format_to_money(3600000) ?>
+                  </td>
+                  <td class="number">
+                    <?php echo format_to_money(3600000) ?>
+                  </td>
+                  <td class="number">
+                    <?php echo format_to_money(3600000) ?>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-            <div class="row mb-3">
-              <label class="col-sm-5 col-form-label"></label>
-              <div class="col-sm-7">
-                <button type="submit" class="btn btn-primary">Submit Form</button>
-              </div>
-            </div>
+        </div>
+      </div>
 
-          </form><!-- End General Form Elements -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Seuil de rentabilité</h5>
+
+          <!-- General Form Elements -->
+            <table class="table table-bordered">
+                <tr>
+                  <th>Chiffre d'affaire</th>
+                  
+                  <td class="number">
+                    <?php echo format_to_money($ca) ?>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Cout de variable</th>
+                  
+                  <td class="number">
+                    <?php echo format_to_money($cv) ?>
+                  </td>
+                <tr>
+                  <tr>
+                    <th>Cout de Fixe</th>
+                    
+                  <td class="number">
+                    <?php echo format_to_money($cf) ?>
+                  </td>
+                  <tr>
+                  <tr>
+                    <th>Marge globale</th>
+                    
+                  <td class="number">
+                    <?php echo format_to_money($mg) ?>
+                  </td>
+                  <tr>
+                  <tr>
+                    <th>Marge sur cout variable</th>
+                    
+                  <td class="number">
+                    <?php echo format_to_money($mcv) ?>
+                  </td>
+                  <tr>
+                  <tr>
+                    <th>Marge sur cout fixe</th>
+                    
+                  <td class="number">
+                    <?php echo format_to_money($mcf) ?>
+                  </td>
+                  <tr>
+                  <tr>
+                    <th>Seuil</th>
+                    
+                  <td class="number">
+                    <?php echo format_to_money($seuil) ?>
+                  </td>
+                  <tr>
+            </table>
 
         </div>
       </div>
@@ -101,7 +156,7 @@
   </div>
 </section>
 
-</main>
+</main><!-- End #main -->
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -65,25 +65,23 @@
     <h5 class="card-title">General Form Elements</h5>
 
     <!-- General Form Elements -->
-    <form>
+    <form action="<?php bu('Analytique/index')?>" method="get">
       <div class="row">
         <div class="col-lg-5">
         <div class="row mb-3">
           <div class="col-sm-6">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Choisir un produit</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select class="form-select" aria-label="Default select example" name="produit">
+              <?php
+                for ($i=0; $i < count($produits) ; $i++) { 
+                  ?>
+                    <option value="<?php echo $produits[$i]['id']?>"><?php echo $produits[$i]['nom']?></option>
+                  <?php
+                }
+              ?>
             </select>
           </div>
           <div class="col-sm-6">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Choisir une date</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+            <input type="date" name="date" id="">
           </div>
         </div>
       </div>
@@ -105,7 +103,7 @@
 
       <div class="card">
         <div class="card-body" style="overflow-x: auto;">
-          <h5 class="card-title">Résultat analytique</h5>
+          <h5 class="card-title">Résultat analytique <?php echo $prod['nom']?> du <?php echo $daty?></h5>
           <table class="table table-bordered" style="font-size: 90%; width: <?php echo 800*4 ?>px">
             <thead>
               <tr>
@@ -113,156 +111,84 @@
                 <th scope="col" rowspan="2">TOTAL</th>
                 <th scope="col" rowspan="2">Unité d'oeuvre</th>
                 <th scope="col" rowspan="2">Nature</th>
-                <th scope="col" colspan="3">ADM/Dist</th>
-                <th scope="col" colspan="3">Usine</th>
-                <th scope="col" colspan="3">Plantation</th>
+                <?php 
+                for ($i=0; $i < count($centres) ; $i++) { 
+                  ?>
+                    <th scope="col" colspan="3"><?php echo $centres[$i]['nom'] ?></th>
+                  <?php
+                }
+                ?>
                 <th scope="col" colspan="2">TOTAL</th>
               </tr>
               <tr>
+              <?php 
+                for ($i=0; $i < count($centres) ; $i++) { 
+                  ?>
                 <td>%</td>
                 <td>Fixe</td>
                 <td>Variable</td>
-                <td>%</td>
-                <td>Fixe</td>
-                <td>Variable</td>
-                <td>%</td>
-                <td>Fixe</td>
-                <td>Variable</td>
+                                  <?php
+                }
+                ?>
                 <td>Fixe</td>
                 <td>Variable</td>
               </tr>
             </thead>
             <tbody>
+                <?php for ($i=0; $i < count($charges); $i++) { 
+                   ?>
               <tr>
-                <td>Frais de transport</td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td class="number">100,00%</td>
-                <td class="number"> - </td>
-                <td class="number"><?php echo format_to_money(3200000) ?></td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <th class="number">-</th>
-                <th class="number"><?php echo format_to_money(3200000) ?></th>
+                <td><?php echo $charges[$i]['nom']?></td>
+                <td><?php echo $charges[$i]['somme'] ?></td>
+                <td><?php echo $charges[$i]['unite_oeuvre']?></td>
+                <td><?php echo $charges[$i]['nature'] ?></td>
+                <?php 
+                for ($j=0; $j < count($centres); $j++) { 
+                   ?>
+                    <td><?php echo $centres[$j]['charges'][$i]['p']?>%</td>
+                    <td><?php echo $centres[$j]['charges'][$i]['fixe']?></td>
+                    <td><?php echo $centres[$j]['charges'][$i]['variable']?></td>
+                   <?php
+                }
+                ?>
+                
+                <th><?php echo $total['charges'][$i]['fixe']?></th>
+                <th><?php echo $total['charges'][$i]['variable']?></th>
               </tr>
-              <tr>
-                <td>Frais de transport</td>
-                <td class="number"><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td class="number">100,00%</td>
-                <td class="number"> - </td>
-                <td class="number"><?php echo format_to_money(3200000) ?></td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <th class="number">-</th>
-                <th class="number"><?php echo format_to_money(3200000) ?></th>
-              </tr>
-              <tr>
-                <td>Frais de transport</td>
-                <td class="number"><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td class="number">100,00%</td>
-                <td class="number"> - </td>
-                <td class="number"><?php echo format_to_money(3200000) ?></td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <td class="number">0,00%</td>
-                <td class="number">-</td>
-                <td class="number">-</td>
-                <th class="number">-</th>
-                <th class="number"><?php echo format_to_money(3200000) ?></th>
-              </tr>
-              <tr>
-                <td>Frais de transport</td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td>100,00%</td>
-                <td> - </td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <th>-</th>
-                <th><?php echo format_to_money(3200000) ?></th>
-              </tr>
-              <tr>
-                <td>Frais de transport</td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td>100,00%</td>
-                <td> - </td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <th>-</th>
-                <th><?php echo format_to_money(3200000) ?></th>
-              </tr>
-              <tr>
-                <td>Frais de transport</td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>KG</td>
-                <td>V</td>
-                <td>100,00%</td>
-                <td> - </td>
-                <td><?php echo format_to_money(3200000) ?></td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <td>0,00%</td>
-                <td>-</td>
-                <td>-</td>
-                <th>-</th>
-                <th><?php echo format_to_money(3200000) ?></th>
-              </tr>
+                   <?php
+                }?>
     <!-- TOTAL -->
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <th class="number">-</th>
-                <th class="number"><?php echo format_to_money(56000000) ?></th>
-                <td></td>
-                <th class="number">-</th>
-                <th class="number"><?php echo format_to_money(56000000) ?></th>
-                <td></td>
-                <th>-</th>
-                <th class="number"><?php echo format_to_money(56000000) ?></th>
-                <th class="number"><?php echo format_to_money(56000000) ?></th>
-                <th class="number"><?php echo format_to_money(56000000) ?></th>
+                <?php 
+                for ($i=0; $i < count($centres); $i++) { 
+                    ?>
+                    <td></td>
+                    <th class="number"><?php echo $centres[$i]['fixe']?></th>
+                    <th class="number"><?php echo $centres[$i]['variable']?></th>
+                    <?php
+                }
+                ?>
+                <th class="number"><?php echo $total['fixe'] ?></th>
+                <th class="number"><?php echo $total['variable'] ?></th>
               </tr>
 
               <tr>
                 <th>TOTAL</th>
-                <th class="number"><?php echo format_to_money(5800000) ?></th>
+                <th class="number"><?php echo $total['somme'] ?></th>
                 <th></th>
                 <th></th>
-                <th class="number" colspan="3"><?php echo format_to_money(5800000) ?></th>
-                <th class="number" colspan="3"><?php echo format_to_money(5800000) ?></th>
-                <th class="number" colspan="3"><?php echo format_to_money(5800000) ?></th>
-                <th class="number" colspan="2"><?php echo format_to_money(5800000) ?></th>
+                <?php 
+                for ($i=0; $i < count($centres); $i++) { 
+                    ?>
+                        <th class="number" colspan="3"><?php echo ($centres[$i]['fixe']+$centres[$i]['variable']) ?></th>
+                    <?php
+                }
+                ?>
+                <th class="number" colspan="2"><?php echo ($total['fixe']+$total['variable']) ?></th>
               </tr>
             </tbody>
           </table>
@@ -274,6 +200,162 @@
     </div>
   </div>
 </section>
+<section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cout du KG mais grain</h5>
+
+              <!-- General Form Elements -->
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>REPARTITION ADM/DISTR</th>
+                      <th>Cout direct</th>
+                      <th>CLES</th>
+                      <th>ADM/DIST</th>
+                      <th>Cout total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    $pl = $centres[2]['fixe']+$centres[2]['variable'];
+                    $us = $centres[1]['fixe']+$centres[1]['variable'];
+                    $tot = $pl+$us;
+                    if($tot==0){
+                      $tot = 1;
+                    }
+                    $ppl = $pl/$tot;
+                    $pus = $us/$tot;
+                    $adm = $centres[0]['fixe']+$centres[0]['variable'];
+                    $admppl = ($adm * $ppl)/100;
+                    $admpus = ($adm * $pus)/100;
+                    $ctpl = $admppl + $ppl;
+                    $ctus = $admpus + $pus;
+                    $lt = $ctpl + $ctus;
+                    ?>
+                    <tr>
+                      <td>TOTAL PLANTATION</td>
+                      <td class="number"><?php echo format_to_money($pl) ?></td>
+                      <td><?php echo $ppl?>%</td>
+                      <td class="number"><?php echo format_to_money($admppl) ?></td>
+                      <th class="number"><?php echo format_to_money($ctpl) ?></th>
+                    </tr>
+                    <tr>
+                      <td>TOTAL USINE</td>
+                      <td class="number"><?php echo format_to_money($us) ?></td>
+                      <td><?php echo $pus?>%</td>
+                      <td class="number"><?php echo format_to_money($admpus) ?></td>
+                      <th class="number"><?php echo format_to_money($ctus) ?></th>
+                    </tr>
+                    <tr>
+                      <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                      <th>TOTAL GENERAL</th>
+                      <td class="number"><?php echo format_to_money($tot) ?></td>
+                      <th></th>
+                      <td class="number"><?php echo format_to_money($adm) ?></td>
+                      <th class="number"><?php echo format_to_money($lt) ?></th>
+                    </tr>
+                  </tbody>
+                </table>
+
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cout du KG mais grain</h5>
+
+              <!-- General Form Elements -->
+                <table class="table table-bordered">
+                  <thead></thead>
+                    <tr>
+                      <th>Unite d'oeuvre</th>
+                      <td>Kg de grain de mais entrant</td>
+                    </tr>
+                    <tr>
+                      <th>
+                        Nombre
+                      </th>
+                      <td>
+                        461000
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        Cout
+                      </th>
+                      <td>
+                        298320
+                      </td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                      <th>Cout du kg de mais grain</th>
+                      <th>210</th>
+                    </tr>
+                </table>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cout du KG de mais concasse</h5>
+
+              <!-- General Form Elements -->
+                <table class="table table-bordered">
+                    <tr>
+                      <th>Unite d'oeuvre</th>
+                      <td>Kg du mais concasse</td>
+                    </tr>
+                    <tr>
+                      <th>
+                        Nombre
+                      </th>
+                      <td>
+                        461000
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        Cout
+                      </th>
+                      <td>
+                        298320
+                      </td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                      <th>Cout du kg de mais grain</th>
+                      <th>210</th>
+                    </tr>
+                </table>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
 </main><!-- End #main -->
 

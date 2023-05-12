@@ -72,11 +72,16 @@
           <h5 class="card-title">General Form Elements</h5>
 
           <!-- General Form Elements -->
-          <form>
+          <form action="<?php bu('Centre/insertion') ?>" method="get">
             <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Nom du produit</label>
+              <label for="inputText" class="col-sm-2 col-form-label">Nom du centre</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="nom">
+              </div>
+              <div class="row mb-3">
+              <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="date">
               </div>
             
 

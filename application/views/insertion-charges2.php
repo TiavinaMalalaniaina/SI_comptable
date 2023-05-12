@@ -50,6 +50,10 @@
 <body>
  
 
+
+
+
+
 <main id="main" class="main">
 
 <div class="pagetitle">
@@ -65,33 +69,63 @@
 
 <section class="section">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">General Form Elements</h5>
+          <h5 class="card-title">Information supplémentaire de la charge</h5>
 
           <!-- General Form Elements -->
-          <form action="<?php bu('Produit/insertion')?>">
-            <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label" >Nom du produit</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="nom">
-              </div>
-              <div class="row mb-3">
+          <form action="<?php bu('Centre/insertion_eq')?>" method="get">
+          <div class="row mb-3">
               <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
               <div class="col-sm-10">
                 <input type="date" class="form-control" name="date">
               </div>
-            
-
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <td>Charges</td>
+                  <?php 
+                  for ($i=0; $i < count($centres); $i++) { 
+                    ?>
+                    <td><?php echo $centres[$i]['nom']?></td>
+                    <?php
+                  }
+                  ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php 
+                for ($i=0; $i < count($charges); $i++) { 
+                  ?>
+                  <tr>
+                  
+                  <td>
+                     <?php echo $charges[$i]['nom']?>
+                  </td>
+                  <?php
+                  for ($j=0; $j < count($centres) ; $j++) { 
+                    ?>
+                    <td>
+                    <input type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage" value="<?php echo $centres[$j]['charges'][$i]?>">
+                  </td>
+                    <?php
+                  }
+                  ?>
+                </tr>
+                  <?php
+                }
+                ?>
+                
+              </tbody>
+            </table>
             <div class="row mb-3">
               <label class="col-sm-5 col-form-label"></label>
               <div class="col-sm-7">
                 <button type="submit" class="btn btn-primary">Submit Form</button>
               </div>
             </div>
-
           </form><!-- End General Form Elements -->
 
         </div>
@@ -101,7 +135,8 @@
   </div>
 </section>
 
-</main>
+</main><!-- End #main -->
+
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

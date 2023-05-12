@@ -76,33 +76,54 @@
           <h5 class="card-title">Information supplémentaire de la charge</h5>
 
           <!-- General Form Elements -->
-          <form>
+          <form action="<?php bu('Produit/insertion_eq')?>" method="get">
+          <div class="row mb-3">
+              <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="date">
+              </div>
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <td>P1</td>
-                  <td>P2</td>
-                  <td>P3</td>
+                  <td>Charges</td>
+                  <?php 
+                  for ($i=0; $i < count($produits); $i++) { 
+                    ?>
+                    <td><?php echo $produits[$i]['nom']?></td>
+                    <?php
+                  }
+                  ?>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <?php 
+                for ($i=0; $i < count($charges); $i++) { 
+                  ?>
+                  <tr>
+                  
                   <td>
-                    <input type="number" name="adm" id="" class="input-pourcentage">
+                     <?php echo $charges[$i]['nom']?>
                   </td>
-                  <td>
-                    <input type="number" name="usines" id="" class="input-pourcentage">
+                  <?php
+                  for ($j=0; $j < count($produits) ; $j++) { 
+                    ?>
+                    <td>
+                    <input type="number" oninput="unabilityToValide()" class="<?php echo $i?>" name="<?php echo ($charges[$i]['id']."-".$produits[$j]['id'])?>" id="" class="input-pourcentage" value="<?php echo $produits[$j]['charges'][$i]?>">
                   </td>
-                  <td>
-                    <input type="number" name="plantation" id="" class="input-pourcentage">
-                  </td>
+                    <?php
+                  }
+                  ?>
                 </tr>
+                  <?php
+                }
+                ?>
+                
               </tbody>
             </table>
             <div class="row mb-3">
               <label class="col-sm-5 col-form-label"></label>
               <div class="col-sm-7">
-                <button type="submit" class="btn btn-primary">Submit Form</button>
+                <button type="submit" id="validate" class="btn btn-primary">Submit Form</button>
               </div>
             </div>
           </form><!-- End General Form Elements -->
@@ -129,6 +150,7 @@
   <script src="<?php echo site_url('assets/vendor/simple-datatables/simple-datatables.js') ?>"></script>
   <script src="<?php echo site_url('assets/vendor/tinymce/tinymce.min.js') ?>"></script>
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
+  <script src="<?php echo site_url('assets/js/main2.js') ?>"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
