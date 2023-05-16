@@ -420,8 +420,8 @@ create table charge_centre(
 );
 
 -- 
-insert into produit(nom,dat) values('P1','2023-05-09');
-insert into produit(nom,dat) values('P2','2023-05-09');
+insert into produit(nom,dat) values('Mais','2023-05-09');
+insert into produit(nom,dat) values('Riz','2023-05-09');
 -- 
 insert into unite_oeuvre(nom) values('KG');
 insert into unite_oeuvre(nom) values('NB');
