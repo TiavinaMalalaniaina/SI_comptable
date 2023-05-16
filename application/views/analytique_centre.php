@@ -104,7 +104,7 @@
       <div class="card">
         <div class="card-body" style="overflow-x: auto;">
           <h5 class="card-title">Résultat analytique <?php echo $centre['nom']?> du <?php echo $daty?></h5>
-          <table class="table table-bordered" style="font-size: 90%; width:max-content">
+          <table class="table table-bordered table-striped" style="font-size: 90%; width:max-content">
             <thead>
               <tr>
                 <th rowspan="2">Rubriques</th>
@@ -115,13 +115,7 @@
                 <th colspan="2">P2</th>
                 <th colspan="2">TOTAL</th>
               </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+              <tr>
                 <td>Fixe</td>
                 <td>Variable</td>
                 <td>Fixe</td>
@@ -129,7 +123,9 @@
                 <td>Fixe</td>
                 <td>Variable</td>
               </tr>
-              <?php
+            </thead>
+              <tbody>
+            <?php
               for ($i=0; $i < count($charges); $i++) { 
                 ?>
                 <tr>
@@ -139,12 +135,12 @@
                 <td><?php echo $charges[$i]['nature']?></td>
                 <?php for ($j=0; $j < count($produits); $j++) { 
                     ?>
-                    <td><?php echo $charges[$i]['fixe'][$j]?></td>
-                    <td><?php echo $charges[$i]['variable'][$j]?></td>
+                    <td><?php echo format_to_money($charges[$i]['fixe'][$j])?></td>
+                    <td><?php echo format_to_money($charges[$i]['variable'][$j])?></td>
                     <?php
                 }?>
-                <td><?php echo $charges[$i]['sum_fix']?></td>
-                <td><?php echo $charges[$i]['sum_var']?></td>
+                <td><?php echo format_to_money($charges[$i]['sum_fix'])?></td>
+                <td><?php echo format_to_money($charges[$i]['sum_var'])?></td>
               </tr>
                 <?php
               }
@@ -154,13 +150,13 @@
                 <?php 
                 for ($i=0; $i < count($produits); $i++) { 
                    ?>
-                   <td><?php echo $produits[$i]['sum_fix']?></td>
-                   <td><?php echo $produits[$i]['sum_var']?></td>
+                   <td><?php echo format_to_money($produits[$i]['sum_fix'])?></td>
+                   <td><?php echo format_to_money($produits[$i]['sum_var'])?></td>
                    <?php
                 }
                 ?>
-                <td><?php echo $last[0]?></td>
-                <td><?php echo $last[1]?></td>
+                <td><?php echo format_to_money($last[0])?></td>
+                <td><?php echo format_to_money($last[1])?></td>
               </tr>
               <tr>
                 <td colspan="4"></td>
@@ -171,7 +167,7 @@
                    <?php
                 }
                 ?>
-                <td colspan="2"><?php echo $last[2]?></td>
+                <td colspan="2"><?php echo format_to_money($last[2])?></td>
               </tr>
             </tbody>
           </table>

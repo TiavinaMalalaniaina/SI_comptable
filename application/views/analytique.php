@@ -62,7 +62,7 @@
     
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">General Form Elements</h5>
+    <h5 class="card-title">Choisir un produit</h5>
 
     <!-- General Form Elements -->
     <form action="<?php bu('Analytique/index')?>" method="get">
@@ -104,7 +104,7 @@
       <div class="card">
         <div class="card-body" style="overflow-x: auto;">
           <h5 class="card-title">Résultat analytique <?php echo $prod['nom']?> du <?php echo $daty?></h5>
-          <table class="table table-bordered" style="font-size: 90%; width: <?php echo 800*4 ?>px">
+          <table class="table table-bordered table-striped" style="font-size: 90%; width: max-content">
             <thead>
               <tr>
                 <th scope="col" rowspan="2">Rubriques</th>
@@ -139,21 +139,21 @@
                    ?>
               <tr>
                 <td><?php echo $charges[$i]['nom']?></td>
-                <td><?php echo $charges[$i]['somme'] ?></td>
+                <td class="number"><?php echo format_to_money($charges[$i]['somme']) ?></td>
                 <td><?php echo $charges[$i]['unite_oeuvre']?></td>
                 <td><?php echo $charges[$i]['nature'] ?></td>
                 <?php 
                 for ($j=0; $j < count($centres); $j++) { 
                    ?>
                     <td><?php echo $centres[$j]['charges'][$i]['p']?>%</td>
-                    <td><?php echo $centres[$j]['charges'][$i]['fixe']?></td>
-                    <td><?php echo $centres[$j]['charges'][$i]['variable']?></td>
+                    <td class="number"><?php echo format_to_money($centres[$j]['charges'][$i]['fixe'])?></td>
+                    <td class="number"><?php echo format_to_money($centres[$j]['charges'][$i]['variable'])?></td>
                    <?php
                 }
                 ?>
                 
-                <th><?php echo $total['charges'][$i]['fixe']?></th>
-                <th><?php echo $total['charges'][$i]['variable']?></th>
+                <th class="number"><?php echo format_to_money($total['charges'][$i]['fixe'])?></th>
+                <th class="number"><?php echo format_to_money($total['charges'][$i]['variable'])?></th>
               </tr>
                    <?php
                 }?>
@@ -167,28 +167,28 @@
                 for ($i=0; $i < count($centres); $i++) { 
                     ?>
                     <td></td>
-                    <th class="number"><?php echo $centres[$i]['fixe']?></th>
-                    <th class="number"><?php echo $centres[$i]['variable']?></th>
+                    <th class="number" class="number"><?php echo format_to_money($centres[$i]['fixe'])?></th>
+                    <th class="number" class="number"><?php echo format_to_money($centres[$i]['variable'])?></th>
                     <?php
                 }
                 ?>
-                <th class="number"><?php echo $total['fixe'] ?></th>
-                <th class="number"><?php echo $total['variable'] ?></th>
+                <th class="number" class="number"><?php echo format_to_money($total['fixe']) ?></th>
+                <th class="number" class="number"><?php echo format_to_money($total['variable']) ?></th>
               </tr>
 
               <tr>
                 <th>TOTAL</th>
-                <th class="number"><?php echo $total['somme'] ?></th>
+                <th class="number" class="number"><?php echo format_to_money($total['somme']) ?></th>
                 <th></th>
                 <th></th>
                 <?php 
                 for ($i=0; $i < count($centres); $i++) { 
                     ?>
-                        <th class="number" colspan="3"><?php echo ($centres[$i]['fixe']+$centres[$i]['variable']) ?></th>
+                        <th class="number" colspan="3" class="number"><?php echo format_to_money($centres[$i]['fixe']+$centres[$i]['variable']) ?></th>
                     <?php
                 }
                 ?>
-                <th class="number" colspan="2"><?php echo ($total['fixe']+$total['variable']) ?></th>
+                <th class="number" colspan="2" class="number"><?php echo format_to_money($total['fixe']+$total['variable']) ?></th>
               </tr>
             </tbody>
           </table>
@@ -280,25 +280,25 @@
                       </tr>
                       <tr>
                         <td>Nombre</td>
-                        <td><?php echo $prix['sum']?></td>
+                        <td class="number"><?php echo $prix['sum']?></td>
                       </tr>
                       <?php 
                         for ($i=0; $i < count($affectation[0]); $i++) { 
                           ?>
                           <tr>
                             <td>Cout <?php echo $affectation[0][$i]['nom']?></td>
-                            <td><?php echo $affectation[0][$i]['cout_total']?></td>
+                            <td class="number"><?php echo format_to_money($affectation[0][$i]['cout_total'])?></td>
                           </tr>
                           <?php
                         }
                       ?>
                       <tr>
                         <td>Cout totaux</td>
-                        <td><?php echo $affectation[2]?></td>
+                        <td class="number"><?php echo format_to_money($affectation[2])?></td>
                       </tr>
                       <tr>
                         <td>Cout de production</td>
-                        <td><?php echo $prix['pv']?></td>
+                        <td class="number"><?php echo format_to_money($prix['pv'])?></td>
                       </tr>
                   </tbody>
                 </table>
@@ -319,8 +319,9 @@
                       <input type="number" name="prix" id="">
                       <input type="hidden" name="date" value="<?php echo $data[0]?>">
                       <input type="hidden" name="produit" value="<?php echo $data[1]?>">
+                      <input type="submit" value="Valider">
                 </form>
-                <h5 class="card-title">Seuil de rentabilité = <?php echo $seuil?> pour un prix de vente de<strong><?php echo format_to_money($prix['prix']); ?></strong></h5>
+                <h5 class="card-title">Seuil de rentabilité = <?php echo $seuil?> pour un prix de vente de<strong class="number"><?php echo format_to_money($prix['prix']); ?></strong></h5>
 
               </center>
                 

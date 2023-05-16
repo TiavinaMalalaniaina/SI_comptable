@@ -1,34 +1,40 @@
 function verified(){
     var index = 0;
-    var input = document.getElementsByClassName(index);
-    while (input != null || length(input)!=0) {
+    var input = Array.from(document.getElementsByClassName(index));
+    console.log(input);
+    while (input.length!=0) {
+    //     console.log(index);
+            
+        if (sum(input) != 100) {
+            return false;
+        }
+        index++;
+        input = Array.from(document.getElementsByClassName(index));
+        console.log(index);
         console.log(input);
-        input.forEach(ina => {
-            if (sum(ina) == 100) {
-                return true;
-            }
-        });
-        index ++;
-        input = document.getElementsByClassName(index);
     }
-    return false;
+    return true;
 }
 
 
 function sum(tab){
     var sol = 0;
     tab.forEach(t => {
-        sol += t;
+        sol += parseInt(t.value);
+
     });
+    console.log(sol);
     return sol;
 }
 
 function unabilityToValide() {
     var button = document.getElementById('validate');
     if (verified()) {
+        console.log(true);
         button.disabled = false;
     }
     else {
+        console.log(false);
         button.disabled = true;
     }
 }

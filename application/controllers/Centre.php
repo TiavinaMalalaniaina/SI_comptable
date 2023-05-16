@@ -20,7 +20,7 @@ class Centre extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('ajout-centre.php');
+		$this->load->view('ajout-centre');
 		$this->load->view('templates/footer.php');
     }
     public function insertion(){
@@ -53,7 +53,7 @@ class Centre extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('insertion-charges2.php', $data);
+		$this->load->view('insertion-charges2', $data);
 		$this->load->view('templates/footer.php');
     }
 

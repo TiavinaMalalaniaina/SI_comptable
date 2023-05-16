@@ -108,7 +108,7 @@
                   for ($j=0; $j < count($centres) ; $j++) { 
                     ?>
                     <td>
-                    <input type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage" value="<?php echo $centres[$j]['charges'][$i]?>">
+                    <input type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage p-<?php echo $j ?>" value="<?php echo $centres[$j]['charges'][$i]?>">
                   </td>
                     <?php
                   }
@@ -123,7 +123,7 @@
             <div class="row mb-3">
               <label class="col-sm-5 col-form-label"></label>
               <div class="col-sm-7">
-                <button type="submit" class="btn btn-primary">Submit Form</button>
+                <button type="submit" class="btn btn-primary" id="validate">Submit Form</button>
               </div>
             </div>
           </form><!-- End General Form Elements -->
