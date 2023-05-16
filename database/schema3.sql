@@ -364,7 +364,9 @@ INSERT INTO journal( debit, credit, date_journal, code_journal, numero_piece, co
 create table produit(
 	id int primary key auto_increment,
 	nom varchar(50),
-	dat date
+	dat date,
+	idunite_oeuvre int,
+	foreign key(idunite_oeuvre) references unite_oeuvre(id)
 );
 
 create table nature(
@@ -419,10 +421,6 @@ create table charge_centre(
 	foreign key(idcharge) references charge(id)
 );
 
--- 
-insert into produit(nom,dat) values('Mais','2023-05-09');
-insert into produit(nom,dat) values('Riz','2023-05-09');
--- 
 insert into unite_oeuvre(nom) values('KG');
 insert into unite_oeuvre(nom) values('NB');
 insert into unite_oeuvre(nom) values('Cons periodique');
@@ -431,6 +429,11 @@ insert into unite_oeuvre(nom) values('LITRES');
 insert into unite_oeuvre(nom) values('Loyer mensuel');
 insert into unite_oeuvre(nom) values('Heures de travail (HT)');
 insert into unite_oeuvre(nom) values('Sal mens ou HT');
+-- 
+insert into produit(nom,dat,idunite_oeuvre) values('Mais','2023-05-09',1);
+insert into produit(nom,dat,idunite_oeuvre) values('Riz','2023-05-09',1);
+-- 
+
 -- 
 insert into nature(nom) values('fixe');
 insert into nature(nom) values('variable');
@@ -615,9 +618,6 @@ insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(27,3,30,'202
 insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(28,1,30,'2023-05-09');
 insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(28,2,40,'2023-05-09');
 insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(28,3,30,'2023-05-09');
-insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(29,1,30,'2023-05-09');
-insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(29,2,40,'2023-05-09');
-insert into charge_centre(idcharge,idcentre,pourcentage,dat) values(29,3,30,'2023-05-09');
 -- 
 
 create table charges_suppletives(

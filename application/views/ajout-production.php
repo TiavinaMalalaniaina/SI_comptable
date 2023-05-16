@@ -50,10 +50,6 @@
 <body>
  
 
-
-
-
-
 <main id="main" class="main">
 
 <div class="pagetitle">
@@ -69,63 +65,49 @@
 
 <section class="section">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Information supplémentaire de la charge</h5>
+          <h5 class="card-title">General Form Elements</h5>
 
           <!-- General Form Elements -->
-          <form action="<?php bu('Centre/insertion_eq')?>" method="get">
-          <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
+          <form action="<?php bu('Produit/insertion_production')?>" method="get">
+            <div class="row mb-3">
+              <label for="inputText" class="col-sm-2 col-form-label" >Nom du produit</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" name="date">
+                <select name="idproduit" id="">
+                  <?php
+                  for ($i=0; $i < count($list); $i++) { 
+                      ?>
+                      <option value="<?php echo $list[$i]['id']?>"><?php echo $list[$i]['nom']?></option>
+                      <?php
+                  }
+                  ?>
+                </select>
               </div>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <td>Charges</td>
-                  <?php 
-                  for ($i=0; $i < count($centres); $i++) { 
-                    ?>
-                    <td><?php echo $centres[$i]['nom']?></td>
-                    <?php
-                  }
-                  ?>
-                </tr>
-              </thead>
-              <tbody>
-                <?php 
-                for ($i=0; $i < count($charges); $i++) { 
-                  ?>
-                  <tr>
-                  
-                  <td>
-                     <?php echo $charges[$i]['nom']?>
-                  </td>
-                  <?php
-                  for ($j=0; $j < count($centres) ; $j++) { 
-                    ?>
-                    <td>
-                    <input type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage" value="<?php echo $centres[$j]['charges'][$i]?>">
-                  </td>
-                    <?php
-                  }
-                  ?>
-                </tr>
-                  <?php
-                }
-                ?>
-                
-              </tbody>
-            </table>
+
+              <label for="inputText" class="col-sm-2 col-form-label" >Quantite</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="qtt">
+              </div>
+              <label for="inputText" class="col-sm-2 col-form-label" >Prix unitaitre</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="pu">
+              </div>
+              <label for="inputText" class="col-sm-2 col-form-label" >Date</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" name="dat">
+              </div>
+            
+
             <div class="row mb-3">
               <label class="col-sm-5 col-form-label"></label>
               <div class="col-sm-7">
                 <button type="submit" class="btn btn-primary">Submit Form</button>
               </div>
             </div>
+
           </form><!-- End General Form Elements -->
 
         </div>
@@ -135,8 +117,7 @@
   </div>
 </section>
 
-</main><!-- End #main -->
-
+</main>
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -152,8 +133,7 @@
   <script src="<?php echo site_url('assets/vendor/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
-  <script src="<?php echo site_url('assets/js/main.js') ?>"></script>
-  <script src="<?php echo site_url('assets/js/main2.js') ?>"></script>
+  <script src="assets/js/main.js"></script>
 
 </body>
 

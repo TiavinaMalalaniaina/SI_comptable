@@ -61,36 +61,7 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Seuil de rentabilité</h5>
-
-          <!-- General Form Elements -->
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <td>p1</td>
-                  <td>p2</td>
-                  <td>p3</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="number">
-                    <?php echo format_to_money(3600000) ?>
-                  </td>
-                  <td class="number">
-                    <?php echo format_to_money(3600000) ?>
-                  </td>
-                  <td class="number">
-                    <?php echo format_to_money(3600000) ?>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-        </div>
-      </div>
+      
 
       <div class="card">
         <div class="card-body">

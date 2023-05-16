@@ -171,6 +171,8 @@
                                 <th scope="col" id="line-echeance">Echéance</th>
                                 <th scope="col" id="line-devise">Devise</th>
                                 <!-- <th scope="col" id="line-parite">Parité</th> -->
+                                <th scope="col" id="line-quantite">Unité d'oeuvre</th>
+                                <th scope="col" id="line-quantite">PU</th>
                                 <th scope="col" id="line-quantite">Quantité</th>
                                 <th scope="col" id="line-montant">Montant devise</th>
                                 <th scope="col" id="line-debit">Débit</th>
@@ -230,6 +232,14 @@
                                     </select>
                                 </td>
                                 <!-- <td id="line-parite"><input type="text" name="parite" id="parite"></td> -->
+                                <td id="line-quantite"><select name="unite[]" id="unite">
+                                    <?php for ($w=0; $w < count($uo); $w++) { 
+                                        ?>
+                                        <option value="<?php echo $uo[$w]['id']?>"><?php echo $uo[$w]['nom']?></option>
+                                        <?php
+                                    }?>
+                                </select></td>
+                                <td id="line-quantite"><input type="text" name="pu[]" id="PU"></td>
                                 <td id="line-quantite"><input type="text" name="quantite[]" id="quantite"></td>
                                 <td id="line-montant"><input type="text" name="montant[]" id="montant"></td>
                                 <td id="line-debit"><input type="text" name="debit[]" id="debit" class="debit" oninput="unabilityToValide()" ></td>

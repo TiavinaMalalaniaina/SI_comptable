@@ -65,7 +65,7 @@
 
 <section class="section">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <div class="card">
         <div class="card-body">
@@ -74,16 +74,29 @@
           <!-- General Form Elements -->
           <form action="<?php bu('Centre/insertion') ?>" method="get">
             <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Nom du centre</label>
-              <div class="col-sm-10">
+              <label for="inputText" class="col-sm-3 col-form-label">Nom du centre</label>
+              <div class="col-sm-9">
                 <input type="text" class="form-control" name="nom">
               </div>
+            </div>
               <div class="row mb-3">
-              <label for="inputText" class="col-sm-2 col-form-label">Date insertion</label>
-              <div class="col-sm-10">
+              <label for="inputText" class="col-sm-3 col-form-label">Date insertion</label>
+              <div class="col-sm-9">
                 <input type="date" class="form-control" name="date">
               </div>
-            
+              </div>
+              <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-3 pt-0">Type de centre</legend>
+                  <div class="col-sm-9">
+                      <input class="form-check-input" type="radio" name="type" id="gridRadios1" value="1" checked>
+                      <label class="form-check-label" for="gridRadios1">
+                        Structurelle
+                      </label>
+                      <input class="form-check-input" type="radio" name="type" id="gridRadios2" value="2">
+                      <label class="form-check-label" for="gridRadios2">
+                        Operationnel
+                      </label>
+                </fieldset>
 
             <div class="row mb-3">
               <label class="col-sm-5 col-form-label"></label>

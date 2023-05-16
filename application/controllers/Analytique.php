@@ -27,6 +27,7 @@ class Analytique extends CI_Controller {
         $centres = $this->analytique_model->charges_centres($charges,$centres,$date);
         $total = $this->analytique_model->total($charges,$centres);
         $affectation = $this->analytique_model->affect_struct_to_operationnal($centres);
+        $centres = $affectation[4];
         $prix = $this->analytique_model->prix($affectation[2],$products[$idproduit-1],$date);
         $p = $prix['prix'];
         if($this->input->get('prix')!==null){
@@ -42,7 +43,9 @@ class Analytique extends CI_Controller {
             'total'=>$total,
             'affectation'=>$affectation,
             'prix'=>$prix,
-            'seuil'=>$seuil
+            'seuil'=>$seuil,
+            'perc'=>$this->analytique_model->perc($centres),
+            'data'=>[$date,$idproduit]
         );
         
         $head['company'] = $this->company_model->select();

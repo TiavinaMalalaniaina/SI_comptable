@@ -96,6 +96,62 @@
       </li>
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-menu-button-wide"></i><span>Production</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="<?php bu('Produit/index') ?>">
+          <i class="bi bi-circle"></i><span>Nouveau produit</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Produit/equilibre') ?>">
+          <i class="bi bi-circle"></i><span>Equilibrage pourcentage</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Produit/production') ?>">
+          <i class="bi bi-circle"></i><span>Ajout production</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-menu-button-wide"></i><span>Centre</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="<?php bu('Centre/index') ?>">
+          <i class="bi bi-circle"></i><span>Nouveau centre</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Centre/equilibre') ?>">
+          <i class="bi bi-circle"></i><span>Equilibrage pourcentage</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-menu-button-wide"></i><span>Analytiques</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="<?php bu('Analytique/index') ?>">
+          <i class="bi bi-circle"></i><span>Par produit</span>
+        </a>
+      </li>
+      <li>
+        <a href="<?php bu('Analytique/index2') ?>">
+          <i class="bi bi-circle"></i><span>Par centre</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 </aside><!-- End Sidebar-->

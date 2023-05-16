@@ -78,7 +78,7 @@ class Produit extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('ajout-produit.php', $data);
+		$this->load->view('ajout-production.php', $data);
 		$this->load->view('templates/footer.php');       
     }   
 

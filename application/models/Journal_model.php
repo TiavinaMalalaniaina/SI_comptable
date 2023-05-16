@@ -53,5 +53,16 @@ class Journal_model extends CI_Model
 		return ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'];
 	}
 	 
+	public function uo(){
+		$req = "select * from unite_oeuvre";
+		$rs = $this->db->query($req);
+		$data = [];
+		$i=0;
+		foreach ($rs->result_array() as $row) {
+			$data[$i] = $row;
+			$i++;
+		}
+		return $data;
+	}
 }
 ?>

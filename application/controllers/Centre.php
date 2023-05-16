@@ -20,13 +20,13 @@ class Centre extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('ajout-centre.php', $data);
+		$this->load->view('ajout-centre.php');
 		$this->load->view('templates/footer.php');
     }
     public function insertion(){
         $nom = $this->input->get('nom');
         $date = $this->input->get('date');
-        $id_type_centre = $this->input->get('id_type_centre');
+        $id_type_centre = $this->input->get('type');
         $this->db->query("insert into centre(nom,id_type_centre,dat) values('".$nom."',".$id_type_centre.",'".$date."')");
         $charges = $this->analytique_model->charges();
         $pd = $this->centre_model->getLast();

@@ -206,156 +206,163 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Cout du KG mais grain</h5>
+              <h5 class="card-title"></h5>
 
               <!-- General Form Elements -->
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>REPARTITION ADM/DISTR</th>
+                      <th>REPARTITION CENTRE DE STRUCTURES</th>
                       <th>Cout direct</th>
                       <th>CLES</th>
-                      <th>ADM/DIST</th>
+                      <?php for ($i=0; $i < count($affectation[1]); $i++) { 
+                        ?>
+                        <th><?php echo $affectation[1][$i]['nom']?></th>
+                        <?php
+                      }?>
                       <th>Cout total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                    $pl = $centres[2]['fixe']+$centres[2]['variable'];
-                    $us = $centres[1]['fixe']+$centres[1]['variable'];
-                    $tot = $pl+$us;
-                    if($tot==0){
-                      $tot = 1;
-                    }
-                    $ppl = $pl/$tot;
-                    $pus = $us/$tot;
-                    $adm = $centres[0]['fixe']+$centres[0]['variable'];
-                    $admppl = ($adm * $ppl)/100;
-                    $admpus = ($adm * $pus)/100;
-                    $ctpl = $admppl + $ppl;
-                    $ctus = $admpus + $pus;
-                    $lt = $ctpl + $ctus;
-                    ?>
-                    <tr>
-                      <td>TOTAL PLANTATION</td>
-                      <td class="number"><?php echo format_to_money($pl) ?></td>
-                      <td><?php echo $ppl?>%</td>
-                      <td class="number"><?php echo format_to_money($admppl) ?></td>
-                      <th class="number"><?php echo format_to_money($ctpl) ?></th>
-                    </tr>
-                    <tr>
-                      <td>TOTAL USINE</td>
-                      <td class="number"><?php echo format_to_money($us) ?></td>
-                      <td><?php echo $pus?>%</td>
-                      <td class="number"><?php echo format_to_money($admpus) ?></td>
-                      <th class="number"><?php echo format_to_money($ctus) ?></th>
-                    </tr>
+                    
+                      <?php for ($i=0; $i < count($affectation[0]); $i++) { 
+                        ?>
+                        <tr> 
+                           <td>TOTAL <?php echo $affectation[0][$i]['nom']?></td>
+                          <td class="number"><?php echo format_to_money($affectation[0][$i]['total']) ?></td>
+                          <td><?php echo $affectation[0][$i]['cles']?>%</td>
+                          <?php for ($j=0; $j < count($affectation[1]); $j++) { 
+                             ?>
+                             <td class="number"><?php echo format_to_money($affectation[1][$j]['affectation'][$i]) ?></td>
+                             <?php
+                          }?>
+                          <th class="number"><?php echo format_to_money($affectation[0][$i]['cout_total']) ?></th>
+                         </tr> 
+                      <?php
+                      }?>
+                      
                     <tr>
                       <td colspan="5"></td>
                     </tr>
                     <tr>
                       <th>TOTAL GENERAL</th>
-                      <td class="number"><?php echo format_to_money($tot) ?></td>
+                      <td class="number"><?php echo format_to_money($affectation[3]) ?></td>
                       <th></th>
-                      <td class="number"><?php echo format_to_money($adm) ?></td>
-                      <th class="number"><?php echo format_to_money($lt) ?></th>
+                      <?php for ($i=0; $i < count($affectation[1]); $i++) { 
+                        ?>
+                        <td class="number"><?php echo format_to_money($affectation[1][$i]['rep_total']) ?></td>
+                        <?php
+                      }?>
+                      <th class="number"><?php echo format_to_money($affectation[2]) ?></th>
                     </tr>
                   </tbody>
                 </table>
-
+                
+              </div>
             </div>
+            
           </div>
-
+          
+          
         </div>
-
-        
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
+        <div class="row">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Cout du KG mais grain</h5>
+              <h5 class="card-title"></h5>
 
               <!-- General Form Elements -->
                 <table class="table table-bordered">
-                  <thead></thead>
-                    <tr>
-                      <th>Unite d'oeuvre</th>
-                      <td>Kg de grain de mais entrant</td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Nombre
-                      </th>
-                      <td>
-                        461000
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Cout
-                      </th>
-                      <td>
-                        298320
-                      </td>
-                    </tr>
-                    <tr><td colspan="2"></td></tr>
-                    <tr>
-                      <th>Cout du kg de mais grain</th>
-                      <th>210</th>
-                    </tr>
+                  <tbody>
+                      <tr>
+                        <td>Unite d oeuvre</td>
+                        <td><?php echo $prod['u']?></td>
+                      </tr>
+                      <tr>
+                        <td>Nombre</td>
+                        <td><?php echo $prix['sum']?></td>
+                      </tr>
+                      <?php 
+                        for ($i=0; $i < count($affectation[0]); $i++) { 
+                          ?>
+                          <tr>
+                            <td>Cout <?php echo $affectation[0][$i]['nom']?></td>
+                            <td><?php echo $affectation[0][$i]['cout_total']?></td>
+                          </tr>
+                          <?php
+                        }
+                      ?>
+                      <tr>
+                        <td>Cout totaux</td>
+                        <td><?php echo $affectation[2]?></td>
+                      </tr>
+                      <tr>
+                        <td>Cout de production</td>
+                        <td><?php echo $prix['pv']?></td>
+                      </tr>
+                  </tbody>
                 </table>
-
+                
+              </div>
             </div>
+            
           </div>
-
+          
+          
         </div>
-
-        <div class="col-lg-6">
+        <div class="row">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Cout du KG de mais concasse</h5>
+              <center>
+                <form action="<?php bu('Analytique/index')?>" method="get">
+                      <input type="number" name="prix" id="">
+                      <input type="hidden" name="date" value="<?php echo $data[0]?>">
+                      <input type="hidden" name="produit" value="<?php echo $data[1]?>">
+                </form>
+                <h5 class="card-title">Seuil de rentabilité = <?php echo $seuil?> pour un prix de vente de<strong><?php echo format_to_money($prix['prix']); ?></strong></h5>
 
-              <!-- General Form Elements -->
-                <table class="table table-bordered">
-                    <tr>
-                      <th>Unite d'oeuvre</th>
-                      <td>Kg du mais concasse</td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Nombre
-                      </th>
-                      <td>
-                        461000
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        Cout
-                      </th>
-                      <td>
-                        298320
-                      </td>
-                    </tr>
-                    <tr><td colspan="2"></td></tr>
-                    <tr>
-                      <th>Cout du kg de mais grain</th>
-                      <th>210</th>
-                    </tr>
-                </table>
-
+              </center>
+                
+              </div>
             </div>
+            
           </div>
+          
+          
+        </div>
+
+      </section>
+      <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Part par centre</h5>
+
+          <!-- Pie Chart -->
+          <div id="pieChart"></div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              new ApexCharts(document.querySelector("#pieChart"), {
+                series: <?php echo json_encode($perc[0])?>,
+                chart: {
+                  height: 350,
+                  type: 'pie',
+                  toolbar: {
+                    show: true
+                  }
+                },
+                labels:  <?php echo json_encode($perc[1])?>
+              }).render();
+            });
+          </script>
+          <!-- End Pie Chart -->
 
         </div>
       </div>
-    </section>
+    </div>
 
 </main><!-- End #main -->
 

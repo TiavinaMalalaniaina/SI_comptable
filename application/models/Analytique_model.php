@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Analytique_model extends CI_Model{
     public function products($date){
         $result = array();
-        $query = $this->db->query("SELECT * FROM produit where dat<='".$date."' order by id");
+        $query = $this->db->query("select p.id,p.nom,p.dat,p.idunite_oeuvre,u.nom as u from produit as p join unite_oeuvre as u on p.idunite_oeuvre=u.id where p.dat<='".$date."' order by p.id");
         foreach($query->result_array() as $row){
             $result[] = $row;
         }
@@ -32,6 +32,7 @@ class Analytique_model extends CI_Model{
                 $a .= "'".$sp[count($sp)-1]."')";
                 $query = "select coalesce(sum(debit),0) as s from journal where compte in ".$a." and date_journal='".$date."'";
             }
+            // echo $query;
             // echo $query;
             $query = $this->db->query($query);
             $rs =  $query->row_array();
@@ -123,8 +124,9 @@ class Analytique_model extends CI_Model{
         for ($i=0; $i < count($centresop); $i++) { 
             $total_op += $centresop[$i]['total'];
         }
+        if($total_op==0){$total_op = 1;}
         for ($i=0; $i < count($centresop); $i++) { 
-            $centresop[$i]['cles'] = $centres[$i]['total']/$total_op;
+            $centresop[$i]['cles'] = ($centres[$i]['total']/$total_op)*100;
         }
         for ($i=0; $i < count($centresop); $i++) { 
             $centresop[$i]['cout_total'] = $centresop[$i]['total'];
@@ -143,20 +145,25 @@ class Analytique_model extends CI_Model{
         for ($i=0; $i < count($centresop); $i++) { 
             $centresop_ct += $centresop[$i]['cout_total'];
         }
-        return [$centresop,$centrestruct,$centresop_ct];
+        return [$centresop,$centrestruct,$centresop_ct,$total_op,$centres];
     }
 
     public function prix($centresop_ct,$produit,$daty){
-        $query = "select sum(quantite),prix from production where dat='".$daty."' and idproduit=".$produit['id']."";
+        $query = "select coalesce(sum(quantite),0) as sum ,coalesce(pu,0) as prix from production where dat='".$daty."' and idproduit=".$produit['id']."";
         $query = $this->db->query($query);
         $rs =  $query->row_array();
+        if($rs['sum']==0){$rs['sum']=1;}
         $rs['pv'] = $centresop_ct/$rs['sum'];
         return $rs;
     }
 
     public function seuil($prix,$total,$qtt){
         $supp = $total['variable']/$qtt;
-        $seuil = $total['fixe']/($prix-$supp);
+        $diff = $prix-$supp;
+        if ($diff==0) {
+            $diff = 1;
+        }
+        $seuil = $total['fixe']/($diff);
         return $seuil;
     }
 
@@ -188,5 +195,14 @@ class Analytique_model extends CI_Model{
         return $charges;
     }
     
+    public function perc($centres){
+        $rs = [];
+        $nm = [];
+        for ($i=0; $i < count($centres); $i++) { 
+            array_push($rs,$centres[$i]['total']);
+            array_push($nm,$centres[$i]['nom']);
+        }
+        return [$rs,$nm];
+    }
 }
 ?>

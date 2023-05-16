@@ -25,6 +25,7 @@ class Journal extends CI_Controller {
 		if($this->input->get('cj')!==null){
 			$code = $this->input->get('cj');
 		}
+		$data['uo'] = $this->journal_model->uo();
 		$data['refs'] = $this->journal_model->get_references();
 		$data['month'] = $month;
 		$data['compte_tiers'] = $this->compte_tiers_model->selectAll();
@@ -57,8 +58,8 @@ class Journal extends CI_Controller {
 		$jour = $this->input->get('jour');
 		$npiece = $this->input->get('npiece');
 		$refpiece = $this->input->get('rpiecetype').$this->input->get('rpiece');
-		$id_unite_oeuvre = $this->input->get('unite_oeuvre');
-		$prix_unite_oeuvre = $this->input->get('prix_unite_oeuvre');
+		$id_unite_oeuvre = $this->input->get('unite');
+		$prix_unite_oeuvre = $this->input->get('pu');
 		$exo = $this->journal_model->current_exercice();
 		// $this->db->trans_begin();
 		// $sumdebit = 0;
@@ -77,7 +78,7 @@ class Journal extends CI_Controller {
 				'code_journal' => $code_journal,
 				'compte_tierce' => $comptet[$i],
 				'quantite' => $quantite[$i],
-				'id_unite_oeuvre' => $id_unite_oeuvre[$i],
+				'idunite_oeuvre' => $id_unite_oeuvre[$i],
 				'prix_unite_oeuvre' => $prix_unite_oeuvre[$i]
 			);
 			// echo json_encode($data);
