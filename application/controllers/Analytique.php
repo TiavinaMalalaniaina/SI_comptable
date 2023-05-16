@@ -74,12 +74,15 @@ class Analytique extends CI_Controller {
         $centre = $centres[$idcentre-1];
         $charges = $this->analytique_model->pourcentage_centre($charges,$centre,$date);
         $charges = $this->analytique_model->product_part($charges,$products);
+        $products = $this->analytique_model->somme_produit($charges,$products);
         $data = array(
             'daty'=>$date,
             'produits'=>$products,
             'charges'=>$charges,
             'centres'=>$centres,
             'centre'=>$centre,
+            'last'=>$this->analytique_model->last_sum($products),
+            'perc'=>$this->analytique_model->perc2($products),
         );        
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);

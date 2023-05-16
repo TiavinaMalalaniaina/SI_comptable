@@ -166,6 +166,7 @@ class Analytique_model extends CI_Model{
         $seuil = $total['fixe']/($diff);
         return $seuil;
     }
+    // 
 
     public function charges_produits($charges,$produits,$dat){
         for ($i=0; $i < count($charges) ; $i++) { 
@@ -184,6 +185,7 @@ class Analytique_model extends CI_Model{
             $rs = $query->row_array();
             $charges[$i]['pour_p'] = $rs['pourcentage'];  
         }
+        return $charges;
     }
 
     public function product_part($charges,$produits){
@@ -192,9 +194,64 @@ class Analytique_model extends CI_Model{
                 $charges[$i]['part_p'][$j] = ($charges[$i]['somme_p'][$j]*$charges[$i]['pour_p'] )/100;
             }
         }
+        for ($i=0; $i < count($charges); $i++) { 
+            for ($j=0; $j < count($produits); $j++) { 
+                if($charges[$i]['nature']=='fixe'){
+                    $charges[$i]['fixe'][$j] = $charges[$i]['part_p'][$j];
+                    $charges[$i]['variable'][$j] = 0;
+                }
+                else if($charges[$i]['nature']=='variable'){
+                    $charges[$i]['fixe'][$j] = 0;
+                    $charges[$i]['variable'][$j] = $charges[$i]['part_p'][$j];
+                }
+            }
+        }
+        for ($i=0; $i < count($charges); $i++) { 
+            $charges[$i]['sum_fix'] = 0;
+            $charges[$i]['sum_var'] = 0;
+            for ($j=0; $j < count($produits); $j++) { 
+                $charges[$i]['sum_fix'] += $charges[$i]['fixe'][$j];
+                $charges[$i]['sum_var'] += $charges[$i]['variable'][$j];
+            }
+        }
         return $charges;
     }
+
+    public function somme_produit($charges,$produits){
+        for ($i=0; $i < count($produits); $i++) { 
+            $produits[$i]['sum_fix'] = 0;
+            $produits[$i]['sum_var'] = 0;
+            for ($j=0; $j < count($charges); $j++) { 
+                $produits[$i]['sum_fix'] += $charges[$j]['fixe'][$i];
+                $produits[$i]['sum_var'] += $charges[$j]['variable'][$i];
+            }
+            $produits[$i]['sum_sum'] = $produits[$i]['sum_fix']+$produits[$i]['sum_var'];
+        }
+        return $produits;
+    }
+    public function last_sum($produits){
+        $sumf = 0;
+        $sumv = 0;
+        $sum = 0;
+        for ($i=0; $i < count($produits); $i++) { 
+            $sumf += $produits[$i]['sum_fix'];
+            $sumv +=  $produits[$i]['sum_var'];
+            $sum += $produits[$i]['sum_sum'];
+        }
+        return [$sumf,$sumv,$sum];
+    }
+
+    public function perc2($produits){
+        $a = [];
+        $b = [];
+        for ($i=0; $i < count($produits); $i++) { 
+            array_push($a,$produits[$i]['sum_sum']);
+            array_push($b,$produits[$i]['nom']);
+        }
+        return [$a,$b];
+    }
     
+    // 
     public function perc($centres){
         $rs = [];
         $nm = [];
