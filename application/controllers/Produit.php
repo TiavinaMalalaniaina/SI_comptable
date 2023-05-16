@@ -69,4 +69,26 @@ class Produit extends CI_Controller {
         redirect(site_url('Produit/equilibre'));
     }
 
+    public function production(){
+        $data = array(
+            'list'=>$this->produit_model->getList(),
+        );
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
+		$this->load->view('ajout-produit.php', $data);
+		$this->load->view('templates/footer.php');       
+    }   
+
+    public function insertion_production(){
+        $idproduit = $this->input->get('idproduit');
+        $qtt = $this->input->get('qtt');
+        $pu = $this->input->get('pu');
+        $dat = $this->input->get('dat');
+        $this->db->query("insert into production(idproduit,quantite,pu,dat) values(".$idproduit.",".$qtt.",".$pu.",'".$dat."')");
+        redirect(site_url('Produit/production'));   
+    }
+    
 }

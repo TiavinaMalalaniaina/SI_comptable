@@ -26,7 +26,8 @@ class Centre extends CI_Controller {
     public function insertion(){
         $nom = $this->input->get('nom');
         $date = $this->input->get('date');
-        $this->db->query("insert into centre(nom,dat) values('".$nom."','".$date."')");
+        $id_type_centre = $this->input->get('id_type_centre');
+        $this->db->query("insert into centre(nom,id_type_centre,dat) values('".$nom."',".$id_type_centre.",'".$date."')");
         $charges = $this->analytique_model->charges();
         $pd = $this->centre_model->getLast();
         for ($i=0; $i < count($charges); $i++) { 

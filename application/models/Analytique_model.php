@@ -39,6 +39,7 @@ class Analytique_model extends CI_Model{
         }
         return $charges;
     }
+
     public function charges_produit($charges,$produit,$dat){
         for ($i=0; $i < count($charges) ; $i++) { 
             $query = $this->db->query("select * from charge_produit where idcharge='".$charges[$i]['id']."' and idproduit='".$produit['id']."' and dat<='".$dat."' order by dat desc limit 1");
@@ -46,10 +47,11 @@ class Analytique_model extends CI_Model{
             $charges[$i]['somme'] = ($charges[$i]['somme'] * $rs['pourcentage'])/100;
         }
         return $charges;
-    } 
+    }
+
     public function centres($dat){
         $result = array();
-        $query = $this->db->query("SELECT * FROM centre where dat <= '".$dat."'");
+        $query = $this->db->query("SELECT centre.id,centre.nom,centre.dat,type_centre.id as id_type_centre,type_centre.nom as nom_type_centre FROM centre join type_centre on centre.id_type_centre = type_centre.id where dat <= '".$dat."'");
         foreach($query->result_array() as $row){
             $result[] = $row;
         }
@@ -82,6 +84,7 @@ class Analytique_model extends CI_Model{
         }
         return $centres;
     }
+
     public function total($charges,$centres){
         $total['charges'] = array();
         $total['fixe'] = 0;
@@ -103,5 +106,87 @@ class Analytique_model extends CI_Model{
         }
         return $total;
     }
+
+    public function affect_struct_to_operationnal($centres){
+        $centrestruct = [];
+        $centresop = [];
+        for ($i=0; $i < count($centres); $i++) {
+            $centres[$i]['total'] = $centres[$i]['fixe'] + $centres[$i]['variable'];  
+            if($centres[$i]['nom_type_centre']=='de structures'){
+                array_push($centrestruct,$centres[$i]);
+            }
+            else if($centres[$i]['nom_type_centre']=='operationnel'){
+                array_push($centresop,$centres[$i]);
+            }
+        }
+        $total_op = 0;
+        for ($i=0; $i < count($centresop); $i++) { 
+            $total_op += $centresop[$i]['total'];
+        }
+        for ($i=0; $i < count($centresop); $i++) { 
+            $centresop[$i]['cles'] = $centres[$i]['total']/$total_op;
+        }
+        for ($i=0; $i < count($centresop); $i++) { 
+            $centresop[$i]['cout_total'] = $centresop[$i]['total'];
+            for ($j=0; $j < count($centrestruct); $j++) { 
+                $centrestruct[$j]['affectation'][$i] = $centresop[$i]['cles']*$centrestruct[$j]['total'];
+                $centresop[$i]['cout_total'] += $centrestruct[$j]['affectation'][$i];
+            }
+        }
+        for ($i=0; $i < count($centrestruct); $i++) { 
+            $centrestruct[$i]['rep_total'] = 0;
+            for ($j=0; $j < count($centresop); $j++) { 
+                $centrestruct[$i]['rep_total'] += $centrestruct[$i]['affectation'][$j];
+            }
+        }
+        $centresop_ct = 0;
+        for ($i=0; $i < count($centresop); $i++) { 
+            $centresop_ct += $centresop[$i]['cout_total'];
+        }
+        return [$centresop,$centrestruct,$centresop_ct];
+    }
+
+    public function prix($centresop_ct,$produit,$daty){
+        $query = "select sum(quantite),prix from production where dat='".$daty."' and idproduit=".$produit['id']."";
+        $query = $this->db->query($query);
+        $rs =  $query->row_array();
+        $rs['pv'] = $centresop_ct/$rs['sum'];
+        return $rs;
+    }
+
+    public function seuil($prix,$total,$qtt){
+        $supp = $total['variable']/$qtt;
+        $seuil = $total['fixe']/($prix-$supp);
+        return $seuil;
+    }
+
+    public function charges_produits($charges,$produits,$dat){
+        for ($i=0; $i < count($charges) ; $i++) { 
+            for ($j=0; $j < count($produits); $j++) { 
+                $query = $this->db->query("select * from charge_produit where idcharge='".$charges[$i]['id']."' and idproduit='".$produits[$j]['id']."' and dat<='".$dat."' order by dat desc limit 1");
+                $rs = $query->row_array();
+                $charges[$i]['somme_p'][$j] = ($charges[$i]['somme'] * $rs['pourcentage'])/100;
+            }
+        }
+        return $charges;
+    } 
+
+    public function pourcentage_centre($charges,$centre,$dat){
+        for ($i=0; $i < count($charges); $i++) { 
+            $query = $this->db->query("select * from charge_centre where idcharge='".$charges[$i]['id']."' and idcentre='".$centre['id']."' and dat<='".$dat."' order by dat desc limit 1");
+            $rs = $query->row_array();
+            $charges[$i]['pour_p'] = $rs['pourcentage'];  
+        }
+    }
+
+    public function product_part($charges,$produits){
+        for ($i=0; $i < count($charges) ; $i++) { 
+            for ($j=0; $j < count($produits); $j++) { 
+                $charges[$i]['part_p'][$j] = ($charges[$i]['somme_p'][$j]*$charges[$i]['pour_p'] )/100;
+            }
+        }
+        return $charges;
+    }
+    
 }
 ?>

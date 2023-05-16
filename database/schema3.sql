@@ -69,7 +69,7 @@ CREATE  TABLE utilisateur (
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
 	nom                  VARCHAR(35)  NOT NULL     ,
 	mdp                  VARCHAR(20)  NOT NULL     
- ) LT CHARSET=latin1;
+ ) ;
 
 CREATE  TABLE detail_company ( 
 	nif                  VARCHAR(25)       ,
@@ -92,6 +92,11 @@ CREATE  TABLE plan_tiers (
 
 CREATE INDEX fk_plan_tiers_type_tiers ON plan_tiers ( type_tiers );
 
+create table unite_oeuvre(
+	id int primary key auto_increment,
+	nom varchar(50)
+);
+
 CREATE  TABLE journal ( 
 	id                   INT  NOT NULL   AUTO_INCREMENT  PRIMARY KEY,
 	debit                DOUBLE   DEFAULT '0'    ,
@@ -106,6 +111,8 @@ CREATE  TABLE journal (
 	echeance             DATE       ,
 	devise               VARCHAR(3)   DEFAULT 'AR'    ,
 	quantite             DOUBLE  NOT NULL     ,
+	idunite_oeuvre		 INT	,
+	prix_unite_oeuvre	 DOUBLE		,
 	idexercice           INT  NOT NULL     ,
 	CONSTRAINT fk_journal_code_journaux FOREIGN KEY ( code_journal ) REFERENCES code_journaux( code ) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT fk_journal_devise FOREIGN KEY ( devise ) REFERENCES devise( code ) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -124,9 +131,9 @@ CREATE INDEX fk_journal_devise ON journal ( devise );
 
 CREATE INDEX fk_journal_exercice ON journal ( idexercice );
 
-CREATE VIEW balance AS select `pc`.`code` AS `code`,`pc`.`intitule` AS `intitule`,`j`.`debit` AS `debit`,`j`.`credit` AS `credit`,`j`.`solde` AS `solde`,`j`.`idexercice` AS `idexercice` from (`.`plan_comptable` `pc` join (select `.`journal`.`compte` AS `compte`,sum(`.`journal`.`debit`) AS `debit`,sum(`.`journal`.`credit`) AS `credit`,(sum(`.`journal`.`debit`) - sum(`.`journal`.`credit`)) AS `solde`,`.`journal`.`idexercice` AS `idexercice` from `.`journal` group by `.`journal`.`compte`,`.`journal`.`idexercice`) `j` on((`pc`.`code` = `j`.`compte`)));
+CREATE VIEW balance AS select pc.code AS code,pc.intitule AS intitule,j.debit AS debit,j.credit AS credit,j.solde AS solde,j.idexercice AS idexercice from (plan_comptable pc join (select journal.compte AS compte,sum(journal.debit) AS debit,sum(journal.credit) AS credit,(sum(journal.debit) - sum(journal.credit)) AS solde,journal.idexercice AS idexercice from journal group by journal.compte,journal.idexercice) j on((pc.code = j.compte)));
 
-CREATE VIEW grand_livre AS select `.`journal`.`code_journal` AS `code_journal`,`.`journal`.`date_journal` AS `date_journal`,`.`journal`.`numero_piece` AS `numero_piece`,`.`journal`.`reference_piece` AS `reference_piece`,`.`journal`.`compte` AS `compte`,`.`journal`.`libelle` AS `libelle`,`.`journal`.`debit` AS `debit`,`.`journal`.`credit` AS `credit`,`.`journal`.`idexercice` AS `idexercice` from `.`journal`;
+CREATE VIEW grand_livre AS select journal.code_journal AS code_journal,journal.date_journal AS date_journal,journal.numero_piece AS numero_piece,journal.reference_piece AS reference_piece,journal.compte AS compte,journal.libelle AS libelle,journal.debit AS debit,journal.credit AS credit,journal.idexercice AS idexercice from journal;
 
 INSERT INTO code_journaux( code, intitule ) VALUES ( 'AC', 'Achat');
 INSERT INTO code_journaux( code, intitule ) VALUES ( 'AN', 'A NOUVEAU');
@@ -359,22 +366,28 @@ create table produit(
 	nom varchar(50),
 	dat date
 );
-create table unite_oeuvre(
-	id int primary key auto_increment,
-	nom varchar(50)
-);
+
 create table nature(
 	id int primary key auto_increment,
 	nom varchar(50)
 );
+create table type_charge(
+	id int primary key auto_increment,
+	nom varchar(50)
+);
+insert into type_charge(nom) values('incorporable');
+insert into type_charge(nom) values('non incorporable');
+insert into type_charge(nom) values('suppletive');
 create table charge(
 	id int primary key auto_increment,
 	nom varchar(50),
 	code varchar(200),
 	idnature int,
 	idunite_oeuvre int,
+	idtype int,
 	foreign key (idnature) references nature(id),
-	foreign key (idunite_oeuvre) references unite_oeuvre(id)
+	foreign key (idunite_oeuvre) references unite_oeuvre(id),
+	foreign key(idtype) references type_charge(id)
 );
 create table charge_produit(
 	id int primary key auto_increment,
@@ -385,10 +398,16 @@ create table charge_produit(
 	foreign key(idcharge) references charge(id),
 	foreign key(idproduit) references produit(id)
 );
+create table type_centre(
+	id int primary key auto_increment,
+	nom varchar(50)
+);
 create table centre(
 	id int primary key auto_increment,
 	nom varchar(50),
-	dat date
+	id_type_centre int,
+	dat date,
+	foreign key(id_type_centre) references type_centre(id)
 );
 create table charge_centre(
 	id int primary key auto_increment,
@@ -417,39 +436,41 @@ insert into nature(nom) values('fixe');
 insert into nature(nom) values('variable');
 insert into nature(nom) values('fixe-variable');
 -- 
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60110','ACHAT SEMENCES',2,1);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60111','ACHAT ENGRAIS&ASSIMILES',2,1);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60230','ACHAT EMBALLAGE',2,2);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60200','FOURNIT DE MAGASIN',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60210','FOURNIT BUR',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('6024','PIEC RECH  VEHICULES',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60610','EAU ET ELECTRICITE',2,4);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('60620','GAZ,COMBUST,CARBURANT,LUBRIF',2,5);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('61310','LOCATION TERRAINS',1,6);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('61550','ENTRETIENS ET REPARATIONS',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('6161','ASSURANCES',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('61800','PHOTOCOPIES ET ASSIMILES',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62620','TELEPHONE',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('61810','ENVOI COLIS(LETTRE&DOC...',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62210','HONORAIRES',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62400','FRAIS DE TRANSPORT',2,1);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62510','VOYAGES   ET DEPLACEMENT',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62520','MISSION(DEPL+HEBERGT+REST°)',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('627','COMMISIONS BANQUES',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62880','AUTRES  CHARGES EXTERNE',2,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('62110','CUEILLEURS',2,1);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('63680','IMPOTS ET TAXES',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('64110','SALAIRES M.O.TEMPORAIRES',2,7);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('64100','SALAIRES PERMANENTS ',1,8);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('64511','CNAPS:COTISATION  PATRONALE',1,8);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('64512','ORGANISME SANITAIRE : COTISATION PATRONALE',1,8);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('64120-64750','AUTRES CHARGES DU PERSONNEL',2,8);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('28','AMORTISSEMENTS',1,3);
-insert into charge(code,nom,idnature,idunite_oeuvre) values('66','CHARGES FINANCIERES',2,3);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60110','ACHAT SEMENCES',2,1,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60111','ACHAT ENGRAIS&ASSIMILES',2,1,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60230','ACHAT EMBALLAGE',2,2,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60200','FOURNIT DE MAGASIN',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60210','FOURNIT BUR',1,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('6024','PIEC RECH  VEHICULES',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60610','EAU ET ELECTRICITE',2,4,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('60620','GAZ,COMBUST,CARBURANT,LUBRIF',2,5,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('61310','LOCATION TERRAINS',1,6,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('61550','ENTRETIENS ET REPARATIONS',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('6161','ASSURANCES',1,3,2);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('61800','PHOTOCOPIES ET ASSIMILES',1,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62620','TELEPHONE',1,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('61810','ENVOI COLIS(LETTRE&DOC...',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62210','HONORAIRES',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62400','FRAIS DE TRANSPORT',2,1,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62510','VOYAGES   ET DEPLACEMENT',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62520','MISSION(DEPL+HEBERGT+REST°)',1,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('627','COMMISIONS BANQUES',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62880','AUTRES  CHARGES EXTERNE',2,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('62110','CUEILLEURS',2,1,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('63680','IMPOTS ET TAXES',1,3,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('64110','SALAIRES M.O.TEMPORAIRES',2,7,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('64100','SALAIRES PERMANENTS ',1,8),1;
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('64511','CNAPS:COTISATION  PATRONALE',1,8,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('64512','ORGANISME SANITAIRE : COTISATION PATRONALE',1,8,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('64120-64750','AUTRES CHARGES DU PERSONNEL',2,8,1);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('28','AMORTISSEMENTS',1,3,2);
+insert into charge(code,nom,idnature,idunite_oeuvre,idtype) values('66','CHARGES FINANCIERES',2,3,1);
 -- 
-insert into centre(nom,dat) values('ADM/DIST','2023-05-09');
-insert into centre(nom,dat) values('USINE','2023-05-09');
-insert into centre(nom,dat) values('PLANTATION','2023-05-09');
+insert into type_centre(nom) values('de structures');
+insert into type_centre(nom) values('operationnel');
+insert into centre(nom,id_type_centre,dat) values('ADM/DIST',1,'2023-05-09');
+insert into centre(nom,id_type_centre,dat) values('USINE',2,'2023-05-09');
+insert into centre(nom,id_type_centre,dat) values('PLANTATION',2,'2023-05-09');
 -- 
 insert into charge_produit(idcharge,idproduit,pourcentage,dat) values(1,1,50,'2023-05-09');
 insert into charge_produit(idcharge,idproduit,pourcentage,dat) values(1,2,50,'2023-05-09');
@@ -604,5 +625,14 @@ create table charges_suppletives(
 	nom varchar(100),
 	valeur float,
 	dat date
+);
+
+create table production(
+	id int primary key auto_increment,
+	idproduit int,
+	quantite float,
+	pu float,
+	dat date,
+	foreign key(idproduit) references produit(id)
 );
 

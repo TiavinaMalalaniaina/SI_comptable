@@ -57,6 +57,8 @@ class Journal extends CI_Controller {
 		$jour = $this->input->get('jour');
 		$npiece = $this->input->get('npiece');
 		$refpiece = $this->input->get('rpiecetype').$this->input->get('rpiece');
+		$id_unite_oeuvre = $this->input->get('unite_oeuvre');
+		$prix_unite_oeuvre = $this->input->get('prix_unite_oeuvre');
 		$exo = $this->journal_model->current_exercice();
 		// $this->db->trans_begin();
 		// $sumdebit = 0;
@@ -74,7 +76,9 @@ class Journal extends CI_Controller {
 				'idexercice' => $exo,
 				'code_journal' => $code_journal,
 				'compte_tierce' => $comptet[$i],
-				'quantite' => $quantite[$i]
+				'quantite' => $quantite[$i],
+				'id_unite_oeuvre' => $id_unite_oeuvre[$i],
+				'prix_unite_oeuvre' => $prix_unite_oeuvre[$i]
 			);
 			// echo json_encode($data);
 			$this->db->insert('journal',$data);
