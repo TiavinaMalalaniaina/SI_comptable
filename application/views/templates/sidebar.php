@@ -51,6 +51,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link collapsed" href="<?php echo site_url('charge_supp') ?>">
+      <i class="bi bi-grid"></i>
+      <span>Suppletive</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="<?php bu('balance') ?>">
       <i class="bi bi-grid"></i>
       <span>Balance</span>
@@ -75,10 +81,10 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#components-nav2" data-bs-toggle="collapse" href="#">
       <i class="bi bi-menu-button-wide"></i><span>Etats financiers</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <ul id="components-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="<?php bu('Etat_financier') ?>">
           <i class="bi bi-circle"></i><span>Actif</span>
@@ -97,10 +103,10 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#components-nav3" data-bs-toggle="collapse" href="#">
       <i class="bi bi-menu-button-wide"></i><span>Production</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <ul id="components-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="<?php bu('Produit/index') ?>">
           <i class="bi bi-circle"></i><span>Nouveau produit</span>
@@ -119,10 +125,10 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#components-nav4" data-bs-toggle="collapse" href="#">
       <i class="bi bi-menu-button-wide"></i><span>Centre</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <ul id="components-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="<?php bu('Centre/index') ?>">
           <i class="bi bi-circle"></i><span>Nouveau centre</span>
@@ -136,10 +142,10 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+    <a class="nav-link collapsed" data-bs-target="#components-nav5" data-bs-toggle="collapse" href="#">
       <i class="bi bi-menu-button-wide"></i><span>Analytiques</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <ul id="components-nav5" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="<?php bu('Analytique/index') ?>">
           <i class="bi bi-circle"></i><span>Par produit</span>

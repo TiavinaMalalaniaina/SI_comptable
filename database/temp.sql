@@ -39,9 +39,6 @@ insert into compte_amort(con,typo,nom,cp,ca) values('4','passif courants','avanc
 insert into compte_amort(con,typo,nom,cp,ca) values('4','passif courants','autres dettes','null','null');
 insert into compte_amort(con,typo,nom,cp,ca) values('5','passif courants','comptes de tresorie','\'51200\',\'51201\',\'51202\',\'51203\',\'53100\'','null');
 
-
-
-
 insert into compte_amort(con,nom) values('70','chiffre d affaire');
 insert into compte_amort(con,nom) values('71','production stockee');
 insert into compte_amort(con,nom) values('60','achat consommee');
