@@ -12,6 +12,7 @@ class Etat_financier extends CI_Controller {
         $this->load->model('Detail_company_model', 'detail_company');
 		$this->load->model('code_journaux_model');
         $this->load->model('document_model');
+        $this->load->library('gpdf');
         $this->load->model('Etat_financier_model');
     }
 
@@ -53,6 +54,59 @@ class Etat_financier extends CI_Controller {
         $this->load->view('bilan_actif.php',$data);
         // 
 		$this->load->view('templates/footer.php');
+    }
+
+    public function actif_pdf() {
+        $dt = date('Y-m-d');
+        if($this->input->get('date')!==null){
+            $dt = $this->input->get('date');
+        }
+
+        $head['company'] = $this->company_model->select();
+		// $this->load->view('templates/header', $head);
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		// $this->load->view('templates/sidebar.php',$piwi);
+        // 
+        $company = $this->company->select();
+        $detail_company = $this->detail_company->select();
+        $docs = $this->document_model->selectAll();
+        $datacompany = array(
+            'company' => $company,
+            'detail' => $detail_company,
+            'docs' => $docs
+        );
+        $exo = $this->Etat_financier_model->current_exercice();
+
+        $test = $this->Etat_financier_model->get_it([1,2,3,4,5,6],[[],[],[],[],[],[]],$dt);
+        $test2 = $this->Etat_financier_model->get_it([7,8,12],[[],[9,10,11],[]],$dt);
+        
+        $data = array(
+            'con' => $datacompany,
+            'exo' => $exo,
+            'anc' => $test,
+            'ac' => $test2
+        );    
+
+           
+        $title = array(
+            'ACTIF', 'COMPTE'
+        );
+
+        $pdf = new GPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',22);
+        $pdf->Cell(200, 10, 'Bilan');
+        $pdf->Ln();
+        $pdf->SetFont('Arial','B',20);
+        $pdf->Cell(200, 20, 'Jeudi le 09 avril 2023', 0, 1);
+        $pdf->SetFont('Times','B',7);
+        $pdf->analyse($title, $data);
+        $pdf->Ln();
+        $pdf->Ln();
+        $pdf->Ln();
+    
+        $pdf->Output();
     }
 
     public function passif() {

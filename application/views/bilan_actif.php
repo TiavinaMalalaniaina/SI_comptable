@@ -100,7 +100,7 @@
 
                 <div class="card">
                     <div class="card-title">
-                        BILAN
+                        BILAN <a href="<?php bu('Etat_financier/actif_pdf')?>">pdf</a>
                     </div>
                     <div class="card-body">
                         EXERCICE CLOS AU: <?php echo $exo['fin']?>

@@ -108,7 +108,7 @@
                   for ($j=0; $j < count($centres) ; $j++) { 
                     ?>
                     <td>
-                    <input type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage p-<?php echo $j ?>" value="<?php echo $centres[$j]['charges'][$i]?>">
+                    <input class="<?php echo $j;?>" type="number" oninput="unabilityToValide()" name="<?php echo ($charges[$i]['id']."-".$centres[$j]['id'])?>" id="" class="input-pourcentage p-<?php echo $j ?>" value="<?php echo $centres[$j]['charges'][$i]?>">
                   </td>
                     <?php
                   }
