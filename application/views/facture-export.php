@@ -122,9 +122,9 @@
                                           </div>
                                       </td>
                                         <th scope="row"><?php echo $liste[$i]['nom']?></th>
-                                        <td><?php echo $liste[$i]['prix_unitaire']?></td>
                                         <td><?php echo $liste[$i]['nombre']?></td>
-                                        <td class="text-end"><?php echo $liste[$i]['montant']?></td>
+                                        <td><?php echo format_to_money($liste[$i]['prix_unitaire']) ?></td>
+                                        <td class="text-end"><?php echo format_to_money($liste[$i]['montant']) ?></td>
                                     </tr>
                                         <?php
                                     }
@@ -132,29 +132,29 @@
                                    
                                    
                                     <tr>
-                                        <th scope="row" colspan="4" class="text-end">Montant Hors Taxes</th>
-                                        <td class="text-end"><?php echo $facture['montant_ht']?></td>
+                                        <th scope="row" colspan="3" class="text-end">Montant Hors Taxes</th>
+                                        <td class="text-end"><?php echo format_to_money($facture['montant_ht']) ?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">TVA 20% </th>
-                                        <td class="border-0 text-end"><?php echo $facture['montant_ht']*$facture['montant_tva']/100?></td>
+                                        <th scope="row" colspan="3" class="border-0 text-end">TVA 20% </th>
+                                        <td class="border-0 text-end"><?php echo format_to_money($facture['montant_ht']*$facture['montant_tva']/100) ?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end"> TTC</th>
-                                        <td class="border-0 text-end"><?php echo $facture['monntant_ttc']?></td>
+                                        <th scope="row" colspan="3" class="border-0 text-end"> TTC</th>
+                                        <td class="border-0 text-end"><?php echo format_to_money($facture['monntant_ttc'])?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
-                                      <th scope="row" colspan="4" class="border-0 text-end">Avance</th>
-                                      <td class="border-0 text-end"><?php echo $facture['montant_avance']?></td>
+                                      <th scope="row" colspan="3" class="border-0 text-end">Avance</th>
+                                      <td class="border-0 text-end"><?php echo format_to_money($facture['montant_avance'])?></td>
                                   </tr>
                                   
                                     <!-- end tr -->
                                     <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">Net a payer</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?php echo $facture['net_payer']?></h4></td>
+                                        <th scope="row" colspan="3" class="border-0 text-end">Net a payer</th>
+                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?php echo format_to_money($facture['net_payer'])?></h4></td>
                                     </tr>
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->

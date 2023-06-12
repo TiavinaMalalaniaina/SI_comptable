@@ -69,15 +69,15 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="test"></p>
-                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Telephone du client" style="width: 350px;" value="test"></p>
-                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="test"></p>
-                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="test"></p>
-                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="test"></p>
+                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;"></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Address du client" style="width: 350px;"></p>
+                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;"></p>
+                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;"></p>
+                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;"></p>
                             </div>
                             <div class="text-muted">
-                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" value="test"></p>
-                                <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;" value="test"></p>
+                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;"></p>
+                                <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;"></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p><input type="text" name="numero" id="" value="<?php echo $numero;?>"></p>
+                                    <p><input type="text" name="numero" id="" value="<?php echo $numero;?>" style="width: 140px"></p>
                                 </div>
                             </div>
                         </div>
@@ -129,18 +129,26 @@
                                       <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="10"></td>
                                       <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="1000"></td>
                                     </tr>
+                                </tbody><!-- end tbody -->
+                                    <tr>
+                                        <th colspan="2"></th>
+                                        <th style="text-align:right">TVA</th>
+                                        <td>
+                                            <p class="mb-1"> <input type="text" name="tva" id="" placeholder="" style="width: 100px;" value="20"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"></th>
+                                        <th style="text-align:right">Avance</th>
+                                        <td>
+                                            <p class="mb-1"> <input type="text" name="avance" id="" placeholder="Avance" style="width: 100px;" value="0"></p>
+                                        </td>
+                                    </tr>
                                     <!-- end tr -->
                                     
                                     <!-- end tr -->
-                                </tbody><!-- end tbody -->
                             </table><!-- end table -->
                         </div><!-- end table responsive -->
-                        <div class="col-sm-6">
-                            <div class="text-muted">
-                                <p class="mb-1">TVA <input type="text" name="tva" id="" placeholder="" style="width: 350px;" value="20"></p>
-                                <p class="mb-1"><input type="text" name="avance" id="" placeholder="Avance" style="width: 350px;" value="0"></p>
-                            </div>
-                        </div>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
                                 <button type="button" class="btn btn-secondary w-md" onclick="add()">Add line</button>
@@ -176,12 +184,12 @@
   <script src="<?php echo bu('assets/js/lib/select2.min.js') ?>"></script>
 
   <script>
-              function add(){
-                t_r = document.getElementById('t_r')
-                t_body = document.getElementById('t_body')
-                t_body.appendChild(t_r.cloneNode(true))
-              }
-            </script>
+    function add(){
+    t_r = document.getElementById('t_r')
+    t_body = document.getElementById('t_body')
+    t_body.appendChild(t_r.cloneNode(true))
+    }
+</script>
 
 </body>
 

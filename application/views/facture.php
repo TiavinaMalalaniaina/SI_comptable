@@ -113,16 +113,16 @@
                                     <?php  
                                     for ($i=0; $i < count($designation); $i++) { 
                                         ?>
-                                        <tr>
-                                      <td>
-                                          <div>
-                                              <h5 class="text-truncate font-size-14 mb-1"><?php echo $designation[$i]?></h5>
-                                          </div>
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <h5 class="text-truncate font-size-14 mb-1"><?php echo $designation[$i]?></h5>
+                                            </div>
                                         </td>
                                         <th scope="row"><?php echo $unite_map[$i]?></th>
                                         <td><?php echo $nombre[$i]?></td>
-                                        <td><?php echo $pu[$i]?></td>
-                                        <td class="text-end"><?php echo $montant[$i]?></td>
+                                        <td><?php echo format_to_money($pu[$i]) ?></td>
+                                        <td class="text-end"><?php echo format_to_money($montant[$i]) ?></td>
                                     </tr>
                                         <?php
                                     }
