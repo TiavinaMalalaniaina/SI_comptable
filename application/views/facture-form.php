@@ -57,6 +57,7 @@
 </style>
 <main class="main" id="main">
 <div class="container">
+    <form action="<?php bu("Facture/confirm_facture")?>" method="get" enctype="multipart/form-data">
 <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -68,10 +69,15 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <p class="mb-2"><input type="text" name="" id="" placeholder="Nom du client" style="width: 350px;"></p>
-                                <p class="mb-1"><input type="text" name="" id="" placeholder="Telephone du client" style="width: 350px;"></p>
-                                <p class="mb-1"><input type="text" name="" id="" placeholder="Email du client" style="width: 350px;"></p>
-                                <p><input type="text" name="" id="" placeholder="Nom du responsable" style="width: 350px;"></p>
+                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="test"></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Telephone du client" style="width: 350px;" value="test"></p>
+                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="test"></p>
+                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="test"></p>
+                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="test"></p>
+                            </div>
+                            <div class="text-muted">
+                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" value="test"></p>
+                                <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;" value="test"></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -79,11 +85,11 @@
                             <div class="text-muted text-sm-end">
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                                    <p>12 Oct, 2020</p>
+                                    <p><input type="date" name="dat" id="" value="<?php echo $date?>"></p>
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p>#1123456</p>
+                                    <p><input type="text" name="numero" id="" value="<?php echo $numero;?>"></p>
                                 </div>
                             </div>
                         </div>
@@ -104,67 +110,41 @@
                                         <th>PU</th>
                                     </tr>
                                 </thead><!-- end thead -->
-                                <tbody>
-                                    <tr>
+                                <tbody id="t_body">
+                                    <tr id="t_r">
                                       <td>
-                                          <select name="" id="" style="width: 350px;">
-                                            <option value="">P1</option>
-                                            <option value="">P2</option>
-                                          </select>
+                                      <input type="text" name="designation[]" id="" style="width: 350px;" value="test">
                                       </td>
-                                      <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
-                                      <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
-                                      <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                    <td>
-                                          <select name="" id="" style="width: 350px;">
-                                            <option value="">P1</option>
-                                            <option value="">P2</option>
-                                          </select>
+                                      <td scope="row">
+                                        <select name="unite[]" id="">
+                                            <?php 
+                                            for ($i=0; $i <  count($uo); $i++) { 
+                                                ?>
+                                                <option value="<?php echo $uo[$i]['id']?>"><?php echo $uo[$i]['nom']?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                       </td>
-                                        <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
-                                        <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
-                                        <td scope="row"><input type="number" name="" id="" style="width: 100px;"></td>
+                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="10"></td>
+                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="1000"></td>
                                     </tr>
                                     <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="3" class="text-end">Montant Hors Taxes</th>
-                                        <td class="text-end">$732.50</td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="3" class="border-0 text-end">TVA 20% </th>
-                                        <td class="border-0 text-end">- $25.50</td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="3" class="border-0 text-end"> TTC</th>
-                                        <td class="border-0 text-end">$20.00</td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                      <th scope="row" colspan="3" class="border-0 text-end">Avance</th>
-                                      <td class="border-0 text-end">$12.00</td>
-                                  </tr>
-                                  <tr>
-                                      <th scope="row" colspan="3" class="border-0 text-end">Net à payer</th>
-                                      <td class="border-0 text-end">$12.00</td>
-                                  </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="3" class="border-0 text-end">Total</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold">$739.00</h4></td>
-                                    </tr>
+                                    
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->
                             </table><!-- end table -->
-                            <h5>Facture addressé à la somme de vingt-deux mille AR TTC</h5>
                         </div><!-- end table responsive -->
+                        <div class="col-sm-6">
+                            <div class="text-muted">
+                                <p class="mb-1">TVA <input type="text" name="tva" id="" placeholder="" style="width: 350px;" value="20"></p>
+                                <p class="mb-1"><input type="text" name="avance" id="" placeholder="Avance" style="width: 350px;" value="0"></p>
+                            </div>
+                        </div>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
-                                <a href="#" class="btn btn-primary w-md">Send</a>
+                                <button type="button" class="btn btn-secondary w-md" onclick="add()">Add line</button>
+                                <button class="btn btn-primary w-md" type="submit">Send</button>
                             </div>
                         </div>
                     </div>
@@ -172,6 +152,7 @@
             </div>
         </div><!-- end col -->
     </div>
+    </form>
 </div>
  
 </main>
@@ -193,6 +174,14 @@
   <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
   <script src="<?php echo bu('assets/js/journal.js') ?>"></script>
   <script src="<?php echo bu('assets/js/lib/select2.min.js') ?>"></script>
+
+  <script>
+              function add(){
+                t_r = document.getElementById('t_r')
+                t_body = document.getElementById('t_body')
+                t_body.appendChild(t_r.cloneNode(true))
+              }
+            </script>
 
 </body>
 

@@ -169,7 +169,7 @@
         </a>
       </li>
       <li>
-        <a href="<?php bu('Facture/see_facture') ?>">
+        <a href="<?php bu('Facture/search_facture') ?>">
           <i class="bi bi-circle"></i><span>Recherche facture</span>
         </a>
       </li>

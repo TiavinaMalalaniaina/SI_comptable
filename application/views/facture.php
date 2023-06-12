@@ -69,10 +69,13 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <h5 class="font-size-15 mb-2">RAMIANDRISOA Tiavina Malalaniaina</h5>
-                                <p class="mb-1">032 66 131 80</p>
-                                <p class="mb-1">tiavinaramia@gmail.com</p>
-                                <p>Responsable: MR JEAN</p>
+                                <h5 class="font-size-15 mb-2"><?php echo $nom?></h5>
+                                <p class="mb-1"><?php echo $tel?></p>
+                                <p class="mb-1"><?php echo $mail?></p>
+                                <p class="mb-1"><?php echo $adresse?></p>
+                                <p>Responsable: <?php echo $nomresp?></p>
+                                <p>Objet: <?php echo $obj?></p>
+                                <p>Reference: <?php echo $ref?></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -80,11 +83,11 @@
                             <div class="text-muted text-sm-end">
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                                    <p>12 Oct, 2020</p>
+                                    <p><?php echo $date?></p>
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p>#1123456</p>
+                                    <p><?php echo $numero?></p>
                                 </div>
                             </div>
                         </div>
@@ -107,59 +110,50 @@
                                     </tr>
                                 </thead><!-- end thead -->
                                 <tbody>
-                                    <tr>
+                                    <?php  
+                                    for ($i=0; $i < count($designation); $i++) { 
+                                        ?>
+                                        <tr>
                                       <td>
                                           <div>
-                                              <h5 class="text-truncate font-size-14 mb-1">Black Strap A012</h5>
-                                              <p class="text-muted mb-0">Watch, Black</p>
+                                              <h5 class="text-truncate font-size-14 mb-1"><?php echo $designation[$i]?></h5>
                                           </div>
                                         </td>
-                                        <th scope="row">01</th>
-                                        <td>$ 245.50</td>
-                                        <td>1</td>
-                                        <td class="text-end">$ 245.50</td>
+                                        <th scope="row"><?php echo $unite_map[$i]?></th>
+                                        <td><?php echo $nombre[$i]?></td>
+                                        <td><?php echo $pu[$i]?></td>
+                                        <td class="text-end"><?php echo $montant[$i]?></td>
                                     </tr>
+                                        <?php
+                                    }
+                                    
+                                    ?>
+                                    
                                     <!-- end tr -->
-                                    <tr>
-                                      <td>
-                                          <div>
-                                            <h5 class="text-truncate font-size-14 mb-1">Stainless Steel S010</h5>
-                                              <p class="text-muted mb-0">Watch, Gold</p>
-                                          </div>
-                                      </td>
-                                        <th scope="row">02</th>
-                                        <td>$ 245.50</td>
-                                        <td>2</td>
-                                        <td class="text-end">$491.00</td>
-                                    </tr>
-                                    <!-- end tr -->
+                                    
                                     <tr>
                                         <th scope="row" colspan="4" class="text-end">Montant Hors Taxes</th>
-                                        <td class="text-end">$732.50</td>
+                                        <td class="text-end"><?php echo $ht?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">TVA 20% </th>
-                                        <td class="border-0 text-end">- $25.50</td>
+                                        <td class="border-0 text-end"><?php echo ($ht*$tva/100)?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end"> TTC</th>
-                                        <td class="border-0 text-end">$20.00</td>
+                                        <td class="border-0 text-end"><?php echo $ttc?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                       <th scope="row" colspan="4" class="border-0 text-end">Avance</th>
-                                      <td class="border-0 text-end">$12.00</td>
+                                      <td class="border-0 text-end"><?php echo $avance?></td>
                                   </tr>
-                                  <tr>
-                                      <th scope="row" colspan="4" class="border-0 text-end">Net à payer</th>
-                                      <td class="border-0 text-end">$12.00</td>
-                                  </tr>
-                                    <!-- end tr -->
+
                                     <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">Total</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold">$739.00</h4></td>
+                                        <th scope="row" colspan="4" class="border-0 text-end">Net a payer</th>
+                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?php echo $net?></h4></td>
                                     </tr>
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->
@@ -167,9 +161,9 @@
                         </div><!-- end table responsive -->
                         <div class="d-print-none mt-4">
                             <div class="float-end">
-                              <a href="#" class="btn btn-danger w-md">Annuler</a>
-                                <a href="#" class="btn btn-success w-md">Valider</a>
-                                <a href="#" class="btn btn-primary w-md">Modifier</a>
+                              <a href="<?php bu('Facture/annuler_facture')?>" class="btn btn-danger w-md">Annuler</a>
+                                <a href="<?php bu('Facture/insert_facture')?>" class="btn btn-success w-md">Valider</a>
+                                <a href="<?php bu('Facture/modifier_facture')?>" class="btn btn-primary w-md">Modifier</a>
                             </div>
                         </div>
                     </div>

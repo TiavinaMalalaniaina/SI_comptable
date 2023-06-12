@@ -9,9 +9,11 @@ class Facture extends CI_Controller {
         $this->load->model('facture_model');
         $this->load->model('code_journaux_model');
         $this->load->model('journal_model');
+        $this->load->library('facturepdf');
     }
 
     public function input_facture() {
+        $this->session->unset_userdata('data');
         $data = array(
             'date'=>$this->facture_model->current_date(),
             'numero'=>$this->facture_model->next_numero(),
@@ -22,7 +24,7 @@ class Facture extends CI_Controller {
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('input_facture.php', $data);
+		$this->load->view('facture-form.php', $data);
 		$this->load->view('templates/footer.php');
     }
 
@@ -64,35 +66,39 @@ class Facture extends CI_Controller {
             'net'=>$calc['net'],
             'unite_map'=>$this->facture_model->uo_map($unite,$uo)
         );
-        $this->session->set_userdata(array(
-            'data'=>$data
-        ));
+        $this->session->set_userdata('data',$data);
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('confirm_facture.php', $data);
+		$this->load->view('facture.php', $data);
 		$this->load->view('templates/footer.php');
     }
 
     public function see_facture(){
-        $id = 1;
-        if($this->input->get('id')!==null){
-            $id = $this->input->get('id');
-        }
-        $list = $this->facture_model->list_facture();
+        $id = $this->input->get('id');
         $fac = $this->facture_model->see_facture($id);
+        $head['company'] = $this->company_model->select();
+		$this->load->view('templates/header', $head);
+		$piwi = [];
+		$piwi['lst'] = $this->code_journaux_model->selectAll();
+		$this->load->view('templates/sidebar.php',$piwi);
+		$this->load->view('facture-export.php', $fac);
+		$this->load->view('templates/footer.php');
+    }
+
+    public function search_facture(){
+        $list = $this->facture_model->list_facture();
         $data = array(
             'list'=>$list,
-            'facture'=>$fac
         );
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('see_facture.php', $data);
+		$this->load->view('search_facture.php', $data);
 		$this->load->view('templates/footer.php');
     }
 
@@ -107,19 +113,28 @@ class Facture extends CI_Controller {
     }
 
     public function modifier_facture(){
-        $data = $this->session->userdata('data');
+        $datas = $this->session->userdata('data');
+        $data = array(
+            'date'=>$this->facture_model->current_date(),
+            'numero'=>$this->facture_model->next_numero(),
+            'uo'=>$this->journal_model->uo(),
+            'data'=>$datas
+        );
         $head['company'] = $this->company_model->select();
 		$this->load->view('templates/header', $head);
 		$piwi = [];
 		$piwi['lst'] = $this->code_journaux_model->selectAll();
 		$this->load->view('templates/sidebar.php',$piwi);
-		$this->load->view('modify_facture.php', $data);
+		$this->load->view('facture-modifier.php', $data);
 		$this->load->view('templates/footer.php');
     }
 
     public function export_facture(){
         $id = $this->input->get('id');
-        redirect("Facture/see_facture?id=".$id);
+        $pdf = new Facturepdf();
+        // echo $pdf;
+        $this->facture_model->export_facture($pdf,$this->facture_model->see_facture($id));
+        $pdf->Output();
     }
 
 }

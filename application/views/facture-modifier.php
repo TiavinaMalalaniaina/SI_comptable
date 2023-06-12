@@ -56,8 +56,8 @@
   }
 </style>
 <main class="main" id="main">
-
 <div class="container">
+    <form action="<?php bu("Facture/confirm_facture")?>" method="get" enctype="multipart/form-data">
 <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -69,15 +69,15 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <h5 class="font-size-15 mb-2"><?php echo $client['nom']?></h5>
-                                <p class="mb-1"><?php echo $client['adresse']?></p>
-                                <p class="mb-1"><?php echo $client['telephone']?></p>
-                                <p class="mb-1"><?php echo $client['email']?></p>
-                                <p><?php echo $client['nom_responsable']?></p>
+                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="<?php echo $data['nom']?>"></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['adreesse']?>"></p>
+                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['tel']?>"></p>
+                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="<?php echo $data['mail']?>"></p>
+                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="<?php echo $data['nomresp']?>"></p>
                             </div>
                             <div class="text-muted">
-                                <p class="mb-1"><?php echo $facture['objet']?></p>
-                                <p class="mb-1"><?php echo $facture['reference']?></p>
+                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" value="<?php echo $data['obj']?>"></p>
+                                <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;" value="<?php echo $data['ref']?>"></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -85,11 +85,11 @@
                             <div class="text-muted text-sm-end">
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                                    <p><?php echo $facture['date_facture']?></p>
+                                    <p><input type="date" name="dat" id="" value="<?php echo $data['date']?>"></p>
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p><?php echo $facture['numero']?></p>
+                                    <p><input type="text" name="numero" id="" value="<?php echo $data['numero']?>"></p>
                                 </div>
                             </div>
                         </div>
@@ -108,76 +108,64 @@
                                         <th>Unité</th>
                                         <th>Nombre</th>
                                         <th>PU</th>
-                                        <th class="text-end" style="width: 120px;">Montant</th>
                                     </tr>
                                 </thead><!-- end thead -->
-                                <tbody>
+                                 <tbody id="t_body">
                                     <?php 
-                                    for ($i=0; $i < count($liste); $i++) { 
+                                    for ($i=0; $i < count($data['designation']); $i++) { 
                                         ?>
-                                             <tr>
+                                        <tr id="t_r">
                                       <td>
-                                          <div>
-                                              <h5 class="text-truncate font-size-14 mb-1"><?php echo $liste[$i]['designation']?></h5>
-                                          </div>
+                                      <input type="text" name="designation[]" id="" style="width: 350px;" value="<?php echo $data['designation'][$i]?>">
                                       </td>
-                                        <th scope="row"><?php echo $liste[$i]['nom']?></th>
-                                        <td><?php echo $liste[$i]['prix_unitaire']?></td>
-                                        <td><?php echo $liste[$i]['nombre']?></td>
-                                        <td class="text-end"><?php echo $liste[$i]['montant']?></td>
+                                      <td scope="row">
+                                        <select name="unite[]" id="">
+                                            <?php 
+                                            for ($j=0; $j <  count($uo); $j++) { 
+                                                ?>
+                                                <option value="<?php echo $uo[$j]['id']?>"
+                                                <?php if($uo[$j]['id']==$data['unite'][$i]){ ?>selected <?php } ?>
+                                                ><?php echo $uo[$j]['nom']?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                      </td>
+                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="<?php echo $data['nombre'][$i]?>"></td>
+                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="<?php echo $data['pu'][$i]?>"></td>
                                     </tr>
                                         <?php
                                     }
                                     ?>
-                                   
-                                   
-                                    <tr>
-                                        <th scope="row" colspan="4" class="text-end">Montant Hors Taxes</th>
-                                        <td class="text-end"><?php echo $facture['montant_ht']?></td>
-                                    </tr>
                                     <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">TVA 20% </th>
-                                        <td class="border-0 text-end"><?php echo $facture['montant_ht']*$facture['montant_tva']/100?></td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end"> TTC</th>
-                                        <td class="border-0 text-end"><?php echo $facture['monntant_ttc']?></td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                      <th scope="row" colspan="4" class="border-0 text-end">Avance</th>
-                                      <td class="border-0 text-end"><?php echo $facture['montant_avance']?></td>
-                                  </tr>
-                                  
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">Net a payer</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?php echo $facture['net_payer']?></h4></td>
-                                    </tr>
+                                    
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->
                             </table><!-- end table -->
                         </div><!-- end table responsive -->
-                        <p>Facture arrete a la somme de <?php echo (new NumberFormatter("fr",NumberFormatter::SPELLOUT))->format($facture['monntant_ttc']);
-?> Ariary</p>
+                        <div class="col-sm-6">
+                            <div class="text-muted">
+                                <p class="mb-1">TVA <input type="text" name="tva" id="" placeholder="" style="width: 350px;" value="<?php echo $data['tva']?>"></p>
+                                <p class="mb-1"><input type="text" name="avance" id="" placeholder="Avance" style="width: 350px;" value="<?php echo $data['avance']?>"></p>
+                            </div>
+                        </div>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
-                                <a href="#" class="btn btn-danger w-md">Supprimer</a>
-                                <a href="<?php bu('Facture/export_facture?id='.$facture['id_facture'])?>" class="btn btn-success w-md">Exporter</a>
+                                <button type="button" class="btn btn-secondary w-md" onclick="add()">Add line</button>
+                                <button class="btn btn-primary w-md" type="submit">Send</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div><!-- end col -->
-
     </div>
+    </form>
 </div>
+ 
 </main>
 
-  <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="<?php echo site_url('assets/vendor/apexcharts/apexcharts.min.js') ?>"></script>
@@ -194,6 +182,14 @@
   <script src="<?php echo bu('assets/js/lib/jquery.js') ?>"></script>
   <script src="<?php echo bu('assets/js/journal.js') ?>"></script>
   <script src="<?php echo bu('assets/js/lib/select2.min.js') ?>"></script>
+
+  <script>
+              function add(){
+                t_r = document.getElementById('t_r')
+                t_body = document.getElementById('t_body')
+                t_body.appendChild(t_r.cloneNode(true))
+              }
+            </script>
 
 </body>
 
