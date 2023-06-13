@@ -91,7 +91,7 @@ class Facturepdf extends FPDF
 
     function SommeEnLettre($montant) {
         $this->SetFont('Arial', '', 12);
-        $this->Cell(0, 10, 'Facture arrete a la somme de : ' . $montant, 0, 1);
+        $this->Cell(0, 10, 'Facture arrete a la somme de : ' . $montant.' Ariary', 0, 1);
         $this->Ln(10);
     }
 

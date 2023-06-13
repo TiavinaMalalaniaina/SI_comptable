@@ -9,9 +9,9 @@ class Facture_model extends CI_Model{
     public function next_numero(){
         $y = date('Y');
         $m = date('m');
-        $result = $this->db->query("select coalesce(id_facture,1) as p from facture order by id_facture desc limit 1");
+        $result = $this->db->query("select count(id_facture) as p from facture where month(date_facture)=".$m." and year(date_facture)=".$m);
         $result = $result->row_array();
-        $result = $result['p'];
+        $result = $result['p']+1;
         $num = "";
         if ($result<10) {
             $num = "00".$result;
@@ -59,6 +59,36 @@ class Facture_model extends CI_Model{
 				'compte' => '70110',
 				'debit' => 0,
 				'credit' => $data['montant'][$i],
+				'date_journal' => $data['date'],
+				'reference_piece' => $data['numero'],
+				'libelle' => $data['designation'][$i],
+				'devise' => 'AR',
+				'idexercice' => 1,
+				'code_journal' => 'VE',
+				'quantite' => $data['nombre'][$i],
+				'idunite_oeuvre' => $data['unite'][$i],
+				'prix_unite_oeuvre' => $data['pu'][$i]
+			);
+            $this->db->insert('journal',$po);
+            $po = array(
+				'compte' => '44570',
+				'debit' => 0,
+				'credit' => $data['montant'][$i]*$data['tva']/100,
+				'date_journal' => $data['date'],
+				'reference_piece' => $data['numero'],
+				'libelle' => $data['designation'][$i],
+				'devise' => 'AR',
+				'idexercice' => 1,
+				'code_journal' => 'VE',
+				'quantite' => $data['nombre'][$i],
+				'idunite_oeuvre' => $data['unite'][$i],
+				'prix_unite_oeuvre' => $data['pu'][$i]
+			);
+            $this->db->insert('journal',$po);
+            $po = array(
+				'compte' => '41110',
+				'credit' => 0,
+				'debit' => ($data['montant'][$i]*$data['tva']/100)+$data['montant'][$i],
 				'date_journal' => $data['date'],
 				'reference_piece' => $data['numero'],
 				'libelle' => $data['designation'][$i],

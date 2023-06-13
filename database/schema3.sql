@@ -674,7 +674,7 @@ CREATE  TABLE client_facture (
 	CONSTRAINT fk_client_facture_facture FOREIGN KEY ( id_facture ) REFERENCES facture( id_facture ) ON DELETE NO ACTION ON UPDATE NO ACTION
  );
 
-INSERT INTO facture( numero, date_facture, objet, reference, montant_ht, montant_tva, monntant_ttc, montant_avance, net_payer ) VALUES ( 'DPX/05/2023/001', '2023-05-01', 'Commande de mais concasse et grain de mais', 'Bon de commande', 150750000, 30150000, 180900000, 0, 180900000);
-INSERT INTO liste_facture( designation, idunite, nombre, prix_unitaire, montant, id_facture ) VALUES ( 'Mais concasse', 1, 500.0, 1500, 750000, 1);
-INSERT INTO liste_facture( designation, idunite, nombre, prix_unitaire, montant, id_facture ) VALUES ( 'Grain de mais', 1, 100.0, 1500000, 150000000, 1);
-INSERT INTO client_facture( nom, adresse, telephone, email, nom_responsable, id_facture ) VALUES ( 'Bob', 'Antananarivo', '0325012352', 'bob@gmail.com', 'Clark', 1);
+-- INSERT INTO facture( numero, date_facture, objet, reference, montant_ht, montant_tva, monntant_ttc, montant_avance, net_payer ) VALUES ( 'DPX/05/2023/001', '2023-05-01', 'Commande de mais concasse et grain de mais', 'Bon de commande', 150750000, 30150000, 180900000, 0, 180900000);
+-- INSERT INTO liste_facture( designation, idunite, nombre, prix_unitaire, montant, id_facture ) VALUES ( 'Mais concasse', 1, 500.0, 1500, 750000, 1);
+-- INSERT INTO liste_facture( designation, idunite, nombre, prix_unitaire, montant, id_facture ) VALUES ( 'Grain de mais', 1, 100.0, 1500000, 150000000, 1);
+-- INSERT INTO client_facture( nom, adresse, telephone, email, nom_responsable, id_facture ) VALUES ( 'Bob', 'Antananarivo', '0325012352', 'bob@gmail.com', 'Clark', 1);

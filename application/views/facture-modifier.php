@@ -70,7 +70,7 @@
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
                                 <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="<?php echo $data['nom']?>"></p>
-                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['adreesse']?>"></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Adresse du client" style="width: 350px;" value="<?php echo $data['adresse']?>"></p>
                                 <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['tel']?>"></p>
                                 <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="<?php echo $data['mail']?>"></p>
                                 <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="<?php echo $data['nomresp']?>"></p>
@@ -140,15 +140,23 @@
                                     <!-- end tr -->
                                     
                                     <!-- end tr -->
-                                </tbody><!-- end tbody -->
+                                </tbody>
+                                <tr>
+                                        <th colspan="2"></th>
+                                        <th style="text-align:right">TVA</th>
+                                        <td>
+                                            <p class="mb-1"> <input type="text" name="tva" id="" placeholder="" style="width: 100px;" value="<?php echo $data['tva']?>"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"></th>
+                                        <th style="text-align:right">Avance</th>
+                                        <td>
+                                            <p class="mb-1"> <input type="text" name="avance" id="" placeholder="Avance" style="width: 100px;" value="<?php echo $data['avance']?>"></p>
+                                        </td>
+                                    </tr><!-- end tbody -->
                             </table><!-- end table -->
                         </div><!-- end table responsive -->
-                        <div class="col-sm-6">
-                            <div class="text-muted">
-                                <p class="mb-1">TVA <input type="text" name="tva" id="" placeholder="" style="width: 350px;" value="<?php echo $data['tva']?>"></p>
-                                <p class="mb-1"><input type="text" name="avance" id="" placeholder="Avance" style="width: 350px;" value="<?php echo $data['avance']?>"></p>
-                            </div>
-                        </div>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
                                 <button type="button" class="btn btn-secondary w-md" onclick="add()">Add line</button>
