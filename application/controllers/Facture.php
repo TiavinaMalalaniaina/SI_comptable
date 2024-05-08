@@ -131,10 +131,12 @@ class Facture extends CI_Controller {
 
     public function export_facture(){
         $id = $this->input->get('id');
+        $fac = $this->facture_model->see_facture($id);
         $pdf = new Facturepdf();
         // echo $pdf;
-        $this->facture_model->export_facture($pdf,$this->facture_model->see_facture($id));
-        $pdf->Output();
+        $namee = str_replace("/","_",$fac['facture']['numero']).'.pdf';
+        $this->facture_model->export_facture($pdf,$fac);
+        $pdf->Output($namee,'I');
     }
 
 }

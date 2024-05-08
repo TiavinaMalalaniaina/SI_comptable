@@ -69,15 +69,15 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <h5 class="font-size-15 mb-2"><?php echo $client['nom']?></h5>
-                                <p class="mb-1"><?php echo $client['adresse']?></p>
-                                <p class="mb-1"><?php echo $client['telephone']?></p>
-                                <p class="mb-1"><?php echo $client['email']?></p>
-                                <p><?php echo $client['nom_responsable']?></p>
+                                <p class="mb-1">Nom: <b><?php echo $client['nom']?></b></p>
+                                <p class="mb-1">Adresse: <b><?php echo $client['adresse']?></b></p>
+                                <p class="mb-1">Tel: <b><?php echo $client['telephone']?></b></p>
+                                <p class="mb-1">Mail: <b><?php echo $client['email']?></b></p>
+                                <p class="mb-1">Responsable: <b><?php echo $client['nom_responsable']?></b></p>
                             </div>
                             <div class="text-muted">
-                                <p class="mb-1"><?php echo $facture['objet']?></p>
-                                <p class="mb-1"><?php echo $facture['reference']?></p>
+                                <p class="mb-1">Objet: <b><?php echo $facture['objet']?></b></p>
+                                <p class="mb-1">Reference: <b><?php echo $facture['reference']?></b></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -85,11 +85,11 @@
                             <div class="text-muted text-sm-end">
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                                    <p><?php echo $facture['date_facture']?></p>
+                                    <p><b><?php echo $facture['date_facture']?></b></p>
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p><?php echo $facture['numero']?></p>
+                                    <p><b><?php echo $facture['numero']?></b></p>
                                 </div>
                             </div>
                         </div>
@@ -160,8 +160,8 @@
                                 </tbody><!-- end tbody -->
                             </table><!-- end table -->
                         </div><!-- end table responsive -->
-                        <p>Facture arrete a la somme de <?php echo (new NumberFormatter("fr",NumberFormatter::SPELLOUT))->format($facture['monntant_ttc']);
-?> Ariary</p>
+                        <p>Facture arrete a la somme de <span style="text-transform: capitalize;font-weight:bold;font-style:italic"><?php echo (new NumberFormatter("fr",NumberFormatter::SPELLOUT))->format($facture['monntant_ttc']);
+?> ariary</span></p>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
                                 <a href="#" class="btn btn-danger w-md">Supprimer</a>

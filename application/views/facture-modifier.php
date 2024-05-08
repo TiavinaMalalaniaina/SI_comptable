@@ -69,14 +69,14 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="<?php echo $data['nom']?>"></p>
-                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Adresse du client" style="width: 350px;" value="<?php echo $data['adresse']?>"></p>
-                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['tel']?>"></p>
-                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="<?php echo $data['mail']?>"></p>
-                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="<?php echo $data['nomresp']?>"></p>
+                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" value="<?php echo $data['nom']?>" required></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Adresse du client" style="width: 350px;" value="<?php echo $data['adresse']?>" required></p>
+                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" value="<?php echo $data['tel']?>" required></p>
+                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" value="<?php echo $data['mail']?>" required></p>
+                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" value="<?php echo $data['nomresp']?>" required></p>
                             </div>
                             <div class="text-muted">
-                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" value="<?php echo $data['obj']?>"></p>
+                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" value="<?php echo $data['obj']?>" required></p>
                                 <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;" value="<?php echo $data['ref']?>"></p>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                                         ?>
                                         <tr id="t_r">
                                       <td>
-                                      <input type="text" name="designation[]" id="" style="width: 350px;" value="<?php echo $data['designation'][$i]?>">
+                                      <input type="text" name="designation[]" id="" style="width: 350px;" value="<?php echo $data['designation'][$i]?>" required>
                                       </td>
                                       <td scope="row">
                                         <select name="unite[]" id="">
@@ -131,8 +131,8 @@
                                             ?>
                                         </select>
                                       </td>
-                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="<?php echo $data['nombre'][$i]?>"></td>
-                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="<?php echo $data['pu'][$i]?>"></td>
+                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="<?php echo $data['nombre'][$i]?>" required></td>
+                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="<?php echo $data['pu'][$i]?>" required></td>
                                     </tr>
                                         <?php
                                     }

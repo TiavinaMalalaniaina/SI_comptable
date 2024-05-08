@@ -69,14 +69,14 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;"></p>
-                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Address du client" style="width: 350px;"></p>
-                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;"></p>
-                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;"></p>
-                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;"></p>
+                                <p class="mb-2"><input type="text" name="nom" id="" placeholder="Nom du client" style="width: 350px;" required></p>
+                                <p class="mb-1"><input type="text" name="adresse" id="" placeholder="Address du client" style="width: 350px;" required></p>
+                                <p class="mb-1"><input type="text" name="tel" id="" placeholder="Telephone du client" style="width: 350px;" required></p>
+                                <p class="mb-1"><input type="text" name="mail" id="" placeholder="Email du client" style="width: 350px;" required></p>
+                                <p><input type="text" name="nomresp" id="" placeholder="Nom du responsable" style="width: 350px;" required></p>
                             </div>
                             <div class="text-muted">
-                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;"></p>
+                                <p class="mb-1"><input type="text" name="obj" id="" placeholder="Objet" style="width: 350px;" required></p>
                                 <p class="mb-1"><input type="text" name="ref" id="" placeholder="Reference" style="width: 350px;"></p>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 <tbody id="t_body">
                                     <tr id="t_r">
                                       <td>
-                                      <input type="text" name="designation[]" id="" style="width: 350px;" value="test">
+                                      <input type="text" name="designation[]" id="" style="width: 350px;" >
                                       </td>
                                       <td scope="row">
                                         <select name="unite[]" id="">
@@ -126,22 +126,22 @@
                                             ?>
                                         </select>
                                       </td>
-                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="10"></td>
-                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="1000"></td>
+                                      <td scope="row"><input type="text" name="nombre[]" id="" style="width: 100px;" value="10" required></td>
+                                      <td scope="row"><input type="text" name="pu[]" id="" style="width: 100px;" value="1000" required></td>
                                     </tr>
                                 </tbody><!-- end tbody -->
                                     <tr>
                                         <th colspan="2"></th>
                                         <th style="text-align:right">TVA</th>
                                         <td>
-                                            <p class="mb-1"> <input type="text" name="tva" id="" placeholder="" style="width: 100px;" value="20"></p>
+                                            <p class="mb-1"> <input type="text" name="tva" id="" placeholder="" style="width: 100px;" value="20" required></p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th colspan="2"></th>
                                         <th style="text-align:right">Avance</th>
                                         <td>
-                                            <p class="mb-1"> <input type="text" name="avance" id="" placeholder="Avance" style="width: 100px;" value="0"></p>
+                                            <p class="mb-1"> <input type="text" name="avance" id="" placeholder="Avance" style="width: 100px;" value="0" required></p>
                                         </td>
                                     </tr>
                                     <!-- end tr -->

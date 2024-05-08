@@ -9,7 +9,8 @@ class Facture_model extends CI_Model{
     public function next_numero(){
         $y = date('Y');
         $m = date('m');
-        $result = $this->db->query("select count(id_facture) as p from facture where month(date_facture)=".$m." and year(date_facture)=".$m);
+        $result = $this->db->query("select count(id_facture) as p from facture where month(date_facture)=".$m." and year(date_facture)=".$y);
+        // echo "select count(id_facture) as p from facture where month(date_facture)=".$m." and year(date_facture)=".$y;
         $result = $result->row_array();
         $result = $result['p']+1;
         $num = "";

@@ -20,8 +20,9 @@ class Facturepdf extends FPDF
     }
 
     function ClientInfo($client) {
-        $this->SetFont('Arial', '', 12);
+        $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 10, 'Client:', 0, 1); 
+        $this->SetFont('Arial', '', 12);
         $this->Cell(0, 10, 'Nom : ' . $client['nom'], 0, 1);
         $this->Cell(0, 10, 'Adresse : ' . $client['adresse'], 0, 1);
         $this->Cell(0, 10, 'Email : ' . $client['email'], 0, 1);
@@ -48,9 +49,9 @@ class Facturepdf extends FPDF
         for ($i=0; $i < count($produits); $i++) { 
             $this->Cell(37.5, 10, $produits[$i]['designation'], 1, 0, 'C');
             $this->Cell(37.5, 10, $produits[$i]['nom'], 1, 0, 'C');
-            $this->Cell(37.5, 10, $produits[$i]['prix_unitaire'], 1, 0, 'C');
+            $this->Cell(37.5, 10, format_to_money($produits[$i]['prix_unitaire']), 1, 0, 'C');
             $this->Cell(37.5, 10, $produits[$i]['nombre'], 1, 0, 'C');
-            $this->Cell(37.5, 10, $produits[$i]['montant'], 1, 0, 'C');
+            $this->Cell(37.5, 10, format_to_money($produits[$i]['montant']), 1, 0, 'C');
             $this->Ln();   
         }
     }
@@ -60,43 +61,44 @@ class Facturepdf extends FPDF
         $this->Cell(37.5*3, 10, '', 0, 0); 
         $this->Cell(37.5, 10, 'Montant HT', 1, 0, 'C');
         $this->SetFont('Arial', '', 12);
-        $this->Cell(37.5, 10, $totaux['montant_ht'], 1, 0, 'C');
+        $this->Cell(37.5, 10, format_to_money($totaux['montant_ht']), 1, 0, 'C');
         $this->Ln();
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(37.5*3, 10, '', 0, 0); 
         $this->Cell(37.5, 10, 'TVA', 1, 0, 'C');
         $this->SetFont('Arial', '', 12);
-        $this->Cell(37.5, 10, $totaux['montant_tva'], 1, 0, 'C');
+        $this->Cell(37.5, 10, format_to_money(($totaux['montant_ht']*$totaux['montant_tva']/100)), 1, 0, 'C');
         $this->Ln();
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(37.5*3, 10, '', 0, 0); 
         $this->Cell(37.5, 10, 'Montant TTC', 1, 0, 'C');
         $this->SetFont('Arial', '', 12);
-        $this->Cell(37.5, 10, $totaux['monntant_ttc'], 1, 0, 'C');
+        $this->Cell(37.5, 10, format_to_money($totaux['monntant_ttc']), 1, 0, 'C');
         $this->Ln();
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(37.5*3, 10, '', 0, 0); 
         $this->Cell(37.5, 10, 'Avance', 1, 0, 'C');
         $this->SetFont('Arial', '', 12);
-        $this->Cell(37.5, 10, $totaux['montant_avance'], 1, 0, 'C');
+        $this->Cell(37.5, 10, format_to_money($totaux['montant_avance']), 1, 0, 'C');
         $this->Ln();
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(37.5*3, 10, '', 0, 0); 
         $this->Cell(37.5, 10, 'Net a payer', 1, 0, 'C');
         $this->SetFont('Arial', '', 12);
-        $this->Cell(37.5, 10, $totaux['net_payer'], 1, 0, 'C');
+        $this->Cell(37.5, 10, format_to_money($totaux['net_payer']), 1, 0, 'C');
         $this->Ln();
         $this->Ln(10); 
     }
 
     function SommeEnLettre($montant) {
+        $montant = ucwords($montant);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(0, 10, 'Facture arrete a la somme de : ' . $montant.' Ariary', 0, 1);
+        $this->Cell(0, 10, 'Facture arrete a la somme de  ' . $montant.' Ariary', 0, 1);
         $this->Ln(10);
     }
 
     function Footer() {
-        $this->SetFont('Arial', 'I', 10);
+        $this->SetFont('Arial', 'B', 10);
         $this->Cell(30, 10, '', 0, 0, 'L');
         $this->Cell(20, 10, 'DIMPLEX', 0, 0, 'L'); 
         $this->Cell(90, 10, '', 0, 0, 'L');

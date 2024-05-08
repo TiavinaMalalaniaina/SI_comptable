@@ -69,13 +69,13 @@
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Addressé à:</h5>
-                                <h5 class="font-size-15 mb-2"><?php echo $nom?></h5>
-                                <p class="mb-1"><?php echo $tel?></p>
-                                <p class="mb-1"><?php echo $mail?></p>
-                                <p class="mb-1"><?php echo $adresse?></p>
-                                <p>Responsable: <?php echo $nomresp?></p>
-                                <p>Objet: <?php echo $obj?></p>
-                                <p>Reference: <?php echo $ref?></p>
+                                <p class="mb-1">Nom: <b><?php echo $nom?></b>   </p>
+                                <p class="mb-1">Tel: <b><?php echo $tel?></b></p>
+                                <p class="mb-1">Mail: <b><?php echo $mail?></b></p>
+                                <p class="mb-1">Adresse: <b><?php echo $adresse?></b></p>
+                                <p>Responsable: <b><?php echo $nomresp?></b></p>
+                                <p>Objet: <b><?php echo $obj?></b></p>
+                                <p>Reference: <b><?php echo $ref?></b></p>
                             </div>
                         </div>
                         <!-- end col -->
@@ -83,11 +83,11 @@
                             <div class="text-muted text-sm-end">
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                                    <p><?php echo $date?></p>
+                                    <p><b><?php echo $date?></b></p>
                                 </div>
                                 <div class="mt-4">
                                     <h5 class="font-size-15 mb-1">Order No:</h5>
-                                    <p><?php echo $numero?></p>
+                                    <p><b><?php echo $numero?></b></p>
                                 </div>
                             </div>
                         </div>
@@ -133,27 +133,27 @@
                                     
                                     <tr>
                                         <th scope="row" colspan="4" class="text-end">Montant Hors Taxes</th>
-                                        <td class="text-end"><?php echo $ht?></td>
+                                        <td class="text-end"><?php echo format_to_money( $ht)?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">TVA 20% </th>
-                                        <td class="border-0 text-end"><?php echo ($ht*$tva/100)?></td>
+                                        <td class="border-0 text-end"><?php echo format_to_money(($ht*$tva/100))?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end"> TTC</th>
-                                        <td class="border-0 text-end"><?php echo $ttc?></td>
+                                        <td class="border-0 text-end"><?php echo format_to_money( $ttc)?></td>
                                     </tr>
                                     <!-- end tr -->
                                     <tr>
                                       <th scope="row" colspan="4" class="border-0 text-end">Avance</th>
-                                      <td class="border-0 text-end"><?php echo $avance?></td>
+                                      <td class="border-0 text-end"><?php echo format_to_money($avance)?></td>
                                   </tr>
 
                                     <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">Net a payer</th>
-                                        <td class="border-0 text-end"><h4 class="m-0 fw-semibold"><?php echo $net?></h4></td>
+                                        <td class="border-0 text-end"><?php echo format_to_money($net)?></td>
                                     </tr>
                                     <!-- end tr -->
                                 </tbody><!-- end tbody -->
